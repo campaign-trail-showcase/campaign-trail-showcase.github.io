@@ -4,7 +4,7 @@ campaignTrail_temp.questions_json = [
         "pk": 138,
         "fields": {
             "priority": 0,
-            "description": "Let's step back a few years.  You have just barely won 1896… but your vice president is just short of victory due to Populist vote splitting.  How do you plan on swinging the Populists to Sewell’s support?",
+            "description": "Let's step back a few years.  You have just barely won in 1896… but your vice president is just short of victory due to Populist vote splitting.  How do you plan on swinging the Populists to Sewall’s support?",
             "likelihood": 1
         }
     },
@@ -58,7 +58,7 @@ campaignTrail_temp.questions_json = [
         "pk": 244,
         "fields": {
             "priority": 6,
-            "description": "Unlike past campaigns of the century, modern campaigns require vast amounts of money to lobby support to your side.  Just like four years ago, you are being massively out funded by the Spooner campaign.  How do you plan on closing the gap?",
+            "description": "Unlike past campaigns of the century, modern campaigns require vast amounts of money to lobby support to your side.  Just like four years ago, you are being massively outfunded by the Spooner campaign.  How do you plan on closing the gap?",
             "likelihood": 1
         }
     },
@@ -85,7 +85,7 @@ campaignTrail_temp.questions_json = [
         "pk": 145,
         "fields": {
             "priority": 6,
-            "description": "In 1898, Wilmington, North Carolina, what some are calling a race riot, while others call an insurrection took place throughout the city.  How would you like to address the issue of race relations during the campaign?",
+            "description": "In 1898, in Wilmington, North Carolina, what some are calling a race riot, while others call it an insurrection, took place throughout the city.  How would you like to address the issue of race relations during the campaign?",
             "likelihood": 1
         }
     },
@@ -94,7 +94,7 @@ campaignTrail_temp.questions_json = [
         "pk": 194,
         "fields": {
             "priority": 6,
-            "description": "After applying a bit of elbow grease and some success in the midterms, you were able to pass the controversial Berry Tariff slightly lowering rates further than even what the Cleveland Administration could do.  What are your thoughts on the Berry Tariff?",
+            "description": "After applying a bit of elbow grease and some success in the midterms, you were able to pass the controversial Berry Tariff, slightly lowering rates further than even what the Cleveland Administration could do.  What are your thoughts on the Berry Tariff?",
             "likelihood": 1
         }
     },
@@ -103,7 +103,7 @@ campaignTrail_temp.questions_json = [
         "pk": 228,
         "fields": {
             "priority": 6,
-            "description": "Since 1893, the former Kingdom of Hawaii has been controlled by foreign nationals, mostly of American origin.  Despite the use of Hawaii in the Spanish-American War, and US Marines being stationed there, the archipelago has not been officially annexed.  With Spooner trying to make this a major issue of the campaign, what will you say about your views about Hawaii?",
+            "description": "Since 1893, the former Kingdom of Hawaii has been controlled by foreign nationals, mostly of American origin.  Despite the use of Hawaii in the Spanish-American War and US Marines being stationed there, the archipelago has not been officially annexed.  With Spooner trying to make this a major issue of the campaign, what will you say about your views on Hawaii?",
             "likelihood": 1
         }
     },
@@ -112,7 +112,7 @@ campaignTrail_temp.questions_json = [
         "pk": 209,
         "fields": {
             "priority": 6,
-            "description": "With the rise of the Populists, calls for political reforms such as the direct election of senators has become widespread across the nation.  Would you support an amendment on the issue if reelected?",
+            "description": "With the rise of the Populists, calls for political reforms such as the direct election of senators have become widespread across the nation.  Would you support an amendment on the issue if reelected?",
             "likelihood": 1
         }
     },
@@ -121,7 +121,7 @@ campaignTrail_temp.questions_json = [
         "pk": 250,
         "fields": {
             "priority": 6,
-            "description": "As the country continues to urbanize, so too does the working class of the cities continue to organize.  While most Populists enthusiastically support unions, the Bourbon moderates have a much more negative take on organized labor.  What is your belief on the concept of unions?",
+            "description": "As the country continues to urbanize, so too does the working class of the cities continue to organize.  While most Populists enthusiastically support unions, the Bourbon moderates have a much more negative take on organized labor.  What is your belief about the concept of unions?",
             "likelihood": 1
         }
     },
@@ -130,7 +130,7 @@ campaignTrail_temp.questions_json = [
         "pk": 229,
         "fields": {
             "priority": 6,
-            "description": "With the rapid expansion of trade over the past century, and a strong internal movement to control such trade, there has been a recent push, especially by Spooner, for the construction of a canal in Central America, most likely Panama.  The anti-imperialist Populists are luke-warm at best about the project, but Bourbon Democrats have been calling for a canal for quite awhile now.  Would you support such a project if reelected?",
+            "description": "With the rapid expansion of trade over the past century, and a strong internal movement to control such trade, there has been a recent push, especially by Spooner, for the construction of a canal in Central America, most likely Panama.  The anti-imperialist Populists are lukewarm at best about the project, but Bourbon Democrats have been calling for a canal for quite a while now.  Would you support such a project if reelected?",
             "likelihood": 1
         }
     },
@@ -139,7 +139,7 @@ campaignTrail_temp.questions_json = [
         "pk": 217,
         "fields": {
             "priority": 6,
-            "description": "Over the last half century, five, largely Populist-controlled states have already allowed women the right to vote with many more states on the way.  How do you feel about this movement?",
+            "description": "Over the last half century, five largely Populist-controlled states have already allowed women the right to vote, with many more states on the way.  How do you feel about this movement?",
             "likelihood": 1
         }
     },
@@ -157,7 +157,7 @@ campaignTrail_temp.questions_json = [
         "pk": 240,
         "fields": {
             "priority": 6,
-            "description": "A tremendous economic upswing has taken place since the Panic of 1893.  Populists credit the pro-Silver and anti-Trust policies for the improvement while the Bourbons have credited the lowered tariff and increase in the gold supply.  What is your take on the improving economy?",
+            "description": "A tremendous economic upswing has taken place since the Panic of 1893.  Populists credit the pro-Silver and anti-trust policies for the improvement, while the Bourbons have credited the lowered tariff and increase in the gold supply.  What is your take on the improving economy?",
             "likelihood": 1
         }
     },
@@ -166,7 +166,7 @@ campaignTrail_temp.questions_json = [
         "pk": 203,
         "fields": {
             "priority": 6,
-            "description": "In 1890, the Sherman Antitrust Act was passed.  Over the past four years, you have tried, mostly unsuccessfully to break up a multitude of trusts, with the end of the American Sugar Refining Company as a major victory.  How do you plan on handling the issue of monopolies?",
+            "description": "In 1890, the Sherman Antitrust Act was passed.  Over the past four years, you have tried, mostly unsuccessfully, to break up a multitude of trusts, with the end of the American Sugar Refining Company as a major victory.  How do you plan on handling the issue of monopolies?",
             "likelihood": 1
         }
     },
@@ -175,7 +175,7 @@ campaignTrail_temp.questions_json = [
         "pk": 140,
         "fields": {
             "priority": 6,
-            "description": "In 1895, the Supreme Court ruled an income tax as unconstitutional.  Since then, lowering tariffs has become much more difficult to pass through Congress.  A large number of Populists back an amendment on the issue while Bourbons are more hesitant about the ordeal.  What is your take on the recent movement for an income tax amendment to the Constitution?",
+            "description": "In 1895, the Supreme Court ruled an income tax unconstitutional.  Since then, lowering tariffs has become much more difficult to pass through Congress.  A large number of Populists back an amendment on the issue, while Bourbons are more hesitant about the ordeal.  What is your take on the recent movement for an income tax amendment to the Constitution?",
             "likelihood": 1
         }
     },
@@ -193,7 +193,7 @@ campaignTrail_temp.questions_json = [
         "pk": 141,
         "fields": {
             "priority": 6,
-            "description": "Over this past year, an uprising took place across Northern China threatening Western citizens and the Open Door Policy.  After nearly a year, this August, the Siege of the Foreign Legation has been lifted by a coalition of nations, including American forces.  Do you have any remarks on the current situation in China, Mr. President?",
+            "description": "Over this past year, an uprising took place across northern China, threatening Western citizens and the Open Door Policy.  After nearly a year, this August, the Siege of the Foreign Legation has been lifted by a coalition of nations, including American forces.  Do you have any remarks on the current situation in China, Mr. President?",
             "likelihood": 1
         }
     },
@@ -232,7 +232,7 @@ campaignTrail_temp.answers_json = [
         "pk": 976,
         "fields": {
             "question": 138,
-            "description": "How about we offer the Populists some cabinet positions if they back Sewell?  I’m sure a Populist Secretary of Agriculture would satisfy them."
+            "description": "How about we offer the Populists some cabinet positions if they back Sewall?  I’m sure a Populist Secretary of Agriculture would satisfy them."
         }
     },
     {
@@ -240,7 +240,7 @@ campaignTrail_temp.answers_json = [
         "pk": 977,
         "fields": {
             "question": 138,
-            "description": "How about I talk to Watson myself, and see if I can convince him to endorse Sewall?"
+            "description": "How about I talk to Watson myself and see if I can convince him to endorse Sewall?"
         }
     },
     {
@@ -248,7 +248,7 @@ campaignTrail_temp.answers_json = [
         "pk": 978,
         "fields": {
             "question": 138,
-            "description": "Let’s see if I can talk a few Republicans to flip sides here.  Sewell is a New England Banker after all."
+            "description": "Let’s see if I can talk a few Republicans into flipping sides here.  Sewall is a New England banker, after all."
         }
     },
     {
@@ -256,7 +256,7 @@ campaignTrail_temp.answers_json = [
         "pk": 979,
         "fields": {
             "question": 138,
-            "description": "Screw Sewall, we don’t need him anyways.  Tell Watson he has my endorsement."
+            "description": "Screw Sewall. We don’t need him anyway.  Tell Watson he has my endorsement."
         }
     },
     {
@@ -272,7 +272,7 @@ campaignTrail_temp.answers_json = [
         "pk": 981,
         "fields": {
             "question": 139,
-            "description": "Spooner’s imperial ambitions against the Filipino people is nothing short of criminal. "
+            "description": "Spooner’s imperial ambitions against the Filipino people are nothing short of criminal."
         }
     },
     {
@@ -280,7 +280,7 @@ campaignTrail_temp.answers_json = [
         "pk": 982,
         "fields": {
             "question": 139,
-            "description": "I’d rather stick to a positive, upbeat campaign this time around.\n"
+            "description": "I’d rather stick to a positive, upbeat campaign this time around."
         }
     },
     {
@@ -312,7 +312,7 @@ campaignTrail_temp.answers_json = [
         "pk": 986,
         "fields": {
             "question": 140,
-            "description": "While I support an income tax in principle, I believe it must be carefully implemented within the confines of the law interpreted by the Supreme Court."
+            "description": "While I support an income tax in principle, I believe it must be carefully implemented within the confines of the law as interpreted by the Supreme Court."
         }
     },
     {
@@ -328,7 +328,7 @@ campaignTrail_temp.answers_json = [
         "pk": 989,
         "fields": {
             "question": 141,
-            "description": "The lifting of the Siege of the Foreign Legation is a testament to the strength of international cooperation in regards to trade issues. While I regret the need for American troops to intervene, I will continue to advocate for a peaceful resolution that upholds the Open Door Policy and ensures stability in the region."
+            "description": "The lifting of the Siege of the Foreign Legation is a testament to the strength of international cooperation in regard to trade issues. While I regret the need for American troops to intervene, I will continue to advocate for a peaceful resolution that upholds the Open Door Policy and ensures stability in the region."
         }
     },
     {
@@ -336,7 +336,7 @@ campaignTrail_temp.answers_json = [
         "pk": 990,
         "fields": {
             "question": 141,
-            "description": "The events in China demonstrate the dangers of imperial overreach. My administration will work to avoid unnecessary entanglements abroad while protecting American lives and interests with the utmost care.\n"
+            "description": "The events in China demonstrate the dangers of imperial overreach. My administration will work to avoid unnecessary entanglements abroad while protecting American lives and interests with the utmost care."
         }
     },
     {
@@ -344,7 +344,7 @@ campaignTrail_temp.answers_json = [
         "pk": 991,
         "fields": {
             "question": 141,
-            "description": "While the siege has ended, the root causes of unrest in China remain unresolved. I will call for a fair approach to trade that respects China's sovereignty while ensuring the safety of Western citizens.\n"
+            "description": "While the siege has ended, the root causes of unrest in China remain unresolved. I will call for a fair approach to trade that respects China's sovereignty while ensuring the safety of Western citizens."
         }
     },
     {
@@ -400,7 +400,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1012,
         "fields": {
             "question": 148,
-            "description": "Let’s head over to New York City to conduct one major speech.  A victory in New York would be the final nail in the coffin for the Spooner campaign."
+            "description": "Let’s head over to New York City to deliver one major speech.  A victory in New York would be the final nail in the coffin for the Spooner campaign."
         }
     },
     {
@@ -408,7 +408,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1460,
         "fields": {
             "question": 193,
-            "description": "This election is a choice between a government of the people and one ruled by Wall Street and monopolists. The Republican Party has stood with the trusts, the railroads, and the bankers while ignoring the struggles of hard working Americans. Together, we will fight their corruption and build an economy that serves every farmer, laborer, and small business, not just the privileged elite."
+            "description": "This election is a choice between a government of the people and one ruled by Wall Street and monopolists. The Republican Party has stood with the trusts, the railroads, and the bankers while ignoring the struggles of hardworking Americans. Together, we will fight their corruption and build an economy that serves every farmer, laborer, and small business, not just the privileged elite."
         }
     },
     {
@@ -416,7 +416,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1461,
         "fields": {
             "question": 193,
-            "description": "The fight for Free Silver is the fight for economic justice. By implementing a 20:1 ratio, we have liberated our farmers and workers from the grip of the gold standard that serves only the wealthy few. With bimetallism, we have and will bring prosperity and fairness to every corner of our nation."
+            "description": "The fight for Free Silver is the fight for economic justice. By implementing a 20:1 ratio, we have liberated our farmers and workers from the grip of the gold standard that serves only the wealthy few. With bimetallism, we have brought and will bring prosperity and fairness to every corner of our nation."
         }
     },
     {
@@ -472,7 +472,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1468,
         "fields": {
             "question": 195,
-            "description": "I think McKinley was on to something last time.  I plan on letting visitors come to me at the White House and let them see me act presidential."
+            "description": "I think McKinley was onto something last time.  I plan on letting visitors come to me at the White House and letting them see me act presidential."
         }
     },
     {
@@ -504,7 +504,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1472,
         "fields": {
             "question": 196,
-            "description": "With Vice President Sewell’s health issues, America is in need of an experienced politician to take the reigns of the Vice Presidency.  From his work with the Post Office to his prior experience as Vice President, Adlai Stevenson is just the man for the job."
+            "description": "With Vice President Sewall’s health issues, America is in need of an experienced politician to take the reins of the Vice Presidency.  From his work with the Post Office to his prior experience as Vice President, Adlai Stevenson is just the man for the job."
         }
     },
     {
@@ -512,7 +512,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1473,
         "fields": {
             "question": 196,
-            "description": "In such tumultuous times, we need a true American who all citizens can appreciate for their virtue and non-partisanship.  Adlai Stevenson has all such qualities and then some."
+            "description": "In such tumultuous times, we need a true American whom all citizens can appreciate for their virtue and non-partisanship.  Adlai Stevenson has all such qualities and then some."
         }
     },
     {
@@ -592,7 +592,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1495,
         "fields": {
             "question": 202,
-            "description": "I oppose the permanent annexation of these lands. America is a republic, not an empire.  I would seek gradual self-rule in these territories over my second term.\n"
+            "description": "I oppose the permanent annexation of these lands. America is a republic, not an empire.  I would seek gradual self-rule in these territories over my second term."
         }
     },
     {
@@ -608,7 +608,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1497,
         "fields": {
             "question": 202,
-            "description": "We never should have involved ourselves in this war, let alone these territories.  \n"
+            "description": "We never should have involved ourselves in this war, let alone in these territories."
         }
     },
     {
@@ -640,7 +640,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1517,
         "fields": {
             "question": 209,
-            "description": "The direct election of Senators is a necessary step for empowering the people. I fully support this movement and will work to make it a reality."
+            "description": "The direct election of senators is a necessary step for empowering the people. I fully support this movement and will work to make it a reality."
         }
     },
     {
@@ -672,7 +672,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1540,
         "fields": {
             "question": 217,
-            "description": "While I support women’s suffrage, I believe it should be a state-level decision.\n"
+            "description": "While I support women’s suffrage, I believe it should be a state-level decision."
         }
     },
     {
@@ -712,7 +712,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1576,
         "fields": {
             "question": 229,
-            "description": "A canal in Panama would expand our commercial interests across East Asia and Latin America, while also being a complete boon for our workers.  I full heartedly support such an attempt."
+            "description": "A canal in Panama would expand our commercial interests across East Asia and Latin America, while also being a complete boon for our workers.  I wholeheartedly support such an attempt."
         }
     },
     {
@@ -720,7 +720,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1577,
         "fields": {
             "question": 229,
-            "description": "Such a project is a mere brainchild of New England Bankers who wish to see American workers toil in the mosquito infested swamps of Central America.  I pledge that under a Bryan Administration, no such action would be taken against the common man."
+            "description": "Such a project is a mere brainchild of New England bankers who wish to see American workers toil in the mosquito-infested swamps of Central America.  I pledge that under a Bryan Administration, no such action would be taken against the common man."
         }
     },
     {
@@ -728,7 +728,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1578,
         "fields": {
             "question": 229,
-            "description": "This idea sounds good on paper but I believe in the current state of things, we should do more research into such a project before taking a massive undertaking in a faraway land."
+            "description": "This idea sounds good on paper, but I believe, in the current state of things, we should do more research into such a project before taking on a massive undertaking in a faraway land."
         }
     },
     {
@@ -736,7 +736,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1589,
         "fields": {
             "question": 233,
-            "description": "The Upper-South doesn’t seem as strong as it once was.  Some resources couldn’t hurt there."
+            "description": "The Upper South doesn’t seem as strong as it once was.  Some resources couldn’t hurt there."
         }
     },
     {
@@ -752,7 +752,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1591,
         "fields": {
             "question": 233,
-            "description": "Isolated as it is, since Spooner is unlikely to travel there, if we visit the West Coast, we’ll really get a bang for our buck."
+            "description": "Isolated as it is, and since Spooner is unlikely to travel there, if we visit the West Coast, we’ll really get a bang for our buck."
         }
     },
     {
@@ -760,7 +760,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1608,
         "fields": {
             "question": 239,
-            "description": "Truly, we have become the empire of liberty that Jefferson has desired us to become!  I will not hesitate to emphasize this great victory over the course of the campaign."
+            "description": "Truly, we have become the empire of liberty that Jefferson desired us to become!  I will not hesitate to emphasize this great victory over the course of the campaign."
         }
     },
     {
@@ -768,7 +768,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1609,
         "fields": {
             "question": 239,
-            "description": "I’m overjoyed that we have been able to overthrow the Spanish oppression in the Caribbean and Pacific but I don’t think the average American will see it the same way.  Let’s focus on victory over Spain over the liberation of Spain’s former colonies."
+            "description": "I’m overjoyed that we have been able to overthrow the Spanish oppression in the Caribbean and Pacific, but I don’t think the average American will see it the same way.  Let’s focus on victory over Spain rather than the liberation of Spain’s former colonies."
         }
     },
     {
@@ -808,7 +808,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1614,
         "fields": {
             "question": 240,
-            "description": "The economy remains fragile, and I’ll be honest with the American people. We must stay the course with policies that benefit all Americans, not just the elites.\n"
+            "description": "The economy remains fragile, and I’ll be honest with the American people. We must stay the course with policies that benefit all Americans, not just the elites."
         }
     },
     {
@@ -816,7 +816,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1624,
         "fields": {
             "question": 244,
-            "description": "Isn’t this the entire point of backing Sewell in ‘96?  Vice President Sewell is one of the wealthiest men in the country, he should be able to help us out here."
+            "description": "Isn’t this the entire point of backing Sewall in ’96?  Vice President Sewall is one of the wealthiest men in the country; he should be able to help us out here."
         }
     },
     {
@@ -880,7 +880,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1650,
         "fields": {
             "question": 251,
-            "description": "Let’s end the campaign in New York.  We have a good shot of winning the state this year."
+            "description": "Let’s end the campaign in New York.  We have a good shot at winning the state this year."
         }
     },
     {
@@ -888,7 +888,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1651,
         "fields": {
             "question": 251,
-            "description": "Although far away from most of the populated country, talking with the miners and farmers of the West Coast could swing that region."
+            "description": "Although it is far away from most of the populated country, talking with the miners and farmers of the West Coast could swing that region."
         }
     },
     {
@@ -896,7 +896,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1652,
         "fields": {
             "question": 251,
-            "description": "The Upper South has been slipping away over the past decade.  Some time there near the capitol can’t hurt our chances."
+            "description": "The Upper South has been slipping away over the past decade.  Some time there near the capital can’t hurt our chances."
         }
     },
     {
@@ -912,7 +912,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2713,
         "fields": {
             "question": 203,
-            "description": "I pledge that by 1904, Standard Oil will be broken up.  If the Supreme Court gets in my way, I will be forced to expand the Supreme Court. "
+            "description": "I pledge that by 1904, Standard Oil will be broken up.  If the Supreme Court gets in my way, I will be forced to expand the Supreme Court."
         }
     },
     {
@@ -928,7 +928,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2726,
         "fields": {
             "question": 250,
-            "description": "The Republican Party has turned its back on the working class, and I will expose them for their complicity in maintaining a broken system."
+            "description": "The Republican Party has turned its back on the working class, and I will expose it for its complicity in maintaining a broken system."
         }
     },
     {
@@ -936,7 +936,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2747,
         "fields": {
             "question": 229,
-            "description": "Unfortunately, such an action would disrupt the free peoples of Central America.  I can not support such a project in good conscience."
+            "description": "Unfortunately, such an action would disrupt the free peoples of Central America.  I cannot support such a project in good conscience."
         }
     },
     {
@@ -8161,7 +8161,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1490,
             "candidate": 21,
-            "answer_feedback": "Despite the numerous cries of recession in 1896, with the new found economic prosperity, the public largely backs you."
+            "answer_feedback": "Despite the numerous cries of recession in 1896, with the newfound economic prosperity, the public largely backs you."
         }
     },
     {
@@ -8188,7 +8188,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 976,
             "candidate": 21,
-            "answer_feedback": "After long talks, your presumptive Secretary of Agriculture, Thomas Watson, manages to convince the Populist electors to vote for Sewell before the contingent "
+            "answer_feedback": "After long talks, your presumptive Secretary of Agriculture, Thomas Watson, manages to convince the Populist electors to vote for Sewall before the contingent election."
         }
     },
     {
@@ -8197,7 +8197,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 977,
             "candidate": 21,
-            "answer_feedback": "Though it eventually goes to a closely divided contingent election, the Populists eventually back Sewell for Vice President with Watson’s help."
+            "answer_feedback": "Though it eventually goes to a closely divided contingent election, the Populists eventually back Sewall for Vice President with Watson’s help."
         }
     },
     {
@@ -8206,7 +8206,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 978,
             "candidate": 21,
-            "answer_feedback": "After many weeks of negotiations, you managed to convince the bare minimum to switch their vote to Sewell.  Many Populists are outraged, and there is speculation that some might run a third party ticket in 1900."
+            "answer_feedback": "After many weeks of negotiations, you managed to convince the bare minimum to switch their votes to Sewall.  Many Populists are outraged, and there is speculation that some might run a third-party ticket in 1900."
         }
     },
     {
@@ -8215,7 +8215,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 979,
             "candidate": 21,
-            "answer_feedback": "Without your support, the contingent election goes into gridlock.  Eventually, Congressional leaders meet up without you and manage to get the votes he needs."
+            "answer_feedback": "Without your support, the contingent election goes into gridlock.  Eventually, congressional leaders meet up without you and manage to get the votes he needs."
         }
     },
     {
@@ -8251,7 +8251,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 983,
             "candidate": 21,
-            "answer_feedback": "Workers are appalled while Populists praise your rhetorical ability."
+            "answer_feedback": "Workers are appalled, while Populists praise your rhetorical ability."
         }
     },
     {
@@ -8260,7 +8260,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 984,
             "candidate": 21,
-            "answer_feedback": "Populists and Bourbons alike are confused why you hedge on such an issue."
+            "answer_feedback": "Populists and Bourbons alike are confused as to why you hedge on such an issue."
         }
     },
     {
@@ -8269,7 +8269,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 985,
             "candidate": 21,
-            "answer_feedback": "Many in your party are upset by your non-committal attitude."
+            "answer_feedback": "Many in your party are upset by your noncommittal attitude."
         }
     },
     {
@@ -8278,7 +8278,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 986,
             "candidate": 21,
-            "answer_feedback": "Some Populists are deflated but moderates generally appreciate your response."
+            "answer_feedback": "Some Populists are deflated, but moderates generally appreciate your response."
         }
     },
     {
@@ -8305,7 +8305,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 990,
             "candidate": 21,
-            "answer_feedback": "Populists are ecstatic while Bourbons and the American people as a whole are either confused or angry."
+            "answer_feedback": "Populists are ecstatic, while Bourbons and the American people as a whole are either confused or angry."
         }
     },
     {
@@ -8332,7 +8332,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1002,
             "candidate": 21,
-            "answer_feedback": "Survivors of the coup are upset but the American public largely forgets about the incident."
+            "answer_feedback": "Survivors of the coup are upset, but the American public largely forgets about the incident."
         }
     },
     {
@@ -8359,7 +8359,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1011,
             "candidate": 21,
-            "answer_feedback": "It's unlikely New York will flip to your cause anyways.  It's good to stay focused on the real battleground states."
+            "answer_feedback": "It's unlikely New York will flip to your cause anyway.  It's good to stay focused on the real battleground states."
         }
     },
     {
@@ -8368,7 +8368,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1012,
             "candidate": 21,
-            "answer_feedback": "With popular figures surrounding you, you perform one of the most famous speeches of all time, later known as the “Against the Skull of Goliath” speech."
+            "answer_feedback": "With popular figures surrounding you, you deliver one of the most famous speeches of all time, later known as the “Against the Skull of Goliath” speech."
         }
     },
     {
@@ -8377,7 +8377,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1460,
             "candidate": 21,
-            "answer_feedback": "Your speech ends with large applause and cheering from the crowd."
+            "answer_feedback": "Your speech ends with loud applause and cheering from the crowd."
         }
     },
     {
@@ -8386,7 +8386,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1461,
             "candidate": 21,
-            "answer_feedback": "Your speech ends with large applause and cheering from the crowd.  You notice some Bourbons whispering to each other in the back of the room."
+            "answer_feedback": "Your speech ends with loud applause and cheering from the crowd.  You notice some Bourbons whispering to each other in the back of the room."
         }
     },
     {
@@ -8395,7 +8395,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1462,
             "candidate": 21,
-            "answer_feedback": "Your speech ends with a large applause from the crowd."
+            "answer_feedback": "Your speech ends with loud applause from the crowd."
         }
     },
     {
@@ -8404,7 +8404,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1463,
             "candidate": 21,
-            "answer_feedback": "Your speech ends with large applause and cheering from the crowd."
+            "answer_feedback": "Your speech ends with loud applause and cheering from the crowd."
         }
     },
     {
@@ -8413,7 +8413,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1464,
             "candidate": 21,
-            "answer_feedback": "Many in the North are upset but your party supports you all the way."
+            "answer_feedback": "Many in the North are upset, but your party supports you all the way."
         }
     },
     {
@@ -8422,7 +8422,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1465,
             "candidate": 21,
-            "answer_feedback": "While many don’t like it, nobody can question the economic upswing since you have taken office."
+            "answer_feedback": "While many don’t like it, nobody can question the economic upswing since you took office."
         }
     },
     {
@@ -8449,7 +8449,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1468,
             "candidate": 21,
-            "answer_feedback": "Much of your base is deflated, but many Bourbons come out of the woodworks to help out."
+            "answer_feedback": "Much of your base is deflated, but many Bourbons come out of the woodwork to help out."
         }
     },
     {
@@ -8458,7 +8458,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1469,
             "candidate": 21,
-            "answer_feedback": "It seems as though the election will be between Rural and Urban America this year."
+            "answer_feedback": "It seems as though the election will be between rural and urban America this year."
         }
     },
     {
@@ -8467,7 +8467,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1470,
             "candidate": 21,
-            "answer_feedback": "Well, it worked last time so lets see if it works again."
+            "answer_feedback": "Well, it worked last time, so let’s see if it works again."
         }
     },
     {
@@ -8521,7 +8521,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1478,
             "candidate": 21,
-            "answer_feedback": "Some in your party are upset, but Temperance isn’t a major issue in this election."
+            "answer_feedback": "Some in your party are upset, but temperance isn’t a major issue in this election."
         }
     },
     {
@@ -8539,7 +8539,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1493,
             "candidate": 21,
-            "answer_feedback": "There is some huffs here and there, but your party largely backs you."
+            "answer_feedback": "There are some huffs here and there, but your party largely backs you."
         }
     },
     {
@@ -8548,7 +8548,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1517,
             "candidate": 21,
-            "answer_feedback": "Letters from Populist voters from out west come in droves to the White House in support of your decision.  Not as many from down South, however."
+            "answer_feedback": "Letters from Populist voters from out West come in droves to the White House in support of your decision.  Not as many from down South, however."
         }
     },
     {
@@ -8575,7 +8575,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1589,
             "candidate": 21,
-            "answer_feedback": "With being so close to the White House, you are able to make numerous trips to Maryland, Delaware, and Kentucky over the course of the campaign."
+            "answer_feedback": "With those states so close to the White House, you are able to make numerous trips to Maryland, Delaware, and Kentucky over the course of the campaign."
         }
     },
     {
@@ -8665,7 +8665,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1491,
             "candidate": 21,
-            "answer_feedback": "Diehard Populists are absolutely overjoyed, and parties are seen in the streets across most of the West.  However, many Bourbon Congressmen have entered into talks with the Spooner Campaign."
+            "answer_feedback": "Diehard Populists are absolutely overjoyed, and parties are seen in the streets across most of the West.  However, many Bourbon congressmen have entered into talks with the Spooner campaign."
         }
     },
     {
@@ -8692,7 +8692,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1609,
             "candidate": 21,
-            "answer_feedback": "No harm, no foul.  The American people are much more in support of the victory over the liberations anyways."
+            "answer_feedback": "No harm, no foul.  The American people are much more in support of the victory over the liberations anyway."
         }
     },
     {
@@ -8710,7 +8710,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2697,
             "candidate": 21,
-            "answer_feedback": "President Aguinaldo takes a tour of the nation, from San Francisco to D.C.  Some Southerners are upset by the visit but many intellectuals are enamored by his speeches in praise of you."
+            "answer_feedback": "President Aguinaldo takes a tour of the nation, from San Francisco to D.C.  Some Southerners are upset by the visit, but many intellectuals are enamored with his speeches in praise of you."
         }
     },
     {
@@ -8755,7 +8755,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2721,
             "candidate": 21,
-            "answer_feedback": "It seems as though you have perfectly thread the needle in such a sticky topic."
+            "answer_feedback": "It seems as though you have perfectly threaded the needle on such a sticky topic."
         }
     },
     {
@@ -8773,7 +8773,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1574,
             "candidate": 21,
-            "answer_feedback": "This response seems too vague for anyone to support.  Populists believe you mean to annex Hawaii while Bourbons believe the opposite about the statement."
+            "answer_feedback": "This response seems too vague for anyone to support.  Populists believe you mean to annex Hawaii, while Bourbons believe the opposite about the statement."
         }
     },
     {
@@ -8800,7 +8800,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2726,
             "candidate": 21,
-            "answer_feedback": "You may be avoiding the question but many workers don’t disagree with you."
+            "answer_feedback": "You may be avoiding the question, but many workers don’t disagree with you."
         }
     },
     {
@@ -8863,7 +8863,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1496,
             "candidate": 21,
-            "answer_feedback": "Some in the Democratic Party find this position too similar with Spooner’s but it does leave Spooner without an avenue for attack."
+            "answer_feedback": "Some in the Democratic Party find this position too similar to Spooner’s, but it does leave Spooner without an avenue for attack."
         }
     },
     {
@@ -8890,7 +8890,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2747,
             "candidate": 21,
-            "answer_feedback": "While Loyal Democrats accept your response, this position is against the common opinion in the nation. "
+            "answer_feedback": "While loyal Democrats accept your response, this position is against the common opinion in the nation."
         }
     },
     {
@@ -8899,7 +8899,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1518,
             "candidate": 21,
-            "answer_feedback": "A surprise answer to many across the nation.  Bourbons and moderates accept your position but there is significant Populist backlash."
+            "answer_feedback": "A surprise answer to many across the nation.  Bourbons and moderates accept your position, but there is significant Populist backlash."
         }
     },
     {
@@ -8908,7 +8908,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1519,
             "candidate": 21,
-            "answer_feedback": "Some Conservatives are troubled by your remark but overall, it falls within the range of acceptable political positions of the day."
+            "answer_feedback": "Some conservatives are troubled by your remark, but overall, it falls within the range of acceptable political positions of the day."
         }
     },
     {
@@ -8917,7 +8917,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2755,
             "candidate": 21,
-            "answer_feedback": "The message returns a luke-warm response from Populists while Bourbons find it acceptable."
+            "answer_feedback": "The message returns a lukewarm response from Populists, while Bourbons find it acceptable."
         }
     },
     {
@@ -8926,7 +8926,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1590,
             "candidate": 21,
-            "answer_feedback": "Unlike Cleveland, you don’t have the same appeal to as many in the Mid-Atlantic region but you do see some unexpected success with the workers of New York City."
+            "answer_feedback": "Unlike Cleveland, you don’t have the same appeal to as many in the Mid-Atlantic region, but you do see some unexpected success with the workers of New York City."
         }
     },
     {
@@ -8941,7 +8941,7 @@ campaignTrail_temp.answer_feedback_json = [
 ]
 
 campaignTrail_temp.candidate_image_url = "https://upload.wikimedia.org/wikipedia/commons/f/fa/WilliamJBryan1902.png";
-campaignTrail_temp.running_mate_image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Adlai_Stevenson_I_by_Saroney_c1892-crop.jpg/156px-Adlai_Stevenson_I_by_Saroney_c1892-crop.jpg";
+campaignTrail_temp.running_mate_image_url = "https://upload.wikimedia.org/wikipedia/commons/5/51/Adlai_Stevenson_I_by_Saroney_c1892-crop.jpg";
 campaignTrail_temp.candidate_last_name = "Bryan";
 campaignTrail_temp.running_mate_last_name = "Stevenson";
 
@@ -8980,5 +8980,4 @@ campaignTrail_temp.jet_data = [
 }
 }
 ]
-
 
