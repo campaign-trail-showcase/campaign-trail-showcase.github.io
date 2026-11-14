@@ -2281,7 +2281,7 @@ campaignTrail_temp.candidate_state_multiplier_json = rows([["campaign_trail.cand
 [2505,1001,1005,0.96],
 [2506,1001,1006,0.9],
 [2507,1001,1007,0.86],
-[2508,1001,1008,1],
+[2508,1001,1008,1.05],
 [2509,1001,1009,1],
 [2510,1001,1010,0.96],
 [2511,1001,1011,0.96],
@@ -2332,7 +2332,7 @@ campaignTrail_temp.candidate_state_multiplier_json = rows([["campaign_trail.cand
 [2556,1003,1005,1.0878],
 [2557,1003,1006,1],
 [2558,1003,1007,1.04915],
-[2559,1003,1008,0.96],
+[2559,1003,1008,0.91],
 [2560,1003,1009,1],
 [2561,1003,1010,1.285],
 [2562,1003,1011,0.528],
@@ -35548,7 +35548,7 @@ function top(list) {
           const end = runAgain ? 2041 : 2037;
           if (is('Walsh') && !wasVp('Paul Gosar')) {
             future({ row: 84 }, 2033, end, 'R');
-          } else if (is('Paul') && !/kennedy|rfk/i.test(vp) && sp <= -3) {
+          } else if (is('Paul') && !/kennedy|rfk/i.test(vp) && sp <= 0) {
             future({ row: 94 }, 2033, tax < 0 ? 2041 : 2037, 'R');
           } else {
             const portraits = TIMELINE_PORTRAITS[83];
