@@ -7753,7 +7753,7 @@ campaignTrail_temp.answer_feedback_json = rows([["campaign_trail.answer_feedback
 [48762,47701,1001,"A few weeks later, the only notable opponent of Pence, Secretary Haley, repeats to all the news outlets that she’s not running, and Mike’s lead in the polls only grows larger. After many months of endless work, you take a much needed break to the nearest cinema, and spend the last two hours mindlessly watching <i> Barbie </i>, which makes you think about the women who died from sepsis because of our new anti-abortion laws. You feel sad for that woman, but the Democrats are really blowing it out of proportion. When the movie ends, you think it wasn’t great."],
 [48776,48775,1001,"Pence lead in the polls only grows larger, only bugged two or three congressmen or media stars in need of attention. After many months of endless work, you take a much needed break to the nearest cinema, and spend the last two hours mindlessly watching <i> Barbie </i>, which makes you think about the women who died from sepsis because of our new anti-abortion laws. You feel sad for that woman, but the Democrats are really blowing it out of proportion. When the movie ends, you think it wasn’t great."],
 [48788,47760,1001,"Pence won’t quit, he keeps touring the countryside, the usual places, the Bible Belt and his home state of Indiana. In every town he keeps delivering the same boring jabs, about lowering taxes and cutting red tape. But we’ve had eight years of that Mike, and Americans get tired quickly."],
-[48791,48055,1001,"Endorsements come in like floodwater, with only the last bloc of the neocons pleading their doubts about a Carlson presidency. Liberals are terrified, finally discovering there’s someone more terrifying than Trump. Governor Pritzker, trying to salvage his tumbling campaign, sneers that he would love to crush Tucker in an election. The only one who hasn’t fully grasped the situation is Tucker himself, who reportedly feels a little uneasy about the whole thing. He didn’t expect this to blow up."],
+[48791,48055,1001,"Endorsements come in like floodwater, with only the last bloc of the neocons pleading their doubts about a Carlson presidency. Governor Pritzker, trying to salvage his tumbling campaign, sneers that he would love to crush Tucker in an election. The only one who hasn’t fully grasped the situation is Tucker himself, who reportedly feels a little uneasy about the whole thing. He didn’t expect this to blow up."],
 [48808,48114,1001,"In the following weeks, information leaks like a broken sewer, about racist text messages and a deepening rift between the company and its star. Still the affair rips the movement apart, between Tuckerards and anti-Tuckerards. Trump takes part of the conversation, saying that he liked Tucker, “but ultimately, he went too far. Too far. Especially on Russia, very weak on Russia.” The man in question is announcing his own platform, but platforms like Spotify have already refused to give him a space."],
 [48811,48173,1001,"In 24 hours, other billionaires stars like Peter Thiel announce donations to Paul’s campaign. Thiel says he once renounced democracy, but is willing to give it a try. Paul lessens his visits to small-towns and the national marihuana association to country-clubs and executive meetings. Candidates once considered shoo-ins announce they have no intention of running. Now, some say that the most remarkable issue is the flooding of social media: Thousands of anonymous accounts, with eccentric names and pictures of Patrick Bateman, writing that Paul’s presidency will be like the second coming of Christ. But you know most of these people can’t vote."],
 [48830,48232,1001,"Trump’s tweet triggers a wave of condemnation from the establishment GOP and the podcasters. Crowder makes a not subtle joke about Paul’s masculinity, and Hawley sneers that while he respectfully disagrees with his colleague, the era of libertarianism in the Republican Party is over. Soon you receive a call from your employers, telling you to end the operation. While looking at the dossier, you recall a photo of Paul, fixate on his smug face and weird hair. You tossed it into the garbage."],
@@ -26913,25 +26913,25 @@ function applyHeirQuestion22AnswerSwaps(
 
     switch (heirKey) {
         case "Pence":
-            if (popValue < 5) {
+            if (popValue <= 5) {
                 swaps.push([49040, 49586]);
             }
 
-            if (policyMean < -3) {
+            if (policyMean <= -3) {
                 swaps.push([49044, 49626]);
-            } else if (policyMean > -3 && policyMean < 3) {
+            } else if (policyMean > -3 && policyMean <= 3) {
                 swaps.push([49044, 49590]);
             }
             break;
 
         case "Haley":
-            if (popValue < 5) {
+            if (popValue <= 5) {
                 swaps.push([49056, 49657]);
             }
 
-            if (socpolValue < -3) {
+            if (socpolValue <= -3) {
                 swaps.push([49059, 49711]);
-            } else if (socpolValue > -3 && socpolValue < 3) {
+            } else if (socpolValue > -3 && socpolValue <= 3) {
                 swaps.push([49059, 49665]);
             }
             break;
@@ -26943,15 +26943,15 @@ function applyHeirQuestion22AnswerSwaps(
 
             if (popValue < 0) {
                 swaps.push([49071, 49836]);
-            } else if (popValue > 0 && popValue < 5) {
+            } else if (popValue >= 0 && popValue < 5) {
                 swaps.push([49071, 49781]);
             }
             break;
 
         case "Carlson":
-            if (ecopolValue < -3) {
+            if (ecopolValue <= -3) {
                 swaps.push([49076, 49918]);
-            } else if (ecopolValue > -3 && ecopolValue < 3) {
+            } else if (ecopolValue > -3 && ecopolValue <= 3) {
                 swaps.push([49076, 49871]);
             }
 
@@ -26961,9 +26961,9 @@ function applyHeirQuestion22AnswerSwaps(
             break;
 
         case "Paul":
-            if (ecoValue < -3) {
+            if (ecoValue <= -3) {
                 swaps.push([49088, 49991]);
-            } else if (ecoValue > -3 && ecoValue < 5) {
+            } else if (ecoValue > -3 && ecoValue <= 5) {
                 swaps.push([49088, 49973]);
             }
 
@@ -26973,19 +26973,19 @@ function applyHeirQuestion22AnswerSwaps(
             break;
 
         case "Cruz":
-            if (popValue < -2) {
+            if (popValue <= -2) {
                 swaps.push([49112, 50035]);
             }
 
-            if (ecoValue < -3) {
+            if (ecoValue <= -3) {
                 swaps.push([49119, 50054]);
-            } else if (ecoValue > -3 && ecoValue < 5) {
+            } else if (ecoValue > -3 && ecoValue <= 5) {
                 swaps.push([49119, 50050]);
             }
             break;
 
         case "Bush":
-            if (unrestValue < 3) {
+            if (unrestValue <= 3) {
                 swaps.push([49128, 50107]);
             }
 
