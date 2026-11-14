@@ -8124,7 +8124,7 @@ campaignTrail_temp.answer_feedback_json = rows([["campaign_trail.answer_feedback
 [52142,52141,1001,[459]],
 [52162,52161,1001,"It’s cheap and we all know it, but while Trump shakes the hands of the survivors and gifts them with red hats, Thune, ${minority} and Pence deliver a small aid package to the damaged areas, not anything fancy, not enough to reap the political benefits."],
 [52168,52167,1001,[460]],
-[52173,52172,1001,"The bombs may be falling, but else could you do, except going to Jerusalem? The trip itself it’s a publicity stunt, a challenge to the mullahs. You face the wall and wear the Sheitel, as Israeli officials call Donald Trump and Nikki Haley the greatest friends Israel has ever had. In a private meeting with Bibi and Ben-Gvir, they put forward their plan of settling Gaza, expelling the two millions Palestinians and relocating them to Somaliland. You gulp, and give them enthusiastic approval."],
+[52173,52172,1001,"The bombs may be falling, but else could you do, except going to Jerusalem? The trip itself it’s a publicity stunt, a challenge to the mullahs. You face the wall and wear the Sheitel, as Israeli officials call Donald Trump and Nikki Haley the greatest friends Israel has ever had. In a private meeting with Smotrich and Ben-Gvir, they put forward their plan of settling Gaza, expelling the two millions Palestinians and relocating them to Somaliland. You gulp, and give them enthusiastic approval."],
 [52178,52177,1001,"The bombs may be falling, but else could you do, except going to Jerusalem? The trip itself it’s a publicity stunt, a challenge to the mullahs. You face the wall and wear the Sheitel, as Israeli officials call Donald Trump and Nikki Haley the greatest friends Israel has ever had. In a private meeting with Bibi and Ben-Gvir, they ask you if, after the mullahs fall, Erdogan could come next."],
 [52189,52188,1001,"According to the State Department, it’s really dangerous, but Trump doesn’t care and you two go to Crimea, declaring in the middle of Sevastopol that this is Ukrainian territory, for our great Ukrainian allies, for the security of democracies around the world. As Putin’s Russia dies ignobly, Ben Shapiro writes an enthusiastic op-ed for The Daily Wire, later read on his show, “Nikki Haley has the potential to be the greatest President in my lifetime”."],
 [52195,52194,1001,"“What a bitch!” You can almost hear the words stabbing your ears as you announce your decision. The Trump family pressures to have your name removed from the ballot, and a fraction of the party agrees. But far away, in the political landscape, your bravery is met with applause and a new intention to forgive."],
@@ -18928,7 +18928,7 @@ window.applyHeirGeneralElectionPictures =
                 }
 
                 if (context.vpTrumpJr) {
-                    answerSwapper(51947, 51970, false);
+                    answerSwapper(51970, 51947, false);
                 }
             }
 
