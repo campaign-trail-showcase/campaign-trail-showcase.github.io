@@ -502,7 +502,7 @@ campaignTrail_temp.questions_json = rows([["campaign_trail.question","descriptio
 [0,1306,"A casualty of Putin’s war has been the global economy. Inflation reaches levels not seen since the 1970s, with oil and gas prices up to the sky. To counter the crisis, the Federal Reserve has announced a hike in interest rates, which, according to Commerce, means the economy will enter a small recession at the end of the year. People, especially people who voted for you, are anxious about the situation. What can we do?\n"],
 [0,1307,"Oh for fuck sake… As if we didn’t have enough problems. Mr. President, the Supreme Court has published its decision on the Mississippi bill. Yes, they are repealing Roe V. Wade. The Bible Belt is popping the champagne, but that’s because they don’t have to deal with the consequences. The Democrat Party is feeding the rage of women, they say we want to control bodies, and seeing the laws we are passing in the South, it’s not really… Mr. President, I don’t think the best course for the administration should be to celebrate this decision. "],
 [0,1309,[0]],
-[0,1317,"Rachel Maddow, his hideous smile, makes all the room drool in rage. “Stay for more, they are calling it a revolution, the ‘22 Revolution, the Anti-Trump Insurgence.” McConnell kisses the throne goodbye, you don’t want to look at McCarthy, poor guy. Stacey Abrams and Beto O’Rourke, dancing for the cameras, an historic upside. Goddamn it, even Rubio and DeSantis have to check on the results. Mr. President, you have to meet the press, you have to make it seem that this is not a disaster, which it is. It could destroy your legacy if you don’t do anything."],
+[0,1317,"Rachel Maddow, his hideous smile, makes all the room drool in rage. “Stay for more, they are calling it a revolution, the ‘22 Revolution, the Anti-Trump Insurgence.” McConnell kisses the throne goodbye, you don’t want to look at McCarthy, poor guy. Stacey Abrams and Beto O’Rourke, dancing for the cameras, an historic upset. Goddamn it, even Rubio and DeSantis have to check on the results. Mr. President, you have to meet the press, you have to make it seem that this is not a disaster, which it is. It could destroy your legacy if you don’t do anything."],
 [0,1308,"#HEIR PLACEHOLDER"],
 [0,1318,[1]],
 [0,1316,"Ukraine has been completely destroyed, subjugated. Russia has annexed all the land east of the Dnieper, while an Ukrainian puppet government has been put in control of the rest. With Medvedev and Kadirov demand \"military operations\" in Poland or the Baltics, the European Union announces that its members will increase military spending to 3% by 2025, with France demanding a \"new relationship\" with the United States. Our intelligence suggests that an armed resistance is rising in Ukraine's countryside. Should we do anything in that regard?"],
@@ -35541,15 +35541,20 @@ function top(list) {
       return future({ row, vp: vice }, 2037, 2041, side);
     }
 
-    function republicanTimeline(effectiveVp = vp) {
+        function republicanTimeline(effectiveVp = vp) {
       if (gopTerms === 2) {
+        if (is('Paul') && sp <= 0 && (pc >= 2 || (p >= 7 && /kennedy|rfk/i.test(vp)))) {
+          const end = tax < 0 ? 2041 : 2037;
+          future({ row: 94 }, 2033, end, 'R');
+          if (end === 2037) election2036(pc >= 2 ? 'D' : 'R');
+          return;
+        }
+
         if (pc >= 2) {
           const runAgain = c.eco >= 10;
           const end = runAgain ? 2041 : 2037;
-          if (is('Walsh') && !wasVp('Paul Gosar')) {
-            future({ row: 84 }, 2033, end, 'R');
-          } else if (is('Paul') && !/kennedy|rfk/i.test(vp) && sp <= 0) {
-            future({ row: 94 }, 2033, tax < 0 ? 2041 : 2037, 'R');
+          if (is('Walsh') && wasVp('Paul Gosar')) {
+            future({ row: 84 }, 2033, end, 'R');          
           } else {
             const portraits = TIMELINE_PORTRAITS[83];
             const fullKey = Object.keys(portraits).find(key => {
@@ -35561,6 +35566,10 @@ function top(list) {
               c.impeachment === 1 ? 'Curtis Sliwa' : sample(TIMELINE_GOP_VPS, effectiveVp));
           }
           if (records.at(-1).end === jan(2037)) election2036('D');
+        } else if (p >= 7 && is('Walsh') && wasVp('Paul Gosar')) {
+          const end = c.eco >= 10 ? 2041 : 2037;
+          future({ row: 84 }, 2033, end, 'R');
+          if (end === 2037) election2036('R');
         } else {
           const side = p >= 7 ? 'R' : 'D';
           future(side === 'R' ? republican2032() : democrat2032(), 2033, side === 'R' ? 2037 : 2041, side);
@@ -35727,9 +35736,10 @@ function top(list) {
       const [first, second, threshold] = TIMELINE_GOP_2025[gop] || [0, 0, 350];
       const target = is('Paul') && /kennedy|rfk/i.test(vp) ? 320 : threshold;
       const walshRemoved = is('Walsh') && c.deadlock && !wasVp('Paul Gosar');
-      const forced2028 = filesRevealed || (c.punishedCox && c.pardon) ||
+      const forced2028 = (filesRevealed && !c.punishedCox) ||
+        (c.punishedCox && c.pardon) ||
         (is('Pence') && c.gopEV < 400 && wasVp('Donald Trump Jr.'));
-      gopTerms = !c.deadlock && !jrDies && !forced2028 &&
+        gopTerms = !c.deadlock && !jrDies && !forced2028 &&
         (c.gopEV > 400 || (c.gopEV > target && noWars && c.eco > 0)) ? 2 : 1;
       const end = 2025 + 4 * gopTerms;
       let effectiveVp = vp;
