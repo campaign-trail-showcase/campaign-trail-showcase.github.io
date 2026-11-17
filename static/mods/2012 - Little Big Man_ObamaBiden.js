@@ -44567,9 +44567,9 @@ function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidates
               const isMatch = (res.state_po && res.state_po.toUpperCase() === statePrefix) || fips.startsWith(statePrefix);
 
               if (isMatch) {
-                const rD = res.baseDem > 0 ? (res.curDem / res.baseDem) : 1;
-                const rR = res.baseRep > 0 ? (res.curRep / res.baseRep) : 1;
-                const rO = res.baseOth > 0 ? (res.curOth / res.baseOth) : 1;
+                const rD = res.baseDem > 0 ? clampVal(res.curDem / res.baseDem, 0.1, 4.0) : 1;
+                const rR = res.baseRep > 0 ? clampVal(res.curRep / res.baseRep, 0.1, 4.0) : 1;
+                const rO = res.baseOth > 0 ? clampVal(res.curOth / res.baseOth, 0.1, 4.0) : 1;
                 sumRD += rD; sumRR += rR; sumRO += rO;
                 count++;
               }
@@ -44627,32 +44627,17 @@ function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidates
       pieceRep = res.curRep * weight;
       pieceOth = res.curOth * weight;
     } else if (pieceData && typeof pieceData === 'object' && pieceData._xw) {
-      const spatialWeight = pieceData.dem + pieceData.rep + pieceData.other;
-      if (spatialWeight > 0) {
-        const demShare = pieceData.dem / spatialWeight;
-        const repShare = pieceData.rep / spatialWeight;
-        const othShare = pieceData.other / spatialWeight;
+      const spatialWeight = (pieceData.dem || 0) + (pieceData.rep || 0) + (pieceData.other || 0);
+      const w = spatialWeight > 0 ? spatialWeight : 1.0;
 
-        const rD = res.baseDem > 0 ? (res.curDem / res.baseDem) : 1;
-        const rR = res.baseRep > 0 ? (res.curRep / res.baseRep) : 1;
-        const rO = res.baseOth > 0 ? (res.curOth / res.baseOth) : 1;
+      const demRef = Number(pieceData.dem) || 0;
+      const repRef = Number(pieceData.rep) || 0;
+      const demRatio = (demRef + repRef > 0) ? demRef / (demRef + repRef) : 0.5;
 
-        const countyTotal = res.curDem + res.curRep + res.curOth;
-        let scaledDem = demShare * rD;
-        let scaledRep = repShare * rR;
-        let scaledOth = othShare * rO;
-        let totalScaled = scaledDem + scaledRep + scaledOth;
-
-        if (totalScaled > 0) {
-          pieceDem = countyTotal * spatialWeight * (scaledDem / totalScaled);
-          pieceRep = countyTotal * spatialWeight * (scaledRep / totalScaled);
-          pieceOth = countyTotal * spatialWeight * (scaledOth / totalScaled);
-        } else {
-          pieceDem = countyTotal * spatialWeight * demShare;
-          pieceRep = countyTotal * spatialWeight * repShare;
-          pieceOth = countyTotal * spatialWeight * othShare;
-        }
-      }
+      const county2p = res.curDem + res.curRep;
+      pieceDem = county2p * w * demRatio;
+      pieceRep = county2p * w * (1 - demRatio);
+      pieceOth = res.curOth * w;
     } else {
       const { d, r, o } = parseVotes(pieceData);
       const hist = countyHistTotals[cleanF];
@@ -45283,10 +45268,18 @@ async function ensureFipsMultipliers(baseCurrentMap, fipsResults, tpCandidatesIn
     const pmRep = pmCounty.votes_rep || res.baseRep || 1;
     const pmOth = pmCounty.votes_other || res.baseOth || 1;
 
+    const st = res.state_po;
+    const stBaseOth = (stateBase[st] && stateBase[st].all > 0) ? (stateBase[st].other / stateBase[st].all) : 0.02;
+    let stTgtOth = 0;
+    tpCandidatesInGame.forEach(cid => { stTgtOth += ((targetStatePct[st] || {})[cid] || 0); });
+    const stateOthGrowth = stBaseOth > 0 ? (stTgtOth / stBaseOth) : 1.0;
+    const maxMo = Math.max(3.0, stateOthGrowth * 2.5);
+
+    const rawMO = pmOth > 0 ? (res.curOth / pmOth) : 1;
     _fipsMultipliers[fips] = {
-      mD: pmDem > 0 ? res.curDem / pmDem : 1,
-      mR: pmRep > 0 ? res.curRep / pmRep : 1,
-      mO: pmOth > 0 ? res.curOth / pmOth : 1,
+      mD: pmDem > 0 ? clampVal(res.curDem / pmDem, 0.1, 4.0) : 1,
+      mR: pmRep > 0 ? clampVal(res.curRep / pmRep, 0.1, 4.0) : 1,
+      mO: clampVal(rawMO, 0.05, maxMo),
       tpShares: res.tpShares || {}
     };
   }
@@ -45888,7 +45881,16 @@ async function loadAndDrawCountyMap(mode) {
 
           let tpAff = null;
           if (tpCandidatesInGame.length > 0) {
-            const w = tpCandidatesInGame.map(cid => Math.exp(TP_AFFINITY_SHARPNESS * tpField[cid][i]));
+            const w = tpCandidatesInGame.map(cid => {
+              const candTgt = ((targetStatePct[st] || {})[cid]) || 0.001;
+              let histWeight = candTgt;
+
+              if (c.tp && tpMapping[cid] !== undefined && c.tp[tpMapping[cid]] !== undefined) {
+                histWeight = Math.max(0.001, c.tp[tpMapping[cid]] / Math.max(1, c.votes_other || 1));
+              }
+
+              return histWeight * Math.exp(TP_AFFINITY_SHARPNESS * (tpField[cid] ? tpField[cid][i] : 0));
+            });
             const wsum = w.reduce((a, b) => a + b, 0) || 1;
             tpAff = {};
             tpCandidatesInGame.forEach((cid, k) => { tpAff[cid] = w[k] / wsum; });
@@ -45949,12 +45951,25 @@ async function loadAndDrawCountyMap(mode) {
           const newOdds = baseOdds * Math.exp(ODDS_GAIN * clampVal(countyShift, -1.2, 1.2));
           const dem2pNew = clampVal(newOdds / (1 + newOdds), 0.0005, 0.9995);
 
+          let tgtTpShare = 0;
+          tpCandidatesInGame.forEach(cid => {
+            tgtTpShare += (target[cid] || 0);
+          });
+
           let tpShare = 0;
-          if (tpCandidatesInGame.length > 0) {
+          if (tpCandidatesInGame.length > 0 && tgtTpShare > 0) {
             const baseStateOthShare = stBase.all > 0 ? stBase.other / stBase.all : 0;
-            const tgtTpShare = Math.max(0, 1 - tgtDem - tgtRep);
-            const ratio = baseStateOthShare > 0 ? tgtTpShare / baseStateOthShare : 1;
-            tpShare = clampVal(plan.baseOthShare * ratio * (1 + 0.35 * plan.noise), 0, 0.9);
+            const stateGrowth = baseStateOthShare > 0 ? (tgtTpShare / baseStateOthShare) : 1.0;
+
+            const ratio = clampVal(stateGrowth, 0.1, Math.min(4.0, Math.max(2.0, stateGrowth * 1.5)));
+
+            const countyBaseOth = plan.baseOthShare > 0 ? plan.baseOthShare : (baseStateOthShare || tgtTpShare);
+            const rawTpShare = countyBaseOth * ratio * (1 + 0.25 * plan.noise);
+
+            const maxAllowedTp = tgtTpShare > 0.25
+              ? 0.90
+              : Math.min(0.45, Math.max(tgtTpShare * 1.5, tgtTpShare * 2.2 + 0.02));
+            tpShare = clampVal(rawTpShare, 0, maxAllowedTp);
           }
 
           const competitiveness = clampVal(Math.abs(stateDelta2p) / 0.08, 0, 1);
@@ -45963,7 +45978,9 @@ async function loadAndDrawCountyMap(mode) {
             + 0.02 * plan.noise;
           total = Math.max(1, Math.round(plan.baseAll * turnoutAdj));
 
-          const twoPartyShare = 1 - tpShare;
+          const dynamicMinTwoParty = Math.max(0.08, 1 - (tgtTpShare * 1.4));
+          const twoPartyShare = Math.max(dynamicMinTwoParty, 1 - tpShare);
+
           countyResults = activeCandidates.map(candId => {
             if (candId === demCandId) {
               const pct = dem2pNew * twoPartyShare;
@@ -46031,8 +46048,22 @@ async function loadAndDrawCountyMap(mode) {
             if (have <= 0) return;
           }
 
-          const factor = want / have;
-          rows.forEach(r => r.results.forEach(cr => { if (cr.id === cid) cr.votes *= factor; }));
+          const isThirdParty = tpCandidatesInGame.includes(cid);
+          const factor = isThirdParty ? clampVal(want / have, 0.2, 2.5) : (want / have);
+
+          const targetShare = targetPcts[cid] || 0;
+          const maxCountyShare = targetShare > 0.25 ? 0.90 : Math.min(0.45, Math.max(targetShare * 2.2 + 0.02, 0.04));
+
+          rows.forEach(r => {
+            r.results.forEach(cr => {
+              if (cr.id === cid) {
+                cr.votes *= factor;
+                if (isThirdParty && r.total > 0) {
+                  cr.votes = Math.min(cr.votes, r.total * maxCountyShare);
+                }
+              }
+            });
+          });
         });
       });
 
@@ -46851,7 +46882,14 @@ async function loadAndDrawCountyMap(mode) {
 
         const dem = Math.round(baseDem * mD);
         const rep = Math.round(baseRep * mR);
-        const oth = Math.round(baseOth * mO);
+        const rawOth = Math.round(baseOth * mO);
+
+        const parentCounty = fipsResults[countyFips];
+        const parentTotal = parentCounty ? (parentCounty.curDem + parentCounty.curRep + parentCounty.curOth) : 0;
+        const countyOthRate = (parentCounty && parentTotal > 0) ? (parentCounty.curOth / parentTotal) : 0.03;
+
+        const maxPrecinctRate = Math.min(0.92, Math.max(0.10, countyOthRate * 2.5 + 0.04));
+        const oth = Math.min(rawOth, Math.round((dem + rep + rawOth) * maxPrecinctRate));
         const total = dem + rep + oth;
 
         const bgResults = [

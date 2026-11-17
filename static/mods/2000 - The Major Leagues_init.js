@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.4.7
+* @version: 1.4.8
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -252,7 +252,7 @@ campaignTrail_temp.election_json = [
         "pk": 9,
         "fields": {
             "year": 2000,
-            "summary": "<p>The twentieth century is bleeding out on the linoleum floor of Sparky Memorial High, and the rest of America isn’t doing much better. Outside these walls, a wooden Vice President and a President’s son with a smug fraternity smile are fighting over the remains of a decade that promised everything and delivered not much of it.</p><p>Linus Van Pelt is running for student council president. Of course he is. Not so little anymore, he’s shed the blanket and the pumpkin patch and rebuilt himself into something smooth, polished, and completely unrecognizable. With an airtight platform and an immaculate smile, everyone knows Linus will win. People like him always do.</p><p>Charlie Brown was not supposed to be here. He was supposed to fail quietly and graduate without anyone noticing. But after Peppermint Patty cornered him by the bleachers on a cold September morning and told him somebody had to fight, he looked at Linus’s campaign poster, and couldn’t think of a single good reason to say no. And so he said yes. This is the last autumn of their childhood, and neither of them knows it yet.</p>",
+            "summary": "<p><b>A few months remain before</b> the century runs out, and Sparky Memorial High has its own little election to worry about. Outside, America is heading into another presidential contest, with a wooden Vice President and a President’s son vying for the keys to the county, but it’s a strange time to be growing up.</p><p>Linus Van Pelt is running for student council president. <em>Of course</em> he is. Barring some extraordinary intervention from the Almighty, he’s already halfway to the finish line: he’s got the teachers, the reputation, the polished speeches— no, really, why would anyone even bother to show up? If there was someone willing to succeed in life, they’d be a Linus. everyone knows Linus will win. People like him always do.</p><p>Charlie Brown, on the other hand, is having trouble understanding how any of this became his problem. He’d been perfectly content to keep his head down and make it through the school year, and now he’s running against a childhood friend with a campaign of his own, wondering what possessed him to agree to any of it. Why <em>him</em>? Why <em>now</em>? And, perhaps most importantly, why couldn’t he have just said no?</p>",
             "image_url": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/tml_summary.jpg",
             "winning_electoral_vote_number": 270,
             "advisor_url": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/tml_advisors.webp",
@@ -369,7 +369,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Independent",
             "state": "Minnesota",
             "priority": 2,
-            "description": "<p><b>Charlie Brown has spent</b> most of his sixteen years being the kind of person things just happen to. He’s not sure when exactly he stopped expecting things to go his way, but it was early enough that the habit is basically structural now, built into how he moves through hallways, sits at lunch tables, and answers questions in class. He has a tendency to say what he actually thinks, which people find either refreshing or exhausting depending on the day, and a further tendency to lie awake at night reconsidering it. He is not, by any measure he’s ever been able to identify, a natural candidate for anything.</p><p>What he also is, maybe, is someone who has spent long enough on the outside of things to have a clear view of them. He doesn’t actually want to be president or anything like that. What he wants, and this is harder to say out loud, is to matter: to actually be <i>doing</i> something rather than simply being present while it happens. He’s been present for a long time, and he’s tired of it. And despite it all, it’s the truest thing he has, and for once in his life, he’s decided that the truest thing he has might be worth something.</p>",
+            "description": "<p><b>The century is ending</b>, and everyone around Charlie Brown seems to have received instructions he, apparently, never got. At sixteen, almost seventeen, he’s spent most of his life being patient, earnest, and reasonably decent, qualities that have earned him very little beyond a reputation for being an easy target. As much as he’s always tried to do the right thing, he’s beginning to resent how little that seems to have counted for. There’s a version of his story, he hopes, where all that persistence is supposed to mean something, as his friends have been telling him for years, but Charlie is beginning to suspect they’ve been making it up to keep him from feeling <em>bad</em>.</p><p>He’s tired of being the punchline, tired of being told things will work out eventually, and increasingly convinced that “eventually” is a place nobody actually gets to. Why did he sign up for this? He doesn’t particularly want to be president, nor does he have much confidence in his ability to do the job, but feels quite uncomfortable watching everyone else decide his place in the world for him. Then again, he can’t quite explain why he agreed to run in the first place.<br>“Perhaps”, he wonders, “perhaps I am the problem.”</p>",
             "color_hex": "#0a0ad4",
             "secondary_color_hex": "#94c2ff",
             "is_active": 1,
@@ -392,7 +392,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Independent",
             "state": "Minnesota",
             "priority": 1,
-            "description": "<p><b>Linus Van Pelt is the kind of</b> sixteen-year-old that adults describe as an old soul, which he has learned to accept as a compliment even when it isn’t entirely meant as one. He is thoughtful in a way that reads as effortless, articulate in a way that never quite tips into performance, and genuinely, sometimes exhaustingly, interested in ideas: in what things mean, in why systems work the way they do, and in the gap between what people say they believe and how they actually live. He has strong opinions about most things and holds them with a particular kind of calm that other people tend to mistake for certainty. Of course, he’s learned not to correct them.</p><p>What people don’t always see, and what he’s not sure he fully sees himself, is how much of his confidence is architecture; something he built carefully, over years, out of the wreckage of being the kid who believed in things too openly and got hurt for it. He is kind because he means to be, organized because he needs to be, and driven in a way that he has, honestly, never entirely examined. Linus cares about doing good, but he also cares about being <i>seen</i> doing good. He knows these are different things, but he has not yet fully worked out what to do with that knowledge.</p>",
+            "description": "<p><b>Coasting on his own</b> innocence, the self-described <em>nouveau riche</em> Linus van Pelt is all but assured to be the next student council president. Why wouldn’t he be? He’s kind, thoughtful, well-read, and possesses a rare ability to listen to someone without immediately making the conversation about himself. His teachers bring up when discussing leadership, and his friends’ parents hope their children will grow up to be like him, too. It’s simple: people like him, adults trust him, and even his detractors have trouble finding anything particularly objectionable to say. A model child, he is.</p><p>It’s a rather comfortable position to be in, and Linus has never had much reason to question it. If his success is just a natural consequence of simply being himself, then he’s quite happy to let people believe that. But somewhere beneath all that certainty is a nagging suspicion that his goodness has always been a little too convenient. He’s never really had to choose between doing what’s right and doing what’s easy, and at seventeen, he’s beginning to wonder what happens when those two things finally stop being the same. What is there left for him to know?</p>",
             "color_hex": "#dc0f0f",
             "secondary_color_hex": "#ffabab",
             "is_active": 1,
@@ -492,7 +492,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "''",
             "electoral_loss_message": "''",
             "no_electoral_majority_message": "''",
-            "description_as_running_mate": "<p><b>Lucy van Pelt understands powers</b> in the way musicians understand rhythm: more than just a simple concept, but as a physical sensation, something she feels in her chest. In fact, she would have been at home in any court in any century; Versailles, the Borgias, all those vicious Silicon Valley start-ups… and more. Here, what she is doing running Linus’s campaign is, on the surface, an act of loyalty, and on every surface beneath that surface, an act of pure self-interest. She wants to win because she always wants to win, and she is very willing to do the opposite if it means better for her in the long term.</p><p>What she will not admit, not even to herself when her defenses are down, is that she is also a little afraid Linus is going to lose. And that the person who might beat him is Charlie Brown, whom she has known since they were small enough to fit in the same sandbox, and who has, against all probability and personal history, become someone worth taking seriously. This makes her angrier than anything else. She was comfortable being right about Charlie Brown. It’s hard to feel comfortable about everything now.</p>",
+            "description_as_running_mate": "<p><b>She would have been</b> at home in any court in any century; Versailles, the Borgias, all those vicious Silicon Valley start-ups, and more. Lucy van Pelt thinks she has an almost instinctive understanding of leverage. After all, she knows what people want, what they’re afraid of losing, and how much either is worth when the right opportunity presents itself. Running Linus’s campaign is, on the surface, an act of loyalty, and on every surface beneath that, an exercise in pure self-interest. She wants to win because she <em>always</em> wants to win, of course, and she’s perfectly willing to sacrifice just about anything if it means coming out ahead in the long run.</p><p>What she hasn’t quite accounted for is the possibility of losing. Worse, the person who might beat Linus is <em>the</em> Charlie Brown, whom she’s known since they were little. She’s spent years comfortably dismissing him as a lost cause, and now he seems to be doing something she can’t quite put her finger on. Really, what is he playing at? Why is everyone suddenly taking him seriously? And why, for some reason, does he seem so different from the boy she’s spent all these years knowing exactly how to deal with?</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -515,7 +515,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "''",
             "electoral_loss_message": "''",
             "no_electoral_majority_message": "''",
-            "description_as_running_mate": "<p><b>Although Peppermint Patty will tell you</b> she’s not the brains of this operation, and she’s wrong, you’ll never convince her of that. She’s not book-smart in the way that gets rewarded on report cards, and she’s made a certain peace with that; though the peace is sometimes uneasy in the small hours of the night when she thinks about it too hard. What she is, inarguably, is perceptive: about people and about the difference between what someone is saying and what they mean. She has been reading Charlie Brown like a book since the fourth grade and she has never once gotten the ending wrong.</p><p>Patty took this on because she believed in him before he believed in himself, as surprising as that may seem; she has standards. What she might say, if you caught her in the right moment, is that she’s tired of watching people who actually give a damn get edged out by people who are just better at performing the giving of a damn. She knows the difference, and figured that if someone like Charlie Brown could be made to stand up in front of people and say the true thing, then maybe the true thing still counts for something. Now, she needed to find out.</p>",
+            "description_as_running_mate": "<p><b>In another life</b>, another year, she could have been someone’s discovery. Born too late to grace the covers of <em>i-D</em>, hang around with the likes of Hunter, Pierce, and other New York City skateboarders, or find herself framed as a muse in the lens of the late Davide Sorrenti, Peppermint Patty has found herself in something of a tough spot. She’s not stupid, obviously, but she’s never been particularly well served by the things the world has decided to reward. Generally, she feels she has a pretty good sense of people, though she doesn’t always know what to do with it. People are weird; that may be a good sign.</p><p>This campaign is about Charlie, genuinely; she believes in him and wants to see him succeed. But the whole thing is also, and she knows it, about finding out whether she can make something of her <em>own</em>, rather than spending her life watching other people do it. Patty wants to make something work, to look at something and know <em>she</em> built it. Charlie Brown is the closest thing to a project she’s ever had, and she’s perfectly aware of how strange that sounds. Still, she’s here, and she’s going to see it through.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -1049,6 +1049,9 @@ const css = `
                 justify-content: center;
                 margin: .5rem 0 0 0;
             }
+			#election_id_button {
+				margin-top: 2.75em;
+			}
 			.description_window_small {
 				background-color: #fffdf5;
 				background-image: linear-gradient(transparent 1.45em, #dbeaf7 1.45em, #dbeaf7 1.55em, transparent 1.55em);
@@ -1312,7 +1315,7 @@ const css = `
 			#election_image img {
 			  height: 90%;
 			  object-fit: cover;
-			  object-position: -50px 0px;
+			  object-position: -60px 0px;
 			}
 			#election_year_form + p:first-of-type {
 			  padding-top: 5em;
