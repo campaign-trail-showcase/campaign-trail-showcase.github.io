@@ -27,6 +27,16 @@ campaignTrail_temp.temp_election_list = [
 
 campaignTrail_temp.credits = "u/GlobalMuffin"
 
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "20") {
+            campaignTrail_temp.code2_id = "2012 - Snow Revolution";
+        }
+    }
+}, 100);
+
 campaignTrail_temp.global_parameter_json = [
     {
         "model": "campaign_trail.global_parameter",
