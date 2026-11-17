@@ -10,6 +10,7 @@ campaignTrail_temp.election_json = [
             "winning_electoral_vote_number": 0,
             "advisor_url": "https://president.uz/uploads/052e5329-95b0-f7bd-4f78-cce97f968ba1_lists_slider_5535.jpg",
             "recommended_reading": "<ul>\n<li><a href=https://www.mprnews.org/story/2012/03/04/putin-russia-elections>Putin claims victory in Russia's presidential vote</a></li>\n<li><a href=https://www.theguardian.com/world/2012/mar/04/russian-election-accusations-vote-fixing>Putin makes his presence felt as protesters take to Moscow's streets</a></li>\n<li><a href=https://www.theguardian.com/world/2012/mar/05/putin-protesters-moscow>Russia’s presidential election marked by unequal campaign conditions, active citizens’ engagement, international observers say</a></li>\n<li><a href=https://odihr.osce.org/odihr/elections/88661>Questions on the March 4 Russian Presidential Election</a></li>\n</ul>",
+            "site_description": "<p>The “Tandemocracy” has shattered. What was supposed to be a scripted job-swap between President Dmitry Medvedev and Prime Minister Vladimir Putin has devolved into an all-out political duel. In a shock move, Medvedev has refused to step aside, instead embracing the protesters' calls for reform. Over the past four years, Russia has faced financial crisis and war in Georgia, and now a “Snow Revolution” in the streets.</p><p>Russia now stands at a crossroads: a return to the \"Vertical of Power\" under Putin, or a leap into a messy, uncertain \"New Thaw\" under Medvedev.</p><p>How will their election play out?  Will Medvedev hold on or will we see the return of Putin?</p>",
             "has_visits": 1,
             "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
         }
@@ -36,6 +37,21 @@ setInterval(() => {
         }
     }
 }, 100);
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#1b1e23",
+    "header_text_color": "#ffffff",
+    "header_text_shadow": "1px 1px 2px rgba(0, 0, 0, 0.7)",
+    "description_background_color": "#f8f8f8",
+    "description_text_color": "#000000",
+    "main_color": "#abb2bf",
+    "secondary_color": "#2c313c",
+    "secondary_hover_color": "#4c5059",
+    "scrollbar_color": "#2c313c #abb2bf",
+    "scrollbar_width": "auto",
+    "image_border": "4px solid #111827",
+    "ui_text_color": "#ffffff"
+};
 
 campaignTrail_temp.global_parameter_json = [
     {
