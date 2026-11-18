@@ -13051,354 +13051,8 @@ if (Array.isArray(campaignTrail_temp.states_json) && Array.isArray(campaignTrail
 
 // ==========================================
 // TWO-ROUND RUNOFF CONTROLLER
+// psst: this is a patched version from the womble version -SM
 // ==========================================
-
-function calculateRoundOneTopShare(answerId) {
-    const e = campaignTrail_temp;
-    const answers = e.player_answers.concat(Number(answerId));
-    const candidates = [
-        Number(e.candidate_id),
-        ...(e.opponents_list || []).map(Number)
-    ];
-
-    const variance = Number(
-        e.global_parameter_json[0].fields.global_variance
-    );
-
-    const normalRandom = typeof F === "function" ? F : function () {
-        let u, v, s;
-        do {
-            u = Math.random() * 2 - 1;
-            v = Math.random() * 2 - 1;
-            s = u * u + v * v;
-        } while (s >= 1 || s === 0);
-
-        return u * Math.sqrt(-2 * Math.log(s) / s);
-    };
-
-    // Candidate-wide effects
-    const globalMultipliers = candidates.map(candidate => {
-        let effect = 0;
-
-        for (const answer of answers) {
-            const score = e.answer_score_global_json.find(item =>
-                Number(item.fields.answer) === Number(answer) &&
-                Number(item.fields.candidate) === Number(e.candidate_id) &&
-                Number(item.fields.affected_candidate) === candidate
-            );
-
-            if (score) effect += Number(score.fields.global_multiplier);
-        }
-
-        const base =
-            candidate === Number(e.candidate_id) && effect < -0.4
-                ? 0.6
-                : 1 + effect;
-
-        let multiplier = base * (1 + normalRandom() * variance);
-
-        if (candidate === Number(e.candidate_id)) {
-            multiplier *= e.difficulty_level_multiplier;
-        }
-
-        return Number.isFinite(multiplier) ? multiplier : 1;
-    });
-
-    // Candidate issue scores
-    const issueData = candidates.map(candidate => {
-        const seen = new Set();
-        const scores = [];
-
-        for (const item of e.candidate_issue_score_json.filter(
-            x => Number(x.fields.candidate) === candidate
-        )) {
-            const issue = Number(item.fields.issue);
-
-            if (!seen.has(issue)) {
-                seen.add(issue);
-                scores.push({
-                    issue,
-                    issue_score: Number(item.fields.issue_score)
-                });
-            }
-        }
-
-        return {
-            candidate_id: candidate,
-            issue_scores: scores
-        };
-    });
-
-    // State multipliers
-    const stateData = candidates.map((candidate, index) => {
-        const multipliers = e.candidate_state_multiplier_json
-            .filter(item => Number(item.fields.candidate) === candidate)
-            .map(item => ({
-                state: Number(item.fields.state),
-                state_multiplier:
-                    Number(item.fields.state_multiplier) *
-                    globalMultipliers[index] *
-                    (1 + normalRandom() * variance)
-            }))
-            .sort((a, b) => a.state - b.state);
-
-        return {
-            candidate_id: candidate,
-            state_multipliers: multipliers
-        };
-    });
-
-    // Update the player's issue scores
-    for (const issueEntry of issueData[0].issue_scores) {
-        const mateScore = e.running_mate_issue_score_json.find(item =>
-            Number(item.fields.issue) === issueEntry.issue
-        );
-
-        if (!mateScore) {
-            throw new Error(
-                "Missing running-mate issue score: " + issueEntry.issue
-            );
-        }
-
-        let answerScore = 0;
-        let importance = 0;
-
-        for (const answer of answers) {
-            for (const item of e.answer_score_issue_json) {
-                if (
-                    Number(item.fields.issue) === issueEntry.issue &&
-                    Number(item.fields.answer) === Number(answer)
-                ) {
-                    answerScore +=
-                        Number(item.fields.issue_score) *
-                        Number(item.fields.issue_importance);
-
-                    importance += Number(item.fields.issue_importance);
-                }
-            }
-        }
-
-        issueEntry.issue_score = (
-            issueEntry.issue_score *
-                e.global_parameter_json[0].fields.candidate_issue_weight +
-            Number(mateScore.fields.issue_score) *
-                e.global_parameter_json[0].fields.running_mate_issue_weight +
-            answerScore
-        ) / (
-            e.global_parameter_json[0].fields.candidate_issue_weight +
-            e.global_parameter_json[0].fields.running_mate_issue_weight +
-            importance
-        );
-    }
-
-    // Apply answer effects and visits to state multipliers
-    for (let ci = 0; ci < candidates.length; ci++) {
-        for (const stateEntry of stateData[ci].state_multipliers) {
-            let effect = 0;
-
-            for (const answer of answers) {
-                for (const item of e.answer_score_state_json) {
-                    if (
-                        Number(item.fields.state) === stateEntry.state &&
-                        Number(item.fields.answer) === Number(answer) &&
-                        Number(item.fields.candidate) === Number(e.candidate_id) &&
-                        Number(item.fields.affected_candidate) === candidates[ci]
-                    ) {
-                        effect += Number(item.fields.state_multiplier);
-                    }
-                }
-            }
-
-            if (ci === 0) {
-                if (Number(e.running_mate_state_id) === stateEntry.state) {
-                    effect += 0.004 * stateEntry.state_multiplier;
-                }
-
-                for (const visit of (e.player_visits || [])) {
-                    if (Number(visit) === stateEntry.state) {
-                        const visitMultiplier =
-                            e.shining_data?.visit_multiplier ?? 1;
-
-                        effect +=
-                            0.005 *
-                            Math.max(0.1, stateEntry.state_multiplier) *
-                            visitMultiplier;
-                    }
-                }
-            }
-
-            stateEntry.state_multiplier += effect;
-        }
-    }
-
-    // Calculate state-level vote strengths
-    const states = [];
-
-    for (const playerState of stateData[0].state_multipliers) {
-        const state = playerState.state;
-        const results = [];
-
-        for (let ci = 0; ci < candidates.length; ci++) {
-            let strength = 0;
-
-            for (
-                let issueIndex = 0;
-                issueIndex < issueData[ci].issue_scores.length;
-                issueIndex++
-            ) {
-                const issue = issueData[0].issue_scores[issueIndex].issue;
-                const candidateIssueScore =
-                    issueData[ci].issue_scores[issueIndex].issue_score;
-
-                const stateIssue = e.state_issue_score_json.find(item =>
-                    Number(item.fields.state) === state &&
-                    Number(item.fields.issue) === issue
-                );
-
-                const stateIssueScore = stateIssue
-                    ? Number(stateIssue.fields.state_issue_score)
-                    : 0;
-
-                const weight = stateIssue
-                    ? Number(stateIssue.fields.weight)
-                    : 1;
-
-                const candidateTerm =
-                    candidateIssueScore * Math.abs(candidateIssueScore);
-
-                const stateTerm =
-                    stateIssueScore * Math.abs(stateIssueScore);
-
-                strength +=
-                    e.global_parameter_json[0].fields.vote_variable -
-                    Math.abs((candidateTerm - stateTerm) * weight);
-            }
-
-            const candidateState =
-                stateData[ci].state_multipliers.find(
-                    item => item.state === state
-                );
-
-            if (!candidateState) {
-                throw new Error(
-                    "Missing state multiplier for candidate " +
-                    candidates[ci] + ", state " + state
-                );
-            }
-
-            strength = Math.max(
-                strength * candidateState.state_multiplier,
-                0
-            );
-
-            results.push({
-                candidate: candidates[ci],
-                result: strength
-            });
-        }
-
-        states.push({ state, result: results });
-    }
-
-    // First polling pass
-    for (const stateResult of states) {
-        const stateRecord = e.states_json.find(
-            item => Number(item.pk) === stateResult.state
-        );
-
-        const turnout = Math.floor(
-            Number(stateRecord.fields.popular_votes) *
-            (0.95 + 0.1 * Math.random())
-        );
-
-        const totalStrength = stateResult.result.reduce(
-            (sum, item) => sum + item.result,
-            0
-        );
-
-        for (const item of stateResult.result) {
-            const share = item.result / totalStrength;
-            item.percent = share;
-            item.votes = Math.floor(share * turnout);
-        }
-    }
-
-    if (e.primary_states) {
-        const primaryStates = JSON.parse(e.primary_states);
-
-        for (const stateResult of states) {
-            const primary = primaryStates.find(
-                item => Number(item.state) === stateResult.state
-            );
-
-            if (primary) {
-                stateResult.result = primary.result.map(item => ({ ...item }));
-            }
-        }
-    }
-
-    // Second polling pass: engine A(2)
-    for (const stateResult of states) {
-        for (const item of stateResult.result) {
-            item.result *= 1 + normalRandom() * variance;
-        }
-
-        const stateRecord = e.states_json.find(
-            item => Number(item.pk) === stateResult.state
-        );
-
-        const turnout = Math.floor(
-            Number(stateRecord.fields.popular_votes) *
-            (0.95 + 0.1 * Math.random())
-        );
-
-        const totalStrength = stateResult.result.reduce(
-            (sum, item) => sum + item.result,
-            0
-        );
-
-        for (const item of stateResult.result) {
-            item.votes = Math.floor(
-                (item.result / totalStrength) * turnout
-            );
-        }
-    }
-
-    // Calculate national popular-vote shares
-    const totals = new Map(
-        candidates.map(candidate => [candidate, 0])
-    );
-
-    for (const stateResult of states) {
-        for (const item of stateResult.result) {
-            const candidate = Number(item.candidate);
-
-            totals.set(
-                candidate,
-                (totals.get(candidate) || 0) + Number(item.votes)
-            );
-        }
-    }
-
-    const totalVotes = [...totals.values()].reduce(
-        (sum, votes) => sum + votes,
-        0
-    );
-
-    if (!totalVotes) {
-        throw new Error("Polling calculation produced zero total votes");
-    }
-
-    return Math.max(
-        ...[...totals.values()].map(votes => votes / totalVotes)
-    );
-}
-
-
-// ==========================================
-// RUNOFF DECISION
-// ==========================================
-
 window.round1Decided = false;
 window.runoffActive = false;
 
@@ -13406,89 +13060,235 @@ window.runoffActive = false;
     if (window.__twoRoundControllerInstalled) return;
     window.__twoRoundControllerInstalled = true;
 
-    // Capture the Continue click BEFORE the engine processes the answer.
-    document.addEventListener("click", function(event) {
-        const button = event.target && event.target.closest
-            ? event.target.closest("#answer_select_button")
-            : null;
+    if (typeof nextQuestion !== "function" || typeof electionNight !== "function" || typeof A !== "function") {
+        console.error("Required engine globals (nextQuestion/electionNight/A) are missing");
+        return;
+    }
 
-        if (!button || window.round1Decided) return;
+    let round1Observer = null;
+    let round1Finished = false;
+    let round2BonusApplied = false;
+    let savedRound1StateResults = null;
+    let savedRunoffOpponentId = null;
 
+    const originalNextQuestion = nextQuestion;
+
+    nextQuestion = function (...args) {
         const e = campaignTrail_temp;
-        const currentQuestion = e.questions_json[e.question_number];
+        const currentQ = e.questions_json && e.questions_json[e.question_number];
 
-        // Question 651 is the 25th question, immediately before 9900.
-        if (!currentQuestion || Number(currentQuestion.pk) !== 651) return;
-
-        const selected = document.querySelector(
-            'input[name="game_answers"]:checked'
-        );
-
-        if (!selected) return;
-
-        try {
-            // Include the answer being submitted in the polling calculation.
-            const topShare = calculateRoundOneTopShare(
-                Number(selected.value)
-            );
-
-            window.round1Decided = true;
-
-            if (topShare >= 0.502) {
-                // A candidate has at least 50%.
-                // The engine increments question_number after this listener.
-                // Setting the count to the next index skips question 9900.
-                e.global_parameter_json[0].fields.question_count =
-                    Number(e.question_number) + 1;
-
-                window.runoffActive = false;
-
-                console.log(
-                    "FIRST ROUND MAJORITY:",
-                    (topShare * 100).toFixed(2) + "%",
-                    "- Skipping runoff."
-                );
-
-            } else {
-                // Nobody has 50%. Eliminate Zyuganov and Zhirinovsky.
-                const eliminated = new Set([8001, 9001]);
-
-                e.opponents_list = (e.opponents_list || []).filter(
-                    id => !eliminated.has(Number(id))
-                );
-
-                for (const list of [
-                    e.opponents_default_json,
-                    e.opponents_weighted_json
-                ]) {
-                    for (const entry of (list || [])) {
-                        if (Number(entry.election) === Number(e.election_id)) {
-                            entry.candidates = (entry.candidates || []).filter(
-                                id => !eliminated.has(Number(id))
-                            );
-                        }
-                    }
-                }
-
-                window.runoffActive = true;
-
-                console.log(
-                    "NO FIRST ROUND MAJORITY:",
-                    (topShare * 100).toFixed(2) + "%",
-                    "- Runoff activated. 8001 and 9001 eliminated."
-                );
-            }
-
-        } catch (error) {
-            window.round1Decided = false;
-
-            console.error(
-                "Two-round controller failed. Candidate list unchanged:",
-                error
-            );
+        // intercept immediately after Question 651
+        if (!window.round1Decided && currentQ && Number(currentQ.pk) === 651) {
+            triggerRound1ElectionNight();
+            return false;
         }
 
-    }, true);
+        // if Q9900 just finished and player chose 15504 ("call up Zyuganov"),
+        // transfer an additional +20% of Zyuganov's Round 1 votes to the player in each region
+        if (
+            window.runoffActive &&
+            !round2BonusApplied &&
+            currentQ &&
+            Number(currentQ.pk) === 9900
+        ) {
+            round2BonusApplied = true;
+            const answers = (e.player_answers || []).map(Number);
+            if (answers.includes(15504) && savedRound1StateResults && savedRunoffOpponentId) {
+                applyEliminatedVoteTransfer(
+                    savedRound1StateResults,
+                    Number(e.candidate_id),
+                    savedRunoffOpponentId,
+                    { 8001: 0.20 }, // incremental shift on top of Round 1 redistribution
+                    true
+                );
+            }
+        }
+
+        return originalNextQuestion.apply(this, args);
+    };
+
+    function applyEliminatedVoteTransfer(stateResults, playerPk, oppPk, shareToPlayerByCand, incremental = false) {
+        const e = campaignTrail_temp;
+
+        for (const stateRes of (stateResults || [])) {
+            const statePk = Number(stateRes.state);
+            const voteMap = new Map();
+
+            for (const candRes of (stateRes.result || [])) {
+                voteMap.set(Number(candRes.candidate), Number(candRes.votes || 0));
+            }
+
+            const vPlayer = voteMap.get(playerPk) || 0;
+            const vOpp = voteMap.get(oppPk) || 0;
+            const vTwoParty = vPlayer + vOpp;
+            if (vPlayer <= 0 || vOpp <= 0 || vTwoParty <= 0) continue;
+
+            const baseShare = vPlayer / vTwoParty;
+
+            // compute transferred votes from eliminated candidates
+            let gainedPlayer = 0;
+            let gainedOpp = 0;
+
+            for (const [cid, votes] of voteMap.entries()) {
+                if (cid === playerPk || cid === oppPk || votes <= 0) continue;
+                const transferPct = shareToPlayerByCand[cid] ?? 0.40;
+                if (incremental) {
+                    // pure incremental swing between player and opponent
+                    gainedPlayer += votes * transferPct;
+                    gainedOpp -= votes * transferPct;
+                } else {
+                    gainedPlayer += votes * transferPct;
+                    gainedOpp += votes * (1 - transferPct);
+                }
+            }
+
+            let adjPlayer = Math.max(1, vPlayer + gainedPlayer);
+            let adjOpp = Math.max(1, vOpp + gainedOpp);
+            const targetShare = adjPlayer / (adjPlayer + adjOpp);
+
+            const playerScale = Math.max(0.75, Math.min(1.35, targetShare / baseShare));
+            const oppScale = Math.max(0.75, Math.min(1.35, (1 - targetShare) / (1 - baseShare)));
+
+            for (const item of (e.candidate_state_multiplier_json || [])) {
+                if (Number(item.fields.state) !== statePk) continue;
+                const cid = Number(item.fields.candidate);
+                if (cid === playerPk) {
+                    item.fields.state_multiplier *= playerScale;
+                } else if (cid === oppPk) {
+                    item.fields.state_multiplier *= oppScale;
+                }
+            }
+        }
+    }
+
+    function triggerRound1ElectionNight() {
+        const e = campaignTrail_temp;
+
+        e.final_state_results = A(2) || A(1);
+        electionNight();
+
+        function attachRunoffHandler() {
+            $("#final_result_button, #overlay_result_button")
+                .off("click.twoRound")
+                .on("click.twoRound", onRound1Finish);
+        }
+
+        attachRunoffHandler();
+
+        const gameWindow = document.getElementById("game_window") || document.body;
+        if (round1Observer) round1Observer.disconnect();
+        round1Observer = new MutationObserver(() => {
+            if (!round1Finished) {
+                attachRunoffHandler();
+            }
+        });
+        round1Observer.observe(gameWindow, { childList: true, subtree: true });
+    }
+
+    function onRound1Finish(ev) {
+        if (ev) ev.preventDefault();
+        if (round1Finished) return;
+        round1Finished = true;
+
+        if (round1Observer) {
+            round1Observer.disconnect();
+            round1Observer = null;
+        }
+        $("#final_result_button, #overlay_result_button").off("click.twoRound");
+        if (typeof window.results_timeout !== "undefined") {
+            clearTimeout(window.results_timeout);
+        }
+
+        const e = campaignTrail_temp;
+        const totals = new Map();
+
+        for (const stateRes of (e.final_state_results || [])) {
+            for (const candRes of (stateRes.result || [])) {
+                const cid = Number(candRes.candidate);
+                totals.set(cid, (totals.get(cid) || 0) + Number(candRes.votes || 0));
+            }
+        }
+
+        const sorted = [...totals.entries()]
+            .map(([candidate, popular_votes]) => ({ candidate, popular_votes }))
+            .sort((a, b) => b.popular_votes - a.popular_votes);
+
+        const totalVotes = sorted.reduce((sum, c) => sum + c.popular_votes, 0);
+        const winner = sorted[0];
+        const runnerUp = sorted[1];
+        const winnerPct = totalVotes > 0 && winner ? (winner.popular_votes / totalVotes) * 100 : 0;
+
+        const playerPk = Number(e.candidate_id);
+        const playerInRunoff = Boolean(
+            (winner && winner.candidate === playerPk) ||
+            (runnerUp && runnerUp.candidate === playerPk)
+        );
+
+        window.round1Decided = true;
+
+        // strict majority (> 50%) OR player eliminated in Round 1 -> end the game
+        if (winnerPct > 50.0 || !playerInRunoff) {
+            window.runoffActive = false;
+            $("#map_footer").html("<i>Processing results, wait one moment...</i>");
+            if (typeof handleFinalResults === "function") {
+                handleFinalResults(500);
+            }
+            if (typeof m === "function") {
+                m();
+            }
+            return;
+        }
+
+        // runoff triggered: keep only the player and the other top-2 finalist
+        const runoffOpponentId = winner.candidate === playerPk ? runnerUp.candidate : winner.candidate;
+        window.runoffActive = true;
+        savedRunoffOpponentId = runoffOpponentId;
+        savedRound1StateResults = e.final_state_results;
+
+        e.opponents_list = [runoffOpponentId];
+
+        for (const list of [e.opponents_default_json, e.opponents_weighted_json]) {
+            for (const entry of (list || [])) {
+                if (Number(entry.election) === Number(e.election_id)) {
+                    entry.candidates = [playerPk, runoffOpponentId];
+                }
+            }
+        }
+
+        // zero out eliminated candidates
+        for (const item of (e.candidate_state_multiplier_json || [])) {
+            const cid = Number(item.fields.candidate);
+            if (cid !== playerPk && cid !== runoffOpponentId) {
+                item.fields.state_multiplier = 0;
+            }
+        }
+
+        // apply Round 2 vote redistribution from Round 1 eliminated candidates:
+        // for Zyuganov, 42% break for Medvedev (60% if cabinet deal)
+        // for Zhirinovsky, 35% break for Medvedev
+        const answers = (e.player_answers || []).map(Number);
+        const zyuToPlayer = answers.includes(4227) ? 0.60 : 0.42;
+
+        applyEliminatedVoteTransfer(
+            savedRound1StateResults,
+            playerPk,
+            runoffOpponentId,
+            {
+                8001: zyuToPlayer,
+                9001: 0.35,
+                2001: 0.30
+            },
+            false
+        );
+
+        // point question_number right before Question 9900
+        const runoffIndex = (e.questions_json || []).findIndex(q => Number(q.pk) === 9900);
+        if (runoffIndex !== -1) {
+            e.question_number = runoffIndex - 1;
+        }
+
+        originalNextQuestion();
+    }
 })();
 
 
