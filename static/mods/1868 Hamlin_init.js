@@ -29,7 +29,7 @@ campaignTrail_temp.election_json = [
         "pk": 5,
         "fields": {
             "year": 1896,
-            "summary": "<strong>\"She won't think anything about it.\"</strong> <p>At 7:22 A.M. on April 15th, 1865, life went from celebrations and cheering to mourning and sobbing. As President Abraham Lincoln was killed in the hands of an assassin. Now, Hamlin is president and has to continue Lincoln's footsteps. He is now given the responsibility of keeping peace, providing leadership, and ending the dark chapter of slavery.</p>\n<p> While news outlets are projecting a Hamlin landslide, Former New York Governor Horatio Seymour is trying to prove that statement incorrect. Will he succeed or will he achieve less than McClellan four years ago?</p>",
+            "summary": "<strong>\"She won't think anything about it.\"</strong> <p>At 7:22 A.M. on April 15th, 1865, life went from celebrations and cheering to mourning and sobbing, as President Abraham Lincoln was killed at the hands of an assassin. Now, Hamlin is president and has to follow in Lincoln's footsteps. He is now given the responsibility of keeping peace, providing leadership, and ending the dark chapter of slavery.</p>\n<p>While news outlets are projecting a Hamlin landslide, former New York Governor Horatio Seymour is trying to prove that statement incorrect. Will he succeed, or will he achieve less than McClellan four years ago?</p>",
             "image_url": "https://i.imgur.com/690TEUz.png",
             "winning_electoral_vote_number": 128,
             "advisor_url": "https://i.imgur.com/690TEUz.png",
@@ -53,7 +53,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Republican/Radical Republican",
             "state": "Maine",
             "priority": 1,
-            "description": "<strong>\"Hannibal the Corporal\"</strong> <p>Everyone, including himself, thought he would be replaced by Tennessee Democratic Governor Andrew Johnson. This was planned so that Lincoln could secure votes from moderate Democrats and be reelected to win the war. However, to everyone's shock. Hamlin was renominated for Vice President. Him and Lincoln would beat George B. McClellan in 1864 in a landslide and would end the war.</p> <p>That happened on April 9th, 1865. For the next 4 days, Washington was full of cheering and celebrations. However, that would all change on April 14th, 1865. Now that Abraham Lincoln was dead, people had to rely on Hamlin to fulfill the promises Abraham Lincoln had left.</p> <strong>Good Luck, Mr. Hamlin.</strong>",
+            "description": "<strong>\"Hannibal the Corporal\"</strong> <p>Everyone, including himself, thought he would be replaced by Tennessee Democratic Governor Andrew Johnson. This was planned so that Lincoln could secure votes from moderate Democrats and be reelected to win the war. However, to everyone's shock, Hamlin was renominated for vice president. He and Lincoln would beat George B. McClellan in 1864 in a landslide and would end the war.</p> <p>That happened on April 9th, 1865. For the next four days, Washington was full of cheering and celebrations. However, that would all change on April 14th, 1865. Now that Abraham Lincoln was dead, people had to rely on Hamlin to fulfill the promises Abraham Lincoln had left.</p> <strong>Good luck, Mr. Hamlin.</strong>",
             "color_hex": "#9e0000",
             "secondary_color_hex": null,
             "is_active": 1,
@@ -84,7 +84,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>On April 9th, 1865, Union General Ulysses S. Grant and his troops surrounded Confederate General Robert E. Lee and his troops. With that, Grant forced Lee to surrender and caused the end of the war.</p> \n<p>Grant is now a household name and is extremely popular. Grant announced he was going to run in 1868, but maybe you can get him on your side and have him as your running mate? If you do succeed, Grant will help you in the Midwest states like Ohio, Indiana, and Illinois. You need to try your best to get Grant on your side. If you fail, then the Republican Party might be split.</p> ",
+            "description_as_running_mate": "<p>On April 9th, 1865, Union General Ulysses S. Grant and his troops surrounded Confederate General Robert E. Lee and his troops. With that, Grant forced Lee to surrender and caused the end of the war.</p>\n<p>Grant is now a household name and is extremely popular. Grant announced he was going to run in 1868, but maybe you can get him on your side and have him as your running mate? If you do succeed, Grant will help you in Midwestern states like Ohio, Indiana, and Illinois. You need to try your best to get Grant on your side. If you fail, then the Republican Party might be split.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -99,7 +99,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Democrat/Peace Democrat",
             "state": "New York",
             "priority": 1,
-            "description": "<strong>Unplayable, here for context</strong> <p>Former Governor of New York, Horatio Seymour, is not a household name like Hamlin or Grant. However, he is popular with Democrats. After narrowly losing the 1864 New York Governor Election to Current Governor Reuben Fenton, Seymour entered the convention for the 1868 Election.</p> <p>However, unlike anyone else, Seymour did not want to be the Democratic candidate. But, after a while, he accepted. His home state of New York will be very close this year, and newspapers are showing you to win it this year. But will Seymour win against the popular incumbent, Mr. Hamlin?</p> <strong>Good Luck, Mr. Seymour!</strong> ",
+            "description": "<strong>Unplayable, here for context</strong> <p>Former Governor of New York Horatio Seymour is not a household name like Hamlin or Grant. However, he is popular with Democrats. After narrowly losing the 1864 New York gubernatorial election to current Governor Reuben Fenton, Seymour entered the convention for the 1868 election.</p> <p>However, unlike anyone else, Seymour did not want to be the Democratic candidate. But after a while, he accepted. His home state of New York will be very close this year, and newspapers are showing you winning it this year. But will Seymour win against the popular incumbent, Mr. Hamlin?</p> <strong>Good luck, Mr. Seymour!</strong>",
             "color_hex": "#00008a",
             "secondary_color_hex": null,
             "is_active": 1,
@@ -130,7 +130,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>Schuyler Colfax is currently the 25th Speaker of the House. Colfax is a former Whig, like many Republicans; however, he also briefly affiliated with the Indiana People's Party in 1854. Colfax was one of the many Republicans to strongly oppose the Kansas-Nebraska Act. Like Hamlin, he is an abolitionist Radical Republican and has been pushing for the 13th Amendment since before the Civil War ended.</p>\n<p>If the 13th Amendment is passed, then slavery will officially be abolished in the United States. Colfax will help you significantly in Indiana, which is a toss-up state this election. Also, Colfax plans to get married after the election so he can campaign as much as possible for you.  However, if you choose Colfax, Moderate Republicans will be disappointed with having two Radical Republicans on the ticket.</p>   ",
+            "description_as_running_mate": "<p>Schuyler Colfax is currently the 25th Speaker of the House. Colfax is a former Whig, like many Republicans; however, he also briefly affiliated with the Indiana People's Party in 1854. Colfax was one of the many Republicans to strongly oppose the Kansas-Nebraska Act. Like Hamlin, he is an abolitionist Radical Republican and has been pushing for the 13th Amendment since before the Civil War ended.</p>\n<p>If the 13th Amendment is passed, then slavery will officially be abolished in the United States. Colfax will help you significantly in Indiana, which is a toss-up state this election. Also, Colfax plans to get married after the election so he can campaign as much as possible for you. However, if you choose Colfax, moderate Republicans will be disappointed with having two Radical Republicans on the ticket.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -153,7 +153,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>General Francis P. Blair Jr, was a former General of the U.S. Army during the Civil War and fought as a soldier in the Mexican-American War. He was also a former member of the House of Representatives from Missouri's 1st District for 3 elected non-consecutive terms. Blair was opposed to the idea that the Southern States should secede. Blair has been a member of the Republican, Union, Opposition, and Free Soil Parties in the past. He was also a former Democrat before 1848.</p>\n<p>However, he has now re-affiliated with the Democratic Party. Blair, as mentioned before, is from Missouri, which is leaning Republican this year. Maybe having him as your running mate can help you win Missouri?</p>",
+            "description_as_running_mate": "<p>General Francis P. Blair Jr. was a general in the U.S. Army during the Civil War and fought as a soldier in the Mexican-American War. He was also a member of the House of Representatives from Missouri's 1st District for three elected, non-consecutive terms. Blair was opposed to the idea that the Southern states should secede. Blair has been a member of the Republican, Union, Opposition, and Free Soil Parties in the past. He was also a Democrat before 1848.</p>\n<p>However, he has now re-affiliated with the Democratic Party. Blair, as mentioned before, is from Missouri, which is leaning Republican this year. Maybe having him as your running mate can help you win Missouri?</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -176,7 +176,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p><b>COLFAX AND GRANT ARE PLAYABLE ONLY!!!</b></p>\n<p>Benjamin Wade is the current president pro tempore of the United States Senate and a senator from Ohio. Wade became a Republican in 1854 after the Whig Party collapsed. Wade will help you with Radical Republicans and will help you in the Midwest. </p> <p> Wade supports Civil Rights and Women's Suffrage. Wade is also responsible for the Wade-Davis Bill, which made the Southern States schedule to return, but the terms were strict, like each Confederate State's Congress had to have a majority that supported readmittance. Wade is a strong pick for Vice President. However, Moderate Republicans will be disappointed that two Radical Republicans are on the same ticket.</p>",
+            "description_as_running_mate": "<p><b>COLFAX AND GRANT ARE PLAYABLE ONLY!!!</b></p>\n<p>Benjamin Wade is the current president pro tempore of the United States Senate and a senator from Ohio. Wade became a Republican in 1854 after the Whig Party collapsed. Wade will help you with Radical Republicans and will help you in the Midwest.</p> <p>Wade supports civil rights and women's suffrage. Wade is also responsible for the Wade-Davis Bill, which scheduled the Southern states to return, but the terms were strict—for example, each Confederate state's Congress had to have a majority that supported readmittance. Wade is a strong pick for vice president. However, moderate Republicans will be disappointed that two Radical Republicans are on the same ticket.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -199,7 +199,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p><b>COLFAX AND GRANT ARE PLAYABLE ONLY!!!</b></p>\n<p>Morton is currently a senator and formerly served as Governor and Lieutenant Governor of Indiana. Morton is also one of the Radical Republican leaders. He is seen as a strong candidate for Vice President. However, there are some downsides to selecting him.</p> \n<p>First, while he was Governor, he had a stroke that partially paralyzed him, so people will question his ability to serve as Vice President. Secondly, while Morton was Governor, he was criticized by people for arresting citizens who were against him and who \"supported the Confederacy and the Southern States\". By some, he is seen as a tyrant after that incident. And finally, he is a Radical Republican, which means Moderate Republicans will be upset by his selection. However, aside from that, he is seen as a strong choice and will help you significantly in Indiana.</p> ",
+            "description_as_running_mate": "<p><b>COLFAX AND GRANT ARE PLAYABLE ONLY!!!</b></p>\n<p>Morton is currently a senator and formerly served as governor and lieutenant governor of Indiana. Morton is also one of the Radical Republican leaders. He is seen as a strong candidate for vice president. However, there are some downsides to selecting him.</p>\n<p>First, while he was governor, he had a stroke that partially paralyzed him, so people will question his ability to serve as vice president. Secondly, while Morton was governor, he was criticized by people for arresting citizens who were against him and who \"supported the Confederacy and the Southern states.\" By some, he is seen as a tyrant after that incident. And finally, he is a Radical Republican, which means moderate Republicans will be upset by his selection. However, aside from that, he is seen as a strong choice and will help you significantly in Indiana.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -222,7 +222,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p><b>COLFAX AND GRANT ARE PLAYABLE ONLY!!!</b></p>\n<p>Reuben Fenton is currently the Governor of New York. Fenton was originally a Democrat who switched to the Republican Party after the Kansas-Nebraska Act was passed. Fenton was one of the many who tried to persuade Franklin Pierce to veto it, but his dream unfortunately failed.</p> <p>Fenton formerly served in the House and Senate, representing New York. Fenton will help with Moderate Republicans and will especially help in New York against Seymour. However, his selection will make some Radicals uncomfortable with having 2 former Democrats on the ticket.</p>",
+            "description_as_running_mate":"<p><b>COLFAX AND GRANT ARE PLAYABLE ONLY!!!</b></p>\n<p>Reuben Fenton is currently the governor of New York. Fenton was originally a Democrat who switched to the Republican Party after the Kansas-Nebraska Act was passed. Fenton was one of the many who tried to persuade Franklin Pierce to veto it, but his dream unfortunately failed.</p> <p>Fenton formerly served in the House and Senate, representing New York. Fenton will help with moderate Republicans and will especially help in New York against Seymour. However, his selection will make some Radicals uncomfortable with having two former Democrats on the ticket.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -245,7 +245,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>Andrew Johnson is the current Military Governor of Tennessee and would have been the 16th Vice President and the 17th President. As a result, he holds a grudge against Hamlin. Johnson began his political career as a Tennessee House Representative, Governor, and Senator.</p> \n<p>Before entering politics, he was affiliated with the Working Men's Party from 1829 until the party's fall in 1834. For the next years, Johnson was an independent until 1839 when he became a Democrat. Johnson is running as Vice President to get revenge on Hamlin. However, if you choose Johnson, then people will be disturbed by his intentions, drinking problems, and the fact that his home state was in the Confederacy.</p>  ",
+            "description_as_running_mate": "<p>Andrew Johnson is the current military governor of Tennessee and would have been the 16th vice president and the 17th president. As a result, he holds a grudge against Hamlin. Johnson began his political career as a Tennessee House representative, governor, and senator.</p>\n<p>Before entering politics, he was affiliated with the Working Men's Party from 1829 until the party's fall in 1834. For the next few years, Johnson was an independent until 1839, when he became a Democrat. Johnson is running for vice president to get revenge on Hamlin. However, if you choose Johnson, then people will be disturbed by his intentions, drinking problems, and the fact that his home state was in the Confederacy.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -268,7 +268,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>Davis is the current Senator of Kentucky. Davis became a Senator after Former Vice President John C. Breckinridge was removed from the Senate for supporting the Confederacy during the war. Davis formerly served as a member of the House of Representatives from Kentucky.</p>\n<p>In 1856, the American Party tried to nominate Davis for President. However, Davis declined, and the nomination went to Millard Fillmore. Overall, Davis should be a beneficial choice for a running mate. However, keep his health in mind, and Kentucky is not competitive this year.</p> ",
+            "description_as_running_mate": "<p>Davis is the current senator from Kentucky. Davis became a senator after former Vice President John C. Breckinridge was removed from the Senate for supporting the Confederacy during the war. Davis formerly served as a member of the House of Representatives from Kentucky.</p>\n<p>In 1856, the American Party tried to nominate Davis for president. However, Davis declined, and the nomination went to Millard Fillmore. Overall, Davis should be a beneficial choice for a running mate. However, keep his health in mind, and Kentucky is not competitive this year.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -278,7 +278,7 @@ campaignTrail_temp.candidate_json = [
         "pk": 386,
         "fields": {
             "first_name": "Henry",
-            "last_name": "Stanberry",
+            "last_name": "Stanbery",
             "election": 5,
             "party": "Democrat/Peace Democrat",
             "state": "Ohio",
@@ -291,7 +291,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>Henry Stanberry is the former Attorney General of Ohio. Stanberry graduated from high school at sixteen and began practicing law, only to be admitted to the bar five years later. He was a former Whig who switched to the Democratic Party.</p>\n<p>He is considered an outsider and is not well known outside of Ohio, which could either be great or terrible for your campaign. Also, Ohio is considered a Republican state, but one that is up for grabs. But can Stanberry help make it go Democratic?</p>",
+            "description_as_running_mate": "<p>Henry Stanbery is the former attorney general of Ohio. Stanbery graduated from high school at sixteen and began practicing law, only to be admitted to the bar five years later. He is a former Whig who switched to the Democratic Party.</p>\n<p>He is considered an outsider and is not well known outside of Ohio, which could either be great or terrible for your campaign. Also, Ohio is considered a Republican state, but one that is up for grabs. But can Stanbery help make it go Democratic?</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -314,7 +314,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>Reverdy Johnson is the current Senator of Maryland. He served as the United States Attorney General under Zachary Taylor and Millard Fillmore. Johnson was formerly a Whig who switched over to the Democratic Party. He is best known for defending Mary Surratt, who was involved in the Lincoln Assassination.</p> <p>However, he is criticized for being involved in helping Edward Stanley in a duel against Senator Henry Wise. Because of this, he is blind in his left eye after firing a pistol at a tree. Also, Maryland is not competitive in this election.</p> ",
+            "description_as_running_mate": "<p>Reverdy Johnson is the current senator from Maryland. He served as the United States Attorney General under Zachary Taylor and Millard Fillmore. Johnson was formerly a Whig who switched over to the Democratic Party. He is best known for defending Mary Surratt, who was involved in the Lincoln assassination.</p> <p>However, he is criticized for being involved in helping Edward Stanly in a duel against Senator Henry Wise. Because of this, he is blind in his left eye after firing a pistol at a tree. Also, Maryland is not competitive in this election.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
