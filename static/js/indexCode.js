@@ -418,6 +418,36 @@ var gameWindow = document.getElementById("game_window");
 var container = document.querySelector(".container");
 const campaignTrailMusic = document.getElementById("campaigntrailmusic");
 
+// Starts mod music on the first click or key press.
+if (campaignTrailMusic) {
+  const stopWatchingForInteraction = new AbortController();
+
+  const startSoundtrackIfBlocked = (event) => {
+    const clickedMusicPlayer = event.target instanceof Element && event.target.closest("#music_player");
+    if (clickedMusicPlayer) {
+      // Stop listening for interactions because user is using the music player.
+      stopWatchingForInteraction.abort();
+      return;
+    }
+
+    const autoplayWasBlocked = campaignTrailMusic.autoplay
+      && campaignTrailMusic.paused
+      && campaignTrailMusic.currentSrc
+      && campaignTrailMusic.played.length === 0;
+    if (!autoplayWasBlocked) return;
+
+    campaignTrailMusic.play().catch((error) => {
+      // Keep listening and try again on the next click or key press if key is not allowed.
+      if (error.name !== "NotAllowedError") throw error;
+    });
+  };
+
+  const listenerOptions = { capture: true, signal: stopWatchingForInteraction.signal };
+  document.addEventListener("pointerdown", startSoundtrackIfBlocked, listenerOptions);
+  document.addEventListener("keydown", startSoundtrackIfBlocked, listenerOptions);
+  campaignTrailMusic.addEventListener("playing", () => stopWatchingForInteraction.abort(), { once: true });
+}
+
 const dynamicStyle = document.createElement("style");
 dynamicStyle.id = "cts-dynamic-style";
 document.head.appendChild(dynamicStyle);
