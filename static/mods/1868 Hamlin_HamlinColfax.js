@@ -13,7 +13,7 @@ campaignTrail_temp.questions_json = [
         "pk": 166,
         "fields": {
             "priority": 1,
-            "description": "(April 15th, 1865) 9 hours later. You are still awake and have not rested your eyes since last night's ghastly moment. Your wife appeared in the room. She says that you have a telegram. However, when you check it, the worst outcome becomes reality, your eyes are wide open while reading the words, President Lincoln was dead, and you are needed to be sworn in as the 17th President of the United States.\n",
+            "description": "(April 15th, 1865) Nine hours later, you are still awake and have not rested your eyes since last night's ghastly moment. Your wife appears in the room. She says that you have a telegram. However, when you check it, the worst outcome becomes reality; your eyes are wide open while reading the words: President Lincoln is dead, and you need to be sworn in as the 17th President of the United States.\n",
             "likelihood": 1
         }
     },
@@ -22,7 +22,7 @@ campaignTrail_temp.questions_json = [
         "pk": 179,
         "fields": {
             "priority": 1,
-            "description": "You arrive at Kirkwood House at 10:50 A.M. Mrs. Lincoln and Tad are in tears, their faces reflecting deep sorrow, while the entire atmosphere looks depressing. A cold breeze from an open window flowed through, adding to the somber mood that envelops everyone present. As Salmon P. Chase prepares to administer the oath, you find yourself pondering whether you can truly be a worthy substitute for Mr Lincoln in this moment. When Chase concludes the oath with the words, \"so help me God,\" the weight of the situation hangs heavily in the air.\n",
+            "description": "You arrive at Kirkwood House at 10:50 A.M. Mrs. Lincoln and Tad are in tears, their faces reflecting deep sorrow, while the entire atmosphere looks depressing. A cold breeze from an open window flows through, adding to the somber mood that envelops everyone present. As Salmon P. Chase prepares to administer the oath, you find yourself pondering whether you can truly be a worthy substitute for Mr. Lincoln in this moment. When Chase concludes the oath with the words, \"So help me God,\" the weight of the situation hangs heavily in the air.\n",
             "likelihood": 1
         }
     },
@@ -31,7 +31,7 @@ campaignTrail_temp.questions_json = [
         "pk": 193,
         "fields": {
             "priority": 1,
-            "description": "(April 16th, 1865) It has been twenty-four hours since Mr. Lincoln departed for the heavenly world. In the wake of his absence, a reporter approaches you, eager to know whether you plan to carry on the legacy of Lincoln's policies into the future. \n",
+            "description": "(April 16th, 1865) It has been twenty-four hours since Mr. Lincoln departed for the heavenly world. In the wake of his absence, a reporter approaches you, eager to know whether you plan to carry on the legacy of Lincoln's policies into the future.\n",
             "likelihood": 1
         }
     },
@@ -40,7 +40,7 @@ campaignTrail_temp.questions_json = [
         "pk": 195,
         "fields": {
             "priority": 1,
-            "description": "(April 26th, 1865) You have just received word that John Wilkes Booth(The person who killed Lincoln) was found and murdered at the Richard Garrett Farm in Port Royal, Virginia. Do you have anything to say about the event? \n",
+            "description": "(April 26th, 1865) You have just received word that John Wilkes Booth (the person who killed Lincoln) was found and murdered at the Richard Garrett Farm in Port Royal, Virginia. Do you have anything to say about the event?\n",
             "likelihood": 1
         }
     },
@@ -58,7 +58,7 @@ campaignTrail_temp.questions_json = [
         "pk": 170,
         "fields": {
             "priority": 1,
-            "description": "(July 7th, 1865) You have just received news that John Wilkes Booth’s team, consisting of Mary Surrat, George Atzerodt, Lewis Powell, and David Herold, were executed today for being involved in the Lincoln Assassination. Do you have anything to add?\n",
+            "description": "(July 7th, 1865) You have just received news that John Wilkes Booth’s team, consisting of Mary Surratt, George Atzerodt, Lewis Powell, and David Herold, was executed today for being involved in the Lincoln assassination. Do you have anything to add?\n",
             "likelihood": 1
         }
     },
@@ -67,7 +67,7 @@ campaignTrail_temp.questions_json = [
         "pk": 196,
         "fields": {
             "priority": 1,
-            "description": "(August 18th, 1865) For the last couple of months, you and Congress were trying to come up with a compromise on when most of the Confederate States would rejoin the Union. Is there a certain year you think is best?",
+            "description": "(August 18th, 1865) For the last couple of months, you and Congress have been trying to come up with a compromise on when most of the Confederate States would rejoin the Union. Is there a certain year you think is best?",
             "likelihood": 1
         }
     },
@@ -85,7 +85,7 @@ campaignTrail_temp.questions_json = [
         "pk": 184,
         "fields": {
             "priority": 1,
-            "description": "(July 24th, 1866) After their state legislature signed the 14th Amendment, Tennessee became the first state from the Confederacy to be readmitted to the Union. Do you have any comments?\n",
+            "description": "(July 24th, 1866) After its state legislature signed the 14th Amendment, Tennessee became the first state from the Confederacy to be readmitted to the Union. Do you have any comments?\n",
             "likelihood": 1
         }
     },
@@ -94,7 +94,7 @@ campaignTrail_temp.questions_json = [
         "pk": 197,
         "fields": {
             "priority": 1,
-            "description": "(March 1st, 1867) A few weeks ago, you signed a proclamation that would make Nebraska the 37th state admitted to the union. Well, today, Nebraska has achieved this. Do you have anything to comment on?\n",
+            "description": "(March 1st, 1867) A few weeks ago, you signed a proclamation that would make Nebraska the 37th state admitted to the Union. Well, today, Nebraska has achieved this. Do you have anything to comment on?\n",
             "likelihood": 1
         }
     },
@@ -103,7 +103,7 @@ campaignTrail_temp.questions_json = [
         "pk": 167,
         "fields": {
             "priority": 1,
-            "description": "With the admission of Nebraska in the books. The Colorado Territory looks to be next. Are you planning on admitting it sooner or later?\n",
+            "description": "With the admission of Nebraska in the books, the Colorado Territory looks to be next. Are you planning on admitting it sooner or later?\n",
             "likelihood": 1
         }
     },
@@ -112,7 +112,7 @@ campaignTrail_temp.questions_json = [
         "pk": 208,
         "fields": {
             "priority": 1,
-            "description": "(July 5th, 1867) Supreme Court Justice James Wayne Moore has passed away. Do you have anyone in mind to replace him?\n",
+            "description": "(July 5th, 1867) Supreme Court Justice James Moore Wayne has passed away. Do you have anyone in mind to replace him?\n",
             "likelihood": 1
         }
     },
@@ -121,7 +121,7 @@ campaignTrail_temp.questions_json = [
         "pk": 187,
         "fields": {
             "priority": 1,
-            "description": "(August 28th, 1867) Mr Hamlin, your son Cyrus has passed away in New Orleans, Louisiana. This must be very hard on you. Do you want to say anything?\n",
+            "description": "(August 28th, 1867) Mr. Hamlin, your son Cyrus has passed away in New Orleans, Louisiana. This must be very hard on you. Do you want to say anything?\n",
             "likelihood": 1
         }
     },
@@ -139,7 +139,7 @@ campaignTrail_temp.questions_json = [
         "pk": 186,
         "fields": {
             "priority": 1,
-            "description": "Mr Hamlin! You have won the Republican Nomination! What will be the main focus of your campaign? \n",
+            "description": "Mr. Hamlin! You have won the Republican nomination! What will be the main focus of your campaign?\n",
             "likelihood": 1
         }
     },
@@ -148,7 +148,7 @@ campaignTrail_temp.questions_json = [
         "pk": 168,
         "fields": {
             "priority": 1,
-            "description": "Mr. Hamlin, you have chosen Schuyler Colfax, the Speaker of the House. Is there a particular reason why you chose him? \n",
+            "description": "Mr. Hamlin, you have chosen Schuyler Colfax, the Speaker of the House. Is there a particular reason why you chose him?\n",
             "likelihood": 1
         }
     },
@@ -157,7 +157,7 @@ campaignTrail_temp.questions_json = [
         "pk": 241,
         "fields": {
             "priority": 1,
-            "description": "(June 1st, 1868) You just found out that Former President James Buchanan has passed away. Do you have anything to say about him?\n",
+            "description": "(June 1st, 1868) You just found out that former President James Buchanan has passed away. Do you have anything to say about him?\n",
             "likelihood": 1
         }
     },
@@ -166,7 +166,7 @@ campaignTrail_temp.questions_json = [
         "pk": 223,
         "fields": {
             "priority": 1,
-            "description": " (July 9th, 1868) Thanks to their reconstruction efforts, Louisiana has officially been readmitted to the Union. It would be the last Confederate state to be readmitted until 1876, when the remaining former Confederate states followed suit. Do you have any comments on this?\n",
+            "description": "(July 9th, 1868) Thanks to its Reconstruction efforts, Louisiana has officially been readmitted to the Union. It would be the last Confederate state to be readmitted until 1876, when the remaining former Confederate states followed suit. Do you have any comments on this?\n",
             "likelihood": 1
         }
     },
@@ -184,7 +184,7 @@ campaignTrail_temp.questions_json = [
         "pk": 240,
         "fields": {
             "priority": 1,
-            "description": "The Democratic nomination had concluded, and they nominated Horatio Seymour, the former governor of New York. What are your thoughts?",
+            "description": "The Democratic nomination has concluded, and they nominated Horatio Seymour, the former governor of New York. What are your thoughts?",
             "likelihood": 1
         }
     },
@@ -193,7 +193,7 @@ campaignTrail_temp.questions_json = [
         "pk": 211,
         "fields": {
             "priority": 1,
-            "description": "The Democratic Nomination has chosen U.S. Representative Francis Preston Blair Jr of Missouri as Seymour’s Running Mate. What do you have to say about this?\n",
+            "description": "The Democratic nomination has chosen U.S. Representative Francis Preston Blair Jr. of Missouri as Seymour’s running mate. What do you have to say about this?\n",
             "likelihood": 1
         }
     },
@@ -220,7 +220,7 @@ campaignTrail_temp.questions_json = [
         "pk": 192,
         "fields": {
             "priority": 1,
-            "description": "Some of your campaign advisors want you to try to get Supreme Court Chief Justice, Salmon P. Chase to endorse you. You are scheduled to meet him in September. \n",
+            "description": "Some of your campaign advisors want you to try to get Supreme Court Chief Justice Salmon P. Chase to endorse you. You are scheduled to meet him in September.\n",
             "likelihood": 1
         }
     },
@@ -229,7 +229,7 @@ campaignTrail_temp.questions_json = [
         "pk": 2497,
         "fields": {
             "priority": 1,
-            "description": "Are there any states you want to campaign in? \n\n",
+            "description": "Are there any states you want to campaign in?\n\n",
             "likelihood": 1
         }
     },
@@ -238,7 +238,7 @@ campaignTrail_temp.questions_json = [
         "pk": 2498,
         "fields": {
             "priority": 1,
-            "description": "Unexpected news just came that a few southern states, Arkansas and North Carolina, are doing well with reconstruction. Should these states be readmitted this year or later?\n",
+            "description": "Unexpected news just came that a few Southern states, Arkansas and North Carolina, are doing well with Reconstruction. Should these states be readmitted this year or later?\n",
             "likelihood": 1
         }
     },
@@ -274,7 +274,7 @@ campaignTrail_temp.questions_json = [
         "pk": 2502,
         "fields": {
             "priority": 1,
-            "description": "One of your weak points is the Recession of 1865-1867. While not as severe as the recession of 1857, it was a recession America could have done without. How will you respond?\n",
+            "description": "One of your weak points is the Recession of 1865-1867. While not as severe as the Recession of 1857, it was a recession America could have done without. How will you respond?\n",
             "likelihood": 1
         }
     },
@@ -301,7 +301,7 @@ campaignTrail_temp.questions_json = [
         "pk": 2505,
         "fields": {
             "priority": 1,
-            "description": "It is election day, and many newspapers are predicting you will win!\n",
+            "description": "It is Election Day, and many newspapers are predicting you will win!\n",
             "likelihood": 1
         }
     }
@@ -313,7 +313,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1352,
         "fields": {
             "question": 165,
-            "description": "Oh, Dear Lord..."
+            "description": "Oh, dear Lord..."
         }
     },
     {
@@ -329,7 +329,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1360,
         "fields": {
             "question": 167,
-            "description": "Let’s wait a while. However, I am not opposed to signing for its statehood in the next couple of years. Maybe in my second term, if I choose to serve another term. \n"
+            "description": "Let’s wait a while. However, I am not opposed to signing for its statehood in the next couple of years. Maybe in my second term, if I choose to serve another term.\n"
         }
     },
     {
@@ -345,7 +345,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1363,
         "fields": {
             "question": 168,
-            "description": "Mr. Colfax is a fellow Radical Republican, just like me. his record for equality and political record should speak for itself. \n"
+            "description": "Mr. Colfax is a fellow Radical Republican, just like me. His record for equality and his political record should speak for themselves.\n"
         }
     },
     {
@@ -353,7 +353,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1369,
         "fields": {
             "question": 170,
-            "description": "Mr. Lincoln can now rest easy knowing justice has been served. "
+            "description": "Mr. Lincoln can now rest easy knowing justice has been served."
         }
     },
     {
@@ -369,7 +369,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1408,
         "fields": {
             "question": 182,
-            "description": "Edwin M. Stanton, of course! He served in my and Mr. Lincoln’s cabinet and strongly supported Reconstruction.\n"
+            "description": "Edwin M. Stanton, of course! He served in Mr. Lincoln’s and my cabinet and strongly supported Reconstruction.\n"
         }
     },
     {
@@ -377,7 +377,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1409,
         "fields": {
             "question": 182,
-            "description": "Lyman Trumbull. He served as a Justice for the Illinois Supreme Court for five years and will help us win moderate voters. \n\n"
+            "description": "Lyman Trumbull. He served as a justice for the Illinois Supreme Court for five years and will help us win moderate voters.\n\n"
         }
     },
     {
@@ -385,7 +385,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1410,
         "fields": {
             "question": 182,
-            "description": "Montgomery Blair. He served in Mr. Lincoln’s cabinet. His anti-slavery stance will make him a great choice. \n"
+            "description": "Montgomery Blair. He served in Mr. Lincoln’s cabinet. His anti-slavery stance will make him a great choice.\n"
         }
     },
     {
@@ -393,7 +393,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1411,
         "fields": {
             "question": 182,
-            "description": "Thomas M. Cooley. He has served as a Justice for the Michigan Supreme Court since 1864. \n"
+            "description": "Thomas M. Cooley. He has served as a justice for the Michigan Supreme Court since 1864.\n"
         }
     },
     {
@@ -417,7 +417,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1461,
         "fields": {
             "question": 193,
-            "description": " I am my own man, but Mr. Lincoln’s policies lacked efficiency. \n"
+            "description": "I am my own man, but Mr. Lincoln’s policies lacked efficiency.\n"
         }
     },
     {
@@ -425,7 +425,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1462,
         "fields": {
             "question": 193,
-            "description": "Never. President Lincoln was the worst president ever. \n"
+            "description": "Never. President Lincoln was the worst president ever.\n"
         }
     },
     {
@@ -433,7 +433,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1464,
         "fields": {
             "question": 194,
-            "description": "This is a major accomplishment! I am glad this dark chapter, which was called slavery, has officially ended. \n"
+            "description": "This is a major accomplishment! I am glad this dark chapter, which was called slavery, has officially ended.\n"
         }
     },
     {
@@ -441,7 +441,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1468,
         "fields": {
             "question": 195,
-            "description": "It’s sad that Mr. Booth had to ruin his life by killing Mr. Lincoln. He had his opportunities in life, but chose the wrong path."
+            "description": "It’s sad that Mr. Booth had to ruin his life by killing Mr. Lincoln. He had his opportunities in life but chose the wrong path."
         }
     },
     {
@@ -449,7 +449,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1472,
         "fields": {
             "question": 196,
-            "description": "I have said this many times. But I think 1876 is the year when most of the Confederate States should return to the Union. With the exceptions of Tennessee and Louisiana. However, I will be open to adding more of the Confederate States if they do well with Reconstruction. "
+            "description": "I have said this many times. But I think 1876 is the year when most of the Confederate States should return to the Union, with the exceptions of Tennessee and Louisiana. However, I will be open to adding more of the Confederate States if they do well with Reconstruction."
         }
     },
     {
@@ -457,7 +457,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1473,
         "fields": {
             "question": 196,
-            "description": "These states choose to leave. Why should we readmit them back?"
+            "description": "These states chose to leave. Why should we readmit them?"
         }
     },
     {
@@ -465,7 +465,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1474,
         "fields": {
             "question": 196,
-            "description": "1868. I think they are all ready to be readmitted, but of course with Reconstruction strictly in effect. "
+            "description": "1868. I think they are all ready to be readmitted, but, of course, with Reconstruction strictly in effect."
         }
     },
     {
@@ -473,7 +473,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1475,
         "fields": {
             "question": 196,
-            "description": "Let's just readmit all of the southern states right now. "
+            "description": "Let's just readmit all of the Southern states right now."
         }
     },
     {
@@ -497,7 +497,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1514,
         "fields": {
             "question": 208,
-            "description": "Maybe William M. Evarts? He is a lawyer and a Republican Figure. I think he would be a good fit. \n\n"
+            "description": "Maybe William M. Evarts? He is a lawyer and a Republican figure. I think he would be a good fit.\n\n"
         }
     },
     {
@@ -505,7 +505,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1515,
         "fields": {
             "question": 208,
-            "description": "James Speed. He served as the Attorney General in mine and Mr. Lincoln’s cabinets. \n"
+            "description": "James Speed. He served as the Attorney General in Mr. Lincoln’s and my cabinets.\n"
         }
     },
     {
@@ -513,7 +513,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1516,
         "fields": {
             "question": 208,
-            "description": "John A. Bingham. He was a framer for the 14th Amendment and a loyal Republican. He is also an intelligent thinker, which would be great for the highest court in the land.\n"
+            "description": "John A. Bingham. He was a framer of the 14th Amendment and a loyal Republican. He is also an intelligent thinker, which would be great for the highest court in the land.\n"
         }
     },
     {
@@ -537,7 +537,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1536,
         "fields": {
             "question": 216,
-            "description": "Yes. I was a member of the Democratic Party. However, I left because they signed one of the worst laws in history. The Kansas-Nebraska Act was so horrible that I decided to leave the Democrats and become a Republican. \n"
+            "description": "Yes. I was a member of the Democratic Party. However, I left because they signed one of the worst laws in history. The Kansas-Nebraska Act was so horrible that I decided to leave the Democrats and become a Republican.\n"
         }
     },
     {
@@ -545,7 +545,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1537,
         "fields": {
             "question": 216,
-            "description": "I was a Democrat before, but I was opposed to slavery then and opposed to it now. \n"
+            "description": "I was a Democrat before, but I was opposed to slavery then and am opposed to it now.\n"
         }
     },
     {
@@ -577,7 +577,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1557,
         "fields": {
             "question": 222,
-            "description": "I am opposed to Reconstruction, and we should bring the states back regardless of what happens. \n"
+            "description": "I am opposed to Reconstruction, and we should bring the states back regardless of what happens.\n"
         }
     },
     {
@@ -585,7 +585,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1558,
         "fields": {
             "question": 222,
-            "description": "I am moderate towards Reconstruction. We need equal rights, however, we should punish the South, but not severely."
+            "description": "I am moderate toward Reconstruction. We need equal rights; however, we should punish the South, but not severely."
         }
     },
     {
@@ -593,7 +593,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1559,
         "fields": {
             "question": 223,
-            "description": "We are glad the state of Louisiana is back with us! \n"
+            "description": "We are glad the state of Louisiana is back with us!\n"
         }
     },
     {
@@ -617,7 +617,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1569,
         "fields": {
             "question": 226,
-            "description": "I think immigration is acceptable, however, I feel like we should keep an eye on them, just in case.\n"
+            "description": "I think immigration is acceptable; however, I feel like we should keep an eye on immigrants, just in case.\n"
         }
     },
     {
@@ -625,7 +625,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1570,
         "fields": {
             "question": 226,
-            "description": "We should ban immigration in general. \n"
+            "description": "We should ban immigration in general.\n"
         }
     },
     {
@@ -633,7 +633,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1619,
         "fields": {
             "question": 242,
-            "description": "Yes. I will run for another term. I feel like I have done a great job as president and feel like there is more I can do in the next four years. \n"
+            "description": "Yes. I will run for another term. I feel like I have done a great job as president and feel like there is more I can do in the next four years.\n"
         }
     },
     {
@@ -649,7 +649,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2555,
         "fields": {
             "question": 187,
-            "description": "My Cyrus fought in the Civil War for the Union and made me proud. He died way too young, and I will miss him every day. "
+            "description": "My Cyrus fought in the Civil War for the Union and made me proud. He died way too young, and I will miss him every day."
         }
     },
     {
@@ -665,7 +665,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2567,
         "fields": {
             "question": 186,
-            "description": "Our main focus is peace! We need to make sure everyone is on board so another American Civil War never happens again. "
+            "description": "Our main focus is peace! We need to make sure everyone is on board so another American Civil War never happens again."
         }
     },
     {
@@ -673,7 +673,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2570,
         "fields": {
             "question": 186,
-            "description": "Our main focus is equality! We will pass bills that will give African Americans the right to vote and make sure they have rights like everyone else. \n"
+            "description": "Our main focus is equality! We will pass bills that will give African Americans the right to vote and make sure they have rights like everyone else.\n"
         }
     },
     {
@@ -681,7 +681,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2571,
         "fields": {
             "question": 186,
-            "description": " Our main focus is on my policies. The 13th and 14th Amendments were passed during my presidency, after all. \n"
+            "description": "Our main focus is on my policies. The 13th and 14th Amendments were passed during my presidency, after all.\n"
         }
     },
     {
@@ -689,7 +689,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2572,
         "fields": {
             "question": 186,
-            "description": " Our main focus is keeping President Lincoln’s legacy alive by finishing this dark chapter of history and making sure he did not die in vain. \n"
+            "description": "Our main focus is keeping President Lincoln’s legacy alive by finishing this dark chapter of history and making sure he did not die in vain.\n"
         }
     },
     {
@@ -697,7 +697,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2591,
         "fields": {
             "question": 241,
-            "description": "Buchanan may have been a bad president, but he was a good man. Rest Well, Mr. Buchanan. \n"
+            "description": "Buchanan may have been a bad president, but he was a good man. Rest well, Mr. Buchanan.\n"
         }
     },
     {
@@ -705,7 +705,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2592,
         "fields": {
             "question": 241,
-            "description": "No! Mr. Buchanan was a terrible president and a doughface. \n"
+            "description": "No! Mr. Buchanan was a terrible president and a doughface.\n"
         }
     },
     {
@@ -713,7 +713,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2593,
         "fields": {
             "question": 241,
-            "description": "Politics aside, Mr. Buchanan was a great man. I offer my condolences to the Buchanan Family. Rest well, Mr. Buchanan…\n"
+            "description": "Politics aside, Mr. Buchanan was a great man. I offer my condolences to the Buchanan family. Rest well, Mr. Buchanan…\n"
         }
     },
     {
@@ -721,7 +721,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2594,
         "fields": {
             "question": 241,
-            "description": "I may be a Republican, but I want to pause campaigning in honor of him. \n"
+            "description": "I may be a Republican, but I want to pause campaigning in honor of him.\n"
         }
     },
     {
@@ -737,7 +737,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2615,
         "fields": {
             "question": 240,
-            "description": "I want to congratulate Mr. Seymour on the nomination, and I wish him good luck in this election. \n"
+            "description": "I want to congratulate Mr. Seymour on the nomination, and I wish him good luck in this election.\n"
         }
     },
     {
@@ -745,7 +745,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2616,
         "fields": {
             "question": 240,
-            "description": "Mr. Seymour is nothing but a racist who opposes Reconstruction and does not believe in equal rights. \n"
+            "description": "Mr. Seymour is nothing but a racist who opposes Reconstruction and does not believe in equal rights.\n"
         }
     },
     {
@@ -753,7 +753,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2617,
         "fields": {
             "question": 240,
-            "description": "A President Seymour could bring us into another Civil War. He will divide the country and make us miserable. \n"
+            "description": "A President Seymour could bring us into another Civil War. He will divide the country and make us miserable.\n"
         }
     },
     {
@@ -761,7 +761,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2618,
         "fields": {
             "question": 240,
-            "description": "We have got to be careful. He was the former governor of New York, and we do not want to hurt our campaign there. \n"
+            "description": "We have got to be careful. He was the former governor of New York, and we do not want to hurt our campaign there.\n"
         }
     },
     {
@@ -769,7 +769,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2662,
         "fields": {
             "question": 192,
-            "description": "We need this endorsement. Chase may hate my guts, but I can prove to him that I am better than Seymour. \n"
+            "description": "We need this endorsement. Chase may hate my guts, but I can prove to him that I am better than Seymour.\n"
         }
     },
     {
@@ -785,7 +785,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2664,
         "fields": {
             "question": 192,
-            "description": "Let's talk to him about our time as Vice President and how we changed Ameria for the better. \n"
+            "description": "Let's talk to him about our time as vice president and how we changed America for the better.\n"
         }
     },
     {
@@ -793,7 +793,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2665,
         "fields": {
             "question": 192,
-            "description": "We don't need that snake’s endorsement. \n"
+            "description": "We don't need that snake’s endorsement.\n"
         }
     },
     {
@@ -801,7 +801,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2678,
         "fields": {
             "question": 2497,
-            "description": "California is close this year. We need to keep them on our side."
+            "description": "California is close this year. We need to keep it on our side."
         }
     },
     {
@@ -809,7 +809,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2679,
         "fields": {
             "question": 2497,
-            "description": "Oregon is leaning Democratic this year. We need to keep them on our side. "
+            "description": "Oregon is leaning Democratic this year. We need to keep it on our side."
         }
     },
     {
@@ -817,7 +817,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2680,
         "fields": {
             "question": 2497,
-            "description": "We need to visit New York. Maybe we can even campaign with Governor Reuben Fenton. \n"
+            "description": "We need to visit New York. Maybe we can even campaign with Governor Reuben Fenton.\n"
         }
     },
     {
@@ -825,7 +825,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2681,
         "fields": {
             "question": 2497,
-            "description": "New Jersey is a big state, we can probably win. Let's visit there.\n"
+            "description": "New Jersey is a big state we can probably win. Let's visit there.\n"
         }
     },
     {
@@ -841,7 +841,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2698,
         "fields": {
             "question": 2498,
-            "description": "We have to follow my policies. Hopefully, every southern state except Tennessee and Louisiana will be readmitted in 1876. No exceptions!\n"
+            "description": "We have to follow my policies. Hopefully, every Southern state except Tennessee and Louisiana will be readmitted in 1876. No exceptions!\n"
         }
     },
     {
@@ -857,7 +857,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2704,
         "fields": {
             "question": 2498,
-            "description": "I do not mind Arkansas being readmitted a few days after the start of my second term and North Carolina a few months later. \n"
+            "description": "I do not mind Arkansas being readmitted a few days after the start of my second term and North Carolina a few months later.\n"
         }
     },
     {
@@ -865,7 +865,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2707,
         "fields": {
             "question": 2499,
-            "description": "Former President Millard Fillmore is a Democrat but does not like Seymour. We can try to get him on board. "
+            "description": "Former President Millard Fillmore is a Democrat but does not like Seymour. We can try to get him on board."
         }
     },
     {
@@ -889,7 +889,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2718,
         "fields": {
             "question": 2499,
-            "description": "John C. Fremont. He ran as a third party to Mr Lincoln in 1864. Maybe we can get him on our side so he does not run as a third party again.\n"
+            "description": "John C. Fremont. He ran as a third party against Mr. Lincoln in 1864. Maybe we can get him on our side so he does not run as a third party again.\n"
         }
     },
     {
@@ -897,7 +897,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2727,
         "fields": {
             "question": 2500,
-            "description": "This is horrible! We need to make sure this is not getting any more popular. \n"
+            "description": "This is horrible! We need to make sure this is not getting any more popular.\n"
         }
     },
     {
@@ -921,7 +921,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2735,
         "fields": {
             "question": 2500,
-            "description": "I am going to denounce the Klan. We are going to send more troops to the south so we can make sure this group does not go any further. \n"
+            "description": "I am going to denounce the Klan. We are going to send more troops to the South so we can make sure this group does not go any further.\n"
         }
     },
     {
@@ -937,7 +937,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2745,
         "fields": {
             "question": 2501,
-            "description": "I want to discuss the policies I have passed as president. \n"
+            "description": "I want to discuss the policies I have passed as president.\n"
         }
     },
     {
@@ -953,7 +953,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2747,
         "fields": {
             "question": 2501,
-            "description": "I want to discuss equality and Civil Rights.\n"
+            "description": "I want to discuss equality and civil rights.\n"
         }
     },
     {
@@ -961,7 +961,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2755,
         "fields": {
             "question": 2502,
-            "description": "Yes. It was a recession; however, in 1867, we were able to strengthen the economy and have not had one since. \n"
+            "description": "Yes. It was a recession; however, in 1867, we were able to strengthen the economy and have not had one since.\n"
         }
     },
     {
@@ -969,7 +969,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2756,
         "fields": {
             "question": 2502,
-            "description": "Listen, we had to do what we had to do. It is never an easy thing to do in a recession, but we had to stay strong and make sure we did not repeat the steps of the Panic of 1837 or 1857. \n"
+            "description": "Listen, we had to do what we had to do. It is never an easy thing to do in a recession, but we had to stay strong and make sure we did not repeat the steps of the Panic of 1837 or 1857.\n"
         }
     },
     {
@@ -977,7 +977,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2757,
         "fields": {
             "question": 2502,
-            "description": "\nRecession? What recession?\n"
+            "description": "Recession? What recession?\n"
         }
     },
     {
@@ -993,7 +993,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2766,
         "fields": {
             "question": 2503,
-            "description": "The Midwest. Colfax is from there, so he could persuade voters easily. "
+            "description": "The Midwest. Colfax is from there, so he could persuade voters easily."
         }
     },
     {
@@ -1001,7 +1001,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2767,
         "fields": {
             "question": 2503,
-            "description": "The Northeast. Hopefully, Colfax can persuade voters in these states to vote for me. \n"
+            "description": "The Northeast. Hopefully, Colfax can persuade voters in these states to vote for me.\n"
         }
     },
     {
@@ -1017,7 +1017,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2790,
         "fields": {
             "question": 2504,
-            "description": "California is close this year. We need to keep them on our side.\n"
+            "description": "California is close this year. We need to keep it on our side.\n"
         }
     },
     {
@@ -1025,7 +1025,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2791,
         "fields": {
             "question": 2504,
-            "description": "Oregon is leaning Democratic this year. We need to keep them on our side. \n"
+            "description": "Oregon is leaning Democratic this year. We need to keep it on our side.\n"
         }
     },
     {
@@ -1033,7 +1033,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2792,
         "fields": {
             "question": 2504,
-            "description": "We need to visit New York. Maybe we can even campaign with Governor Reuben Fenton. \n"
+            "description": "We need to visit New York. Maybe we can even campaign with Governor Reuben Fenton.\n"
         }
     },
     {
@@ -1057,7 +1057,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2809,
         "fields": {
             "question": 165,
-            "description": "This is horrible. I uhh- don't know what to do..."
+            "description": "This is horrible. I, uh, don't know what to do..."
         }
     },
     {
@@ -1065,7 +1065,7 @@ campaignTrail_temp.answers_json = [
         "pk": 2812,
         "fields": {
             "question": 195,
-            "description": "Well, this was expected, glad justice was served. "
+            "description": "Well, this was expected. Glad justice was served."
         }
     }
 ];
@@ -5473,7 +5473,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1352,
             "candidate": 20,
-            "answer_feedback": "You try to go back to sleep, but can’t. You knew to yourself this was going to be a long night. \n"
+            "answer_feedback": "You try to go back to sleep but can’t. You knew within yourself this was going to be a long night.\n"
         }
     },
     {
@@ -5482,7 +5482,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1356,
             "candidate": 20,
-            "answer_feedback": "While on your way to the inauguration, you are dead still knowing that the next few months (or maybe even longer) are going to be rough.\n"
+            "answer_feedback": "While on your way to the inauguration, you are dead still, knowing that the next few months (or maybe even longer) are going to be rough.\n"
         }
     },
     {
@@ -5491,7 +5491,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1399,
             "candidate": 20,
-            "answer_feedback": "As soon as you said those 4 words and stared at the Bible, your left hand was on for a solid 5 seconds, you thought, \"Am I really doing this? Or is this a dream?\""
+            "answer_feedback": "As soon as you said those four words and stared at the Bible, with your left hand resting on it for a solid five seconds, you thought, \"Am I really doing this? Or is this a dream?\""
         }
     },
     {
@@ -5500,7 +5500,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1411,
             "candidate": 20,
-            "answer_feedback": "Cooley's nomination passes in the Senate 33-14. However, some people are turned off that he is more of an independent than a Republican. "
+            "answer_feedback": "Cooley's nomination passes in the Senate 33-14. However, some people are turned off that he is more of an independent than a Republican."
         }
     },
     {
@@ -5509,7 +5509,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1415,
             "candidate": 20,
-            "answer_feedback": "This was the expected response, but Tennessee's Legislature is voting in this election, and they are planning on voting for Seymour. \n"
+            "answer_feedback": "This was the expected response, but Tennessee's legislature is voting in this election, and it is planning on voting for Seymour.\n"
         }
     },
     {
@@ -5536,7 +5536,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1462,
             "candidate": 20,
-            "answer_feedback": "“Breaking News! President Hamlin Has Been Caught Playing Beer Pong With Tennessee Governor Andrew Johnson Last Night.” This is what you read in the paper. You screwed up Hannibal... screwed up big time...\n"
+            "answer_feedback": "“Breaking News! President Hamlin Has Been Caught Playing Beer Pong With Tennessee Governor Andrew Johnson Last Night.” This is what you read in the paper. You screwed up, Hannibal... screwed up big time...\n"
         }
     },
     {
@@ -5545,7 +5545,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1464,
             "candidate": 20,
-            "answer_feedback": "The dark chapter is over indeed! As an abolitionist all your life, this is highly expected to come from you! \n"
+            "answer_feedback": "The dark chapter is over indeed! As you have been an abolitionist all your life, this is highly expected from you!\n"
         }
     },
     {
@@ -5563,7 +5563,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1473,
             "candidate": 20,
-            "answer_feedback": "Are you drunk or something? Almost everyone supports the readmission of these states sooner or later. "
+            "answer_feedback": "Are you drunk or something? Almost everyone supports the readmission of these states sooner or later."
         }
     },
     {
@@ -5572,7 +5572,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1474,
             "candidate": 20,
-            "answer_feedback": "This may sound like a good compromise on paper. But in reality, this is just not popular. As a Radical Republican yourself, you should know that they want the southern states to be readmitted in the next 10-15 years. "
+            "answer_feedback": "This may sound like a good compromise on paper. But in reality, this is just not popular. As a Radical Republican yourself, you should know that they want the Southern states to be readmitted in the next 10-15 years."
         }
     },
     {
@@ -5590,7 +5590,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1477,
             "candidate": 20,
-            "answer_feedback": "Oh... Right..."
+            "answer_feedback": "Oh... right..."
         }
     },
     {
@@ -5599,7 +5599,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1558,
             "candidate": 20,
-            "answer_feedback": "Radical Republicans are disappointed, while voters from states like California are satisfied. \n"
+            "answer_feedback": "Radical Republicans are disappointed, while voters from states like California are satisfied.\n"
         }
     },
     {
@@ -5608,7 +5608,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1567,
             "candidate": 20,
-            "answer_feedback": "You are correct. However, some people are not a fan of immigration, so you lost votes, but not too many. \n"
+            "answer_feedback": "You are correct. However, some people are not fans of immigration, so you lost votes, but not too many.\n"
         }
     },
     {
@@ -5617,7 +5617,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1516,
             "candidate": 20,
-            "answer_feedback": "Bingham is a good selection. His nomination passed in the Senate 58-8. "
+            "answer_feedback": "Bingham is a good selection. His nomination passed in the Senate 58-8."
         }
     },
     {
@@ -5635,7 +5635,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1408,
             "candidate": 20,
-            "answer_feedback": "Stanton would have worked if he were not in poor health right now. However, the Senate passed the vote for his nomination 36-11. "
+            "answer_feedback": "Stanton would have worked if he were not in poor health right now. However, the Senate passed the vote for his nomination 36-11."
         }
     },
     {
@@ -5644,7 +5644,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1409,
             "candidate": 20,
-            "answer_feedback": "Trumbull is indeed a popular selection for moderates. But, for Radicals? Nope. Also, there have been rumors around him that he will represent the Democratic Party in the near future. However, there is no evidence to prove this. "
+            "answer_feedback": "Trumbull is indeed a popular selection for moderates. But for Radicals? Nope. Also, there have been rumors about him that he will represent the Democratic Party in the near future. However, there is no evidence to prove this."
         }
     },
     {
@@ -5653,7 +5653,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1410,
             "candidate": 20,
-            "answer_feedback": "Some people think Blair is a good choice because of his anti slavery stance. But you do realize Blair is a Democrat, right? He is also the brother of Francis Blair Jr. However, to be fair, he was a former Republican, and he indeed served in President Lincoln's cabinet. But as expected, Radical Republicans are not cutting you any slack."
+            "answer_feedback": "Some people think Blair is a good choice because of his anti-slavery stance. But you do realize Blair is a Democrat, right? He is also the brother of Francis Blair Jr. However, to be fair, he was a former Republican, and he indeed served in President Lincoln's cabinet. But as expected, Radical Republicans are not cutting you any slack."
         }
     },
     {
@@ -5662,7 +5662,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1360,
             "candidate": 20,
-            "answer_feedback": "This was the expected answer. The House and Senate agreed to vote in June of 1871 so the state can hopefully be admitted on August 1st, 1872. \n"
+            "answer_feedback": "This was the expected answer. The House and Senate agreed to vote in June of 1871 so the state can hopefully be admitted on August 1st, 1872.\n"
         }
     },
     {
@@ -5671,7 +5671,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1361,
             "candidate": 20,
-            "answer_feedback": "Fair enough. You are right about the number of people since only 24,000 live there. However, people question why they have to wait 20 years. \n"
+            "answer_feedback": "Fair enough. You are right about the number of people, since only 24,000 live there. However, people question why they have to wait 20 years.\n"
         }
     },
     {
@@ -5680,7 +5680,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1515,
             "candidate": 20,
-            "answer_feedback": "James Speed is a good choice! The Senate easily votes 55-11 in favor of him taking over. "
+            "answer_feedback": "James Speed is a good choice! The Senate easily votes 55-11 in favor of him taking over."
         }
     },
     {
@@ -5689,7 +5689,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1514,
             "candidate": 20,
-            "answer_feedback": "Evarts is a good choice, and the Senate agrees, as his nomination passed 56-10. "
+            "answer_feedback": "Evarts is a good choice, and the Senate agrees, as his nomination passed 56-10."
         }
     },
     {
@@ -5698,7 +5698,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2545,
             "candidate": 20,
-            "answer_feedback": "Hoar could work. His nomination passed 52-14. His age of 40 is a concern for some people, but for many, it is not. "
+            "answer_feedback": "Hoar could work. His nomination passed 52-14. His age of 40 is a concern for some people, but for many, it is not."
         }
     },
     {
@@ -5725,7 +5725,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1619,
             "candidate": 20,
-            "answer_feedback": "“Hamlin Runs For a Second Term and is on the Ballot in Numerous States!” This is what you read the next morning. \n"
+            "answer_feedback": "“Hamlin Runs for a Second Term and Is on the Ballot in Numerous States!” This is what you read the next morning.\n"
         }
     },
     {
@@ -5743,7 +5743,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2570,
             "candidate": 20,
-            "answer_feedback": "You are cheered on by Radical Republicans and many Northerners. \n"
+            "answer_feedback": "You are cheered on by Radical Republicans and many Northerners.\n"
         }
     },
     {
@@ -5752,7 +5752,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2571,
             "candidate": 20,
-            "answer_feedback": " Describing your successes is always beneficial to your campaign. \n"
+            "answer_feedback": "Describing your successes is always beneficial to your campaign.\n"
         }
     },
     {
@@ -5761,7 +5761,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2572,
             "candidate": 20,
-            "answer_feedback": "The convention roared with cheers! Lincoln was popular, and bringing this up is never a bad idea. "
+            "answer_feedback": "The convention roared with cheers! Lincoln was popular, and bringing this up is never a bad idea."
         }
     },
     {
@@ -5770,7 +5770,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1363,
             "candidate": 20,
-            "answer_feedback": " Choosing Colfax will benefit you within the Radical Republicans. But the Moderate Republicans? Nope! This will hurt you some. But Radical Republicans and Indiana are overjoyed with his selection."
+            "answer_feedback": "Choosing Colfax will benefit you with the Radical Republicans. But the moderate Republicans? Nope! This will hurt you some. But Radical Republicans and Indiana are overjoyed with his selection."
         }
     },
     {
@@ -5779,7 +5779,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2591,
             "candidate": 20,
-            "answer_feedback": "This is a good response to such an event. "
+            "answer_feedback": "This is a good response to such an event."
         }
     },
     {
@@ -5788,7 +5788,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2592,
             "candidate": 20,
-            "answer_feedback": "Now is not the time to be political. What you said was horrible. The Buchanans now despise you, and even though Buchanan was not a very good president, the whole country is angry with you. Mr. Hamlin, you screwed up bad. "
+            "answer_feedback": "Now is not the time to be political. What you said was horrible. The Buchanans now despise you, and even though Buchanan was not a very good president, the whole country is angry with you. Mr. Hamlin, you screwed up badly."
         }
     },
     {
@@ -5797,7 +5797,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2593,
             "candidate": 20,
-            "answer_feedback": "This is a great non-political statement. The Buchanan family thanks you and invites you to the funeral. \n"
+            "answer_feedback": "This is a great non-political statement. The Buchanan family thanks you and invites you to the funeral.\n"
         }
     },
     {
@@ -5806,7 +5806,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2594,
             "candidate": 20,
-            "answer_feedback": "This works! You took a few days off from the campaign trail and went to the funeral. \n"
+            "answer_feedback": "This works! You took a few days off from the campaign trail and went to the funeral.\n"
         }
     },
     {
@@ -5815,7 +5815,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1559,
             "candidate": 20,
-            "answer_feedback": "This was the expected response. However, like Tennessee, Louisiana's Legislature is voting, and it is predicted to go solidly Democratic this election. \n"
+            "answer_feedback": "This was the expected response. However, like Tennessee, Louisiana's legislature is voting, and it is predicted to go solidly Democratic this election.\n"
         }
     },
     {
@@ -5824,7 +5824,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1536,
             "candidate": 20,
-            "answer_feedback": " It is good to be honest. However, this does pull some Radical Republicans away, but not too many. \n"
+            "answer_feedback": "It is good to be honest. However, this does pull some Radical Republicans away, but not too many.\n"
         }
     },
     {
@@ -5833,7 +5833,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1537,
             "candidate": 20,
-            "answer_feedback": "This works. However, some people do not believe you since you were a strong Jacksonian Democrat. But considering you have a record of strongly opposing slavery. This is probably the best response. \n"
+            "answer_feedback": "This works. However, some people do not believe you since you were a strong Jacksonian Democrat. But considering you have a record of strongly opposing slavery, this is probably the best response.\n"
         }
     },
     {
@@ -5842,7 +5842,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1538,
             "candidate": 20,
-            "answer_feedback": "This might have worked if you were NOT in political office before becoming a Republican. Also, everyone knows you were a Democrat. So you shot yourself in the foot with this response. \n"
+            "answer_feedback": "This might have worked if you had NOT been in political office before becoming a Republican. Also, everyone knows you were a Democrat. So you shot yourself in the foot with this response.\n"
         }
     },
     {
@@ -5851,7 +5851,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2609,
             "candidate": 20,
-            "answer_feedback": "Opponents are calling you a wuss. But then again, everyone knows you were a former Democrat.\n"
+            "answer_feedback": "Opponents are calling you a wuss. But then again, everyone knows you are a former Democrat.\n"
         }
     },
     {
@@ -5860,7 +5860,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2615,
             "candidate": 20,
-            "answer_feedback": "This is a nice non-political response. \n"
+            "answer_feedback": "This is a nice non-political response.\n"
         }
     },
     {
@@ -5869,7 +5869,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2616,
             "candidate": 20,
-            "answer_feedback": "Some think this is a little overboard, but some think this is a great response. However, this does hurt you a little in New York. \n"
+            "answer_feedback": "Some think this is a little overboard, but some think this is a great response. However, this does hurt you a little in New York.\n"
         }
     },
     {
@@ -5878,7 +5878,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2617,
             "candidate": 20,
-            "answer_feedback": " A little slippery slope, huh? But to be fair, the majority of Americans are in fear of another civil war, so this attack works. \n"
+            "answer_feedback": "A bit of a slippery slope, huh? But to be fair, the majority of Americans are in fear of another civil war, so this attack works.\n"
         }
     },
     {
@@ -5887,7 +5887,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2618,
             "candidate": 20,
-            "answer_feedback": "It doesn’t hurt to play it safe. But do not forget to attack Seymour since he has some weak spots that can help you in the long run. \n"
+            "answer_feedback": "It doesn’t hurt to play it safe. But do not forget to attack Seymour since he has some weak spots that can help you in the long run.\n"
         }
     },
     {
@@ -5896,7 +5896,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1523,
             "candidate": 20,
-            "answer_feedback": "This was the right approach. However, his selection will hurt your numbers in Missouri. \n"
+            "answer_feedback": "This was the right approach. However, his selection will hurt your numbers in Missouri.\n"
         }
     },
     {
@@ -5914,7 +5914,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1555,
             "candidate": 20,
-            "answer_feedback": "Radical Republicans love this! However, moderate Republicans and Democrats are upset. \n"
+            "answer_feedback": "Radical Republicans love this! However, moderate Republicans and Democrats are upset.\n"
         }
     },
     {
@@ -5923,7 +5923,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1556,
             "candidate": 20,
-            "answer_feedback": "This goes against everything you said about Reconstruction. Radical Republicans are livid. However, some Radicals are happy that you want equality. \n"
+            "answer_feedback": "This goes against everything you said about Reconstruction. Radical Republicans are livid. However, some Radicals are happy that you want equality.\n"
         }
     },
     {
@@ -5932,7 +5932,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1557,
             "candidate": 20,
-            "answer_feedback": "Ok, Andrew Johnson.\n"
+            "answer_feedback": "Okay, Andrew Johnson.\n"
         }
     },
     {
@@ -5941,7 +5941,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1569,
             "candidate": 20,
-            "answer_feedback": "This is what the majority of Americans agree on. "
+            "answer_feedback": "This is what the majority of Americans agree on."
         }
     },
     {
@@ -5950,7 +5950,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1570,
             "candidate": 20,
-            "answer_feedback": "Some people agree while others don’t. "
+            "answer_feedback": "Some people agree, while others don’t."
         }
     },
     {
@@ -5959,7 +5959,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2662,
             "candidate": 20,
-            "answer_feedback": "Success! It was challenging, but you were able to get his endorsement. \n"
+            "answer_feedback": "Success! It was challenging, but you were able to get his endorsement.\n"
         }
     },
     {
@@ -5968,7 +5968,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2663,
             "candidate": 20,
-            "answer_feedback": "Your gambit failed. However, Chase says he would not endorse Seymour either. \n"
+            "answer_feedback": "Your gambit failed. However, Chase says he will not endorse Seymour either.\n"
         }
     },
     {
@@ -5977,7 +5977,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2664,
             "candidate": 20,
-            "answer_feedback": "Your gambit failed extremely. Chase endorses Seymour.\n"
+            "answer_feedback": "Your gambit failed completely. Chase endorses Seymour.\n"
         }
     },
     {
@@ -5986,7 +5986,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2665,
             "candidate": 20,
-            "answer_feedback": "You indeed hate each other. But again, trying couldn’t have hurt. He is 100% supporting Seymour in this election. \n"
+            "answer_feedback": "You indeed hate each other. But again, trying couldn’t have hurt. He is 100% supporting Seymour in this election.\n"
         }
     },
     {
@@ -5995,7 +5995,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2678,
             "candidate": 20,
-            "answer_feedback": "Your poll numbers boost in California.\n"
+            "answer_feedback": "Your poll numbers get a boost in California.\n"
         }
     },
     {
@@ -6004,7 +6004,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2679,
             "candidate": 20,
-            "answer_feedback": "Your poll numbers boost in Oregon. "
+            "answer_feedback": "Your poll numbers get a boost in Oregon."
         }
     },
     {
@@ -6013,7 +6013,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2680,
             "candidate": 20,
-            "answer_feedback": "Your poll numbers boost in New York.\n"
+            "answer_feedback": "Your poll numbers get a boost in New York.\n"
         }
     },
     {
@@ -6022,7 +6022,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2681,
             "candidate": 20,
-            "answer_feedback": "Your poll numbers boost in New Jersey.\n"
+            "answer_feedback": "Your poll numbers get a boost in New Jersey.\n"
         }
     },
     {
@@ -6031,7 +6031,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2695,
             "candidate": 20,
-            "answer_feedback": "This does not comply with your policies; however, strangely, it works. North Carolina will be readmitted on March 10th, 1869, and Arkansas on July 25th, 1869. \n"
+            "answer_feedback": "This does not comply with your policies; however, strangely, it works. North Carolina will be readmitted on March 10th, 1869, and Arkansas on July 25th, 1869.\n"
         }
     },
     {
@@ -6040,7 +6040,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2698,
             "candidate": 20,
-            "answer_feedback": "Way to stick to your policies! "
+            "answer_feedback": "Way to stick to your policies!"
         }
     },
     {
@@ -6049,7 +6049,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2701,
             "candidate": 20,
-            "answer_feedback": "While this seems like a good idea, it is better just to readmit one for now. "
+            "answer_feedback": "While this seems like a good idea, it is better just to readmit one for now."
         }
     },
     {
@@ -6058,7 +6058,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2704,
             "candidate": 20,
-            "answer_feedback": "This does not adhere to your policies, but strangely, it works. Arkansas is scheduled to be readmitted on March 10th, 1869, and North Carolina on July 25th, 1869. \n"
+            "answer_feedback": "This does not adhere to your policies, but strangely, it works. Arkansas is scheduled to be readmitted on March 10th, 1869, and North Carolina on July 25th, 1869.\n"
         }
     },
     {
@@ -6067,7 +6067,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2707,
             "candidate": 20,
-            "answer_feedback": "Fillmore thinks you are too much of a radical. He will not endorse you. But he doesn't want to endorse Seymour either. \n"
+            "answer_feedback": "Fillmore thinks you are too much of a radical. He will not endorse you. But he doesn't want to endorse Seymour either.\n"
         }
     },
     {
@@ -6076,7 +6076,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2711,
             "candidate": 20,
-            "answer_feedback": "Seward was hesitant to discuss the assassination, but he talked about it anyway. The speech was well received, and Seward endorses you, as expected. \n"
+            "answer_feedback": "Seward was hesitant to discuss the assassination, but he talked about it anyway. The speech was well received, and Seward endorses you, as expected.\n"
         }
     },
     {
@@ -6112,7 +6112,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2731,
             "candidate": 20,
-            "answer_feedback": "Offend anyone? Offend anyone?! With this statement, you have offended so many people! Hannibal, what were you thinking? \n"
+            "answer_feedback": "Offend anyone? Offend anyone?! With this statement, you have offended so many people! Hannibal, what were you thinking?\n"
         }
     },
     {
@@ -6130,7 +6130,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2735,
             "candidate": 20,
-            "answer_feedback": "This was the expected response. You send troops to the south, and the Klan disappears, but it's unfortunately most likely not the end of them. \n"
+            "answer_feedback": "This was the expected response. You send troops to the South, and the Klan disappears, but, unfortunately, it's most likely not the end of them.\n"
         }
     },
     {
@@ -6139,7 +6139,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2755,
             "candidate": 20,
-            "answer_feedback": "This is a good answer. However, some people are doubtful. \n"
+            "answer_feedback": "This is a good answer. However, some people are doubtful.\n"
         }
     },
     {
@@ -6148,7 +6148,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2756,
             "candidate": 20,
-            "answer_feedback": " People love your honesty and bravery. Also, you may or may not know it, but your statement also attacked Democrats since Democratic Presidents were in office in 1837 and 1857. "
+            "answer_feedback": "People love your honesty and bravery. Also, you may or may not know it, but your statement also attacked Democrats since Democratic presidents were in office in 1837 and 1857."
         }
     },
     {
@@ -6157,7 +6157,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2757,
             "candidate": 20,
-            "answer_feedback": " Real funny…\n"
+            "answer_feedback": "Real funny…\n"
         }
     },
     {
@@ -6166,7 +6166,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2765,
             "candidate": 20,
-            "answer_feedback": "Tennessee and Louisiana's state legislatures are voting in this election, and they both are supporting Seymour. So this trip was useless. \n"
+            "answer_feedback": "Tennessee and Louisiana's state legislatures are voting in this election, and they both are supporting Seymour. So this trip was useless.\n"
         }
     },
     {
@@ -6175,7 +6175,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2766,
             "candidate": 20,
-            "answer_feedback": "Colfax is very popular in the Midwest, especially in Illinois, Indiana, and Ohio. "
+            "answer_feedback": "Colfax is very popular in the Midwest, especially in Illinois, Indiana, and Ohio."
         }
     },
     {
@@ -6184,7 +6184,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2767,
             "candidate": 20,
-            "answer_feedback": "Colfax is also very popular in the Northeast. He helps your poll numbers in Pennsylvania, New York, and New Jersey. \n"
+            "answer_feedback": "Colfax is also very popular in the Northeast. He helps your poll numbers in Pennsylvania, New York, and New Jersey.\n"
         }
     },
     {
@@ -6193,7 +6193,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2768,
             "candidate": 20,
-            "answer_feedback": "Colfax campaigning in the Border States did not go well. He is very unpopular in that area. So your poll numbers will go down in Missouri, Maryland, Kentucky, and Delaware. \n"
+            "answer_feedback": "Colfax's campaigning in the Border States did not go well. He is very unpopular in that area. So your poll numbers will go down in Missouri, Maryland, Kentucky, and Delaware.\n"
         }
     },
     {
@@ -6202,7 +6202,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2790,
             "candidate": 20,
-            "answer_feedback": "Your poll numbers boost in California.\n"
+            "answer_feedback": "Your poll numbers get a boost in California.\n"
         }
     },
     {
@@ -6211,7 +6211,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2791,
             "candidate": 20,
-            "answer_feedback": "Your poll numbers boost in Oregon. "
+            "answer_feedback": "Your poll numbers get a boost in Oregon."
         }
     },
     {
@@ -6220,7 +6220,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2792,
             "candidate": 20,
-            "answer_feedback": "Your poll numbers boost in New York.\n"
+            "answer_feedback": "Your poll numbers get a boost in New York.\n"
         }
     },
     {
@@ -6229,7 +6229,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2793,
             "candidate": 20,
-            "answer_feedback": "Your poll numbers boost in New Jersey."
+            "answer_feedback": "Your poll numbers get a boost in New Jersey."
         }
     },
     {
@@ -6238,7 +6238,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2806,
             "candidate": 20,
-            "answer_feedback": " The results are coming in."
+            "answer_feedback": "The results are coming in."
         }
     },
     {
@@ -6247,7 +6247,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2809,
             "candidate": 20,
-            "answer_feedback": "You panic. You stay wide awake the whole night. "
+            "answer_feedback": "You panic. You stay wide awake the whole night."
         }
     }
 ];
