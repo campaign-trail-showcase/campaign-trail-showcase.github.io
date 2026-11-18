@@ -1822,7 +1822,7 @@ function installCandidateActionButtons() {
   }
 
   const allButtons = Array.from(
-    document.querySelectorAll('button, input[type="button"], input[type="submit"]')
+  gameWindow.querySelectorAll('button, input[type="button"], input[type="submit"]')
   ).filter((button) => !button.classList.contains("candidate-carousel-arrow"));
 
   const existingBack = Array.from(actionBar.children).find(
@@ -2004,7 +2004,7 @@ function installAssistantActionButtons(isUnlocked) {
   }
 
   const allButtons = Array.from(
-    document.querySelectorAll('button, input[type="button"], input[type="submit"]')
+  gameWindow.querySelectorAll('button, input[type="button"], input[type="submit"]')
   ).filter((button) => !button.classList.contains("candidate-carousel-arrow"));
 
   const existingBack = Array.from(actionBar.children).find(
@@ -2611,22 +2611,15 @@ nameEntry.appendChild(confirmButton);
 
   installAssistantWindow();
 
-const candidateObserver = new MutationObserver(() => {
+window.__heirCarouselObserver?.disconnect();
+const carouselObserver = window.__heirCarouselObserver = new MutationObserver(() => {
   installArrows();
-  syncCarouselHostState();
-});
-
-candidateObserver.observe(document.body, {
-  childList: true,
-  subtree: true
-});
-
-const assistantObserver = new MutationObserver(() => {
   installAssistantWindow();
   syncCarouselHostState();
+  window.__heirSyncSettings?.();
 });
 
-assistantObserver.observe(document.body, {
+carouselObserver.observe(document.getElementById("game_window") || document.body, {
   childList: true,
   subtree: true
 });
@@ -4809,8 +4802,7 @@ window.theHeirAchievementStorage = {
 };
 
 window.heirCheatsOn = () =>
-  (typeof cheatsActive !== "undefined" && cheatsActive === true) ||
-  (typeof cheats !== "undefined" && +cheats === 1) || +window.cheats === 1;
+  typeof cheatMenuAlreadyActivated !== "undefined" && cheatMenuAlreadyActivated;
 
 window.heirHasAchievementGate = function (gate) {
   if (gate === "presidential-list" && window.heirCheatsOn()) return true;
@@ -5483,13 +5475,7 @@ gameWindow.classList.add("heir-settings-host");
 renderAll(state);
 }
 
-const screenObserver = new MutationObserver(installSettingsScreen);
-
-screenObserver.observe(document.body,{
-childList:true,
-subtree:true
-});
-
+window.__heirSyncSettings = installSettingsScreen;
 window.__theHeirSettingsScreenInstalled = true;
 installSettingsScreen();
 })();
