@@ -7594,7 +7594,7 @@ campaignTrail_temp.answer_feedback_json = rows([["campaign_trail.answer_feedback
 [43414,43045,1001,"It’s strange, really strange, to see Trump act this way, and it releases some of your stress. Some press feel like the President is finally trying to be conciliatory, and the new senator of Pennsylvania cherishes the idea of working with the Administration. Others wonder if it's just empty words, probably they are."],
 [43427,43223,1001,[385]],
 [43437,43281,1001,[386]],
-[43470,43469,1001,"Republicans have repeatedly surpassed expectations for six years, even the most TDS affected accept that the man has a way with voters. He’s proven himself as a competente, conservative President, making senator Loeffler retake his seat in Georgia."],
+[43470,43469,1001,"Republicans have repeatedly surpassed expectations for six years, even the most TDS affected accept that the man has a way with voters. He’s proven himself as a competent, conservative President, making senator Loeffler retake his seat in Georgia."],
 [43476,43475,1001,[385]],
 [43485,43484,1001,[386]],
 [43516,43515,1001,"Even riding the blue Wave, Democrats have no power to negotiate. They get in the House and peel Collins and Murkowski, but in the end, it is insufficient to break Thune's axe. Ten days later everybody has forgotten about it."],
@@ -16094,9 +16094,6 @@ if (result?.caseKey) {
     const CONTROLLER =
         "__theHeirHistoricalElectionController";
 
-    const OBSERVER =
-        "__theHeirHistoricalResultsObserver";
-
     const TARGET_QUESTION_NUMBER = 22;
     const TOTAL_POPULAR_VOTE = 155238302;
 
@@ -16556,7 +16553,6 @@ const HISTORICAL_VPS = {
     };
 
     window[CONTROLLER]?.stop?.();
-    window[OBSERVER]?.disconnect?.();
 
     function normalize(value) {
         return String(value || "")
@@ -17869,22 +17865,7 @@ function updateResultTables() {
         historicalResult
     );
 }
-    const observer =
-        new MutationObserver(
-            updateResultTables
-        );
-
-    observer.observe(
-        document.getElementById(
-            "game_window"
-        ) || document.body,
-        {
-            childList: true,
-            subtree: true
-        }
-    );
-
-    window[OBSERVER] = observer;
+    window.__heirSyncResultTables = updateResultTables;
 
     updateResultTables();
 })();
@@ -19467,7 +19448,7 @@ function applyQuestion27Picture(context) {
     } else if (
         context.forpol >= 1.5 &&
         context.ukraine >= 5 &&
-        context.ceasefire === 1
+        context.ceasefire === 1 && context.newsomVp !== "Tlaib"
     ) {
         imageUrl =
             "https://i.imgur.com/FqDnsWG.jpeg";
@@ -19622,11 +19603,12 @@ function applyQuestion27Picture(context) {
         if (
             context.forpol >= 1.5 &&
             context.ukraine >= 5 &&
-            context.ceasefire === 1
+            context.ceasefire === 1 &&
+            context.newsomVp !== "Tlaib"
         ) {
             questionSwapper(50894, 55230);
-            putinout +=1;
-            supshock -=2;
+            putinout += 1;
+            supshock -= 2;
             return;
         }
 
@@ -20619,7 +20601,6 @@ window.__applyHeirRoutesBeforeRender =
 ;(() => {
     const MODEL_KEY = "__economicModelController";
     const CHECK_INTERVAL_MS = 350;
-    const QUESTION_SETTLE_DELAY_MS = 80;
     const ROUND_DIGITS = 2;
     const STATE_MULTIPLIER_MIN_ID = 2500;
     const STATE_MULTIPLIER_MAX_ID = 2550;
@@ -20633,9 +20614,7 @@ window.__applyHeirRoutesBeforeRender =
     const previousStateMultiplierEcoDeltas = previousController?.getStateMultiplierEcoDeltas?.() || {};
 
     let lastQuestionKey = null;
-    let pendingCheckTimer = null;
     let pollTimer = null;
-    let observer = null;
     let lastAppliedAnswerCount = null;
 const stateMultiplierEcoDeltas = { ...previousStateMultiplierEcoDeltas };
 
@@ -21098,39 +21077,15 @@ function checkForNewQuestion() {
 
     updateEcoAnchoredStateMultipliers();
 }
-    function scheduleQuestionCheck() {
-        if (pendingCheckTimer !== null) {
-            window.clearTimeout(pendingCheckTimer);
-        }
-
-        pendingCheckTimer = window.setTimeout(() => {
-            pendingCheckTimer = null;
-            checkForNewQuestion();
-        }, QUESTION_SETTLE_DELAY_MS);
-    }
 
     function startEconomicModel() {
-        observer = new MutationObserver(scheduleQuestionCheck);
-        observer.observe(document.documentElement, { childList: true, subtree: true });
+        checkForNewQuestion();
         pollTimer = window.setInterval(checkForNewQuestion, CHECK_INTERVAL_MS);
-        scheduleQuestionCheck();
     }
 
     function stopEconomicModel() {
-        if (pendingCheckTimer !== null) {
-            window.clearTimeout(pendingCheckTimer);
-            pendingCheckTimer = null;
-        }
-
-        if (pollTimer !== null) {
-            window.clearInterval(pollTimer);
-            pollTimer = null;
-        }
-
-        if (observer) {
-            observer.disconnect();
-            observer = null;
-        }
+        window.clearInterval(pollTimer);
+        pollTimer = null;
     }
 
 window[MODEL_KEY] = {
@@ -21749,32 +21704,42 @@ function ensureFooterUpdated() {
     }
 }
 
-let footerObserverRunning = false;
+let footerFrame = null;
+let childrenChanged = false;
 
-function footerMutationHandler() {
-    if (footerObserverRunning) return;
-    footerObserverRunning = true;
-
-    requestAnimationFrame(() => {
-        try {
-            ensureFooterUpdated();
-        } finally {
-            footerObserverRunning = false;
+function footerMutationHandler(records) {
+    childrenChanged ||= records.some(record => record.type === "childList");
+    if (footerFrame !== null) return;
+    footerFrame = requestAnimationFrame(() => {
+        footerFrame = null;
+        const syncView = childrenChanged;
+        childrenChanged = false;
+        const tasks = syncView ? [
+            window.__campaignHqController?.syncButton,
+            ensureFooterUpdated,
+            window.__heirSyncResultTables,
+            window.dataVisualizer?.refreshVisualization
+        ] : [ensureFooterUpdated];
+        for (const task of tasks) {
+            try {
+                task?.();
+            } catch (error) {
+                console.error("The Heir:", error);
+            }
         }
     });
 }
 
 window.__mixedFooterController?.stop?.();
-
 window.hasInitializedMixedFooter = true;
-
 ensureFooterUpdated();
 
 const footerObserver = new MutationObserver(footerMutationHandler);
-footerObserver.observe(document.documentElement, {
+footerObserver.observe(document.getElementById("game_window") || document.body, {
     childList: true,
     subtree: true,
-    attributes: true
+    attributes: true,
+    attributeFilter: ["class", "style", "hidden", "src", "id", "type"]
 });
 
 window.mixedFooter = {
@@ -21784,9 +21749,10 @@ window.mixedFooter = {
 
 window.__mixedFooterController = {
     stop() {
-        footerObserver.disconnect();
-        window.mixedFooter = null;
-    }
+    footerObserver.disconnect();
+    if (footerFrame !== null) cancelAnimationFrame(footerFrame);
+    window.mixedFooter = null;
+}
 };
 
 const questionLayoutFixCss = `
@@ -23970,8 +23936,6 @@ let bypassHeirAdvisorIntercept = false;
 let heirAdvisorInterceptorStarted = false;
 let heirChoiceAnswerProcessing = false;
     let heirAdvisorClickHandler = null;
-    let campaignHqObserver = null;
-    let campaignHqBootstrapTimer = null;
 
     const CANDIDATES = [
         {
@@ -27685,14 +27649,16 @@ function startHeirAdvisorInterceptor() {
     );
 }
 
-    function renderCampaignVariables(popup) {
+        function renderCampaignVariables(popup) {
         const variables = popup.querySelector(".campaign-hq-vars");
-        if (!variables) {
-            return;
-        }
+        if (!variables) return;
 
-        variables.innerHTML = "";
-        getVariableRows().forEach((row) => variables.appendChild(createVariableRow(row)));
+        const rows = getVariableRows();
+        const signature = JSON.stringify(rows);
+        if (variables.heirSignature === signature) return;
+
+        variables.replaceChildren(...rows.map(createVariableRow));
+        variables.heirSignature = signature;
     }
 
 function getHeirChoiceItems() {
@@ -28275,74 +28241,29 @@ document.body.appendChild(popup);
     }
 
     function addHeadquarterButton() {
-        const refButton = document.getElementById("view_electoral_map");
-        if (!refButton) {
-            return;
-        }
+        const gameWindow = document.getElementById("game_window");
+        const refButton = gameWindow?.querySelector("#view_electoral_map");
+        if (!refButton) return;
 
-        let button = document.getElementById(BUTTON_ID);
-        if (!button) {
-            button = document.createElement("button");
-            button.id = BUTTON_ID;
-            refButton.insertAdjacentElement("afterend", button);
-        } else if (button.dataset.campaignHqButtonReady !== "true") {
+        let button = gameWindow.querySelector("#" + BUTTON_ID);
+        if (button?.onclick === openCampaignHQ) return;
+
+        if (button) {
             const cleanButton = button.cloneNode(false);
-            cleanButton.id = BUTTON_ID;
             button.replaceWith(cleanButton);
             button = cleanButton;
+        } else {
+            button = document.createElement("button");
+            button.id = BUTTON_ID;
+            refButton.after(button);
         }
 
-        button.dataset.campaignHqButtonReady = "true";
         button.textContent = "Campaign HQ";
         button.onclick = openCampaignHQ;
     }
 
-    async function handleFooter() {
-        injectStyles();
-        addHeadquarterButton();
-    }
-
-    function startCampaignHqBootstrap() {
-        if (campaignHqBootstrapTimer !== null) {
-            return;
-        }
-
-        campaignHqBootstrapTimer = window.setInterval(() => {
-            const buttonBefore = document.getElementById(BUTTON_ID);
-            handleFooter();
-            const buttonAfter = document.getElementById(BUTTON_ID);
-            if (buttonBefore || buttonAfter) {
-                stopCampaignHqBootstrap();
-            }
-        }, 300);
-    }
-
-    function stopCampaignHqBootstrap() {
-        if (campaignHqBootstrapTimer === null) {
-            return;
-        }
-
-        window.clearInterval(campaignHqBootstrapTimer);
-        campaignHqBootstrapTimer = null;
-    }
-
-    async function handleMutations(mutationsList, observer) {
-        if (window.__campaignHqObserverRunning) {
-            return;
-        }
-
-        window.__campaignHqObserverRunning = true;
-        observer.disconnect();
-        await handleFooter();
-        observer.observe(document.documentElement, { childList: true, subtree: true });
-        window.__campaignHqObserverRunning = false;
-    }
-
-    campaignHqObserver = new MutationObserver(handleMutations);
-    campaignHqObserver.observe(document.documentElement, { childList: true, subtree: true });
-
-handleFooter();
-startCampaignHqBootstrap();
+    injectStyles();
+    addHeadquarterButton();
 startHeirAdvisorInterceptor();
 startFakeHeirCaptureWatcher();
 
@@ -28350,13 +28271,9 @@ startFakeHeirCaptureWatcher();
         stopLiveRefresh();
         stopHeirChoiceWatcher();
         closeHeirChoiceScreen();
-        stopCampaignHqBootstrap();
-stopFakeHeirCaptureWatcher();
+        stopFakeHeirCaptureWatcher();
       
-        if (campaignHqObserver) {
-            campaignHqObserver.disconnect();
-            campaignHqObserver = null;
-        }
+        delete window[CONTROLLER_KEY].syncButton;
 
         if (heirAdvisorClickHandler) {
             document.removeEventListener("click", heirAdvisorClickHandler, true);
@@ -28366,11 +28283,11 @@ stopFakeHeirCaptureWatcher();
         heirAdvisorInterceptorStarted = false;
         pendingHeirAdvisorButton = null;
         bypassHeirAdvisorIntercept = false;
-        window.__campaignHqObserverRunning = false;
     }
 
     window[CONTROLLER_KEY] = {
         stop: stopCampaignHqController,
+        syncButton: addHeadquarterButton,
     };
 
     window.openCampaignHQ = openCampaignHQ;
@@ -28399,7 +28316,7 @@ stopFakeHeirCaptureWatcher();
 (function () {
   //if (!window.campaignTrail_temp?.dynamicEN) return;
 
-  var oldElectionNight = window.electionNight;
+  const oldElectionNight = window.electionNight;
   var originalNextQuestion = window.nextQuestion;
 
   // Una partida terminada no puede volver al formulario por un clic pendiente.
@@ -28415,6 +28332,7 @@ stopFakeHeirCaptureWatcher();
     window.nextQuestion.__heirEndGuard = true;
   }
 
+  if (typeof oldElectionNight !== "function") return;
   // configure time increment if desired, defaults to 3 for high-frequency ticks. old was 15
   var timeIncrement = window.campaignTrail_temp?.en_time_increment ?? 3; // minutes per tick
   var isPaused = false;
@@ -28427,6 +28345,16 @@ stopFakeHeirCaptureWatcher();
   var stateNextUpdate = {};
 
   window.electionNight = function (type = 'general', timestep = 10, states = []) {
+  const props = typeof PROPS === "undefined" ? null : PROPS;
+  const s = props?.ELECTIONS?.get?.(String(campaignTrail_temp.election_id));
+  const candidates = props?.CANDIDATES;
+
+  if (!s || !candidates?.get || typeof getSortedCands !== "function" ||
+      typeof mapPkToFields !== "function" || typeof showOutcomePopup !== "function" ||
+      typeof handleFinalResults !== "function" || typeof m !== "function" ||
+      typeof $ !== "function" || typeof $.fn?.usmap !== "function") {
+    return oldElectionNight.apply(this, arguments);
+  }
     const isGeneral = type === 'general';
     const wasAutoplay = isGeneral && (
       document.getElementById("cheatIndicator")?.dataset.autoplayActive === "1" ||
@@ -28499,8 +28427,6 @@ stopFakeHeirCaptureWatcher();
         callTimeJitter: Math.floor(Math.random() * 30) - 15
       };
     });
-
-    const s = PROPS.ELECTIONS.get(String(campaignTrail_temp.election_id));
     const winningEV = s.winning_electoral_vote_number;
     const evsToWin = `${someStatesHaveEVs ? `</br>${formatNumbers(winningEV)} to win` : ""}`;
     const footerText = isGeneral ? 'Final results' : 'Back to questions';
@@ -28900,7 +28826,7 @@ stopFakeHeirCaptureWatcher();
             statesCalled++;
             if (currentEVs[st.final_winner] !== undefined) currentEVs[st.final_winner] += stateObj.electoral_votes;
 
-            const candObj = PROPS.CANDIDATES.get(String(st.final_winner));
+            const candObj = candidates.get(String(st.final_winner));
             const c = candObj ? candObj.color_hex : "#ccc";
 
             // flash state brightly if it was just called
@@ -28912,7 +28838,7 @@ stopFakeHeirCaptureWatcher();
 
           } else {
             if (snapshot.leader) {
-              const candObj = PROPS.CANDIDATES.get(String(snapshot.leader));
+              const candObj = candidates.get(String(snapshot.leader));
               const c = candObj ? candObj.color_hex : "#ccc";
 
               // dynamic opacity scaling based on margin
@@ -30614,66 +30540,6 @@ stopFakeHeirCaptureWatcher();
     refreshVisualization: function () { hookMapButton(); if (isInElectionMapView() && !isInitialized) initVisualization(); },
     forceReset: function () { isInitialized = false; styleCache = {}; }
   };
-})();
-
-// This is a catch-all mutation observer so that
-// we keep one having them all run at once
-(function () {
-  'use strict';
-
-  if (window.bobert) {
-    window.bobert.disconnect();
-  }
-
-  window.bobertTasks = [];
-
-  const initialTasks = () => {
-    // data visualizer
-    try { window.dataVisualizer?.refreshVisualization?.(); } catch (e) { }
-  };
-
-  window.bobertTasks.push(initialTasks);
-
-    let scheduled = false;
-
-    const runTasks = () => {
-        scheduled = false;
-        const tasks = window.bobertTasks;
-
-        if (tasks.length === 0) {
-            if (window.bobert) window.bobert.disconnect();
-            return;
-        }
-
-        for (let i = tasks.length - 1; i >= 0; i--) {
-            try {
-                if (tasks[i]() === true) tasks.splice(i, 1);
-            } catch (e) {
-                console.error("bobert task failed:", e);
-            }
-        }
-
-        if (tasks.length === 0 && window.bobert) {
-            window.bobert.disconnect();
-        }
-    };
-
-    const handleMutations = () => {
-        if (scheduled || window.bobertTasks.length === 0) return;
-        scheduled = true;
-        requestAnimationFrame(runTasks);
-    };
-
-    const targetNode = document.getElementById("game_window");
-
-    if (targetNode) {
-        window.bobert = new MutationObserver(handleMutations);
-        window.bobert.observe(targetNode, { childList: true, subtree: true });
-        handleMutations();
-		//console.log("bobert...");
-    } else {
-    console.warn("Zoinks! Bobert could not find game_window.");
-    }
 })();
 
 // The county map feature from 2000TML
@@ -32630,7 +32496,9 @@ async function loadAndDrawCountyMap(mode) {
             }
         }
 
-        const candsInfo = PROPS.CANDIDATES;
+        const nativeCandidates = typeof PROPS === "undefined" ? null : PROPS?.CANDIDATES;
+        const candsInfo = nativeCandidates?.get ? nativeCandidates :
+            new Map(electionData.candidate_json.map(({pk, fields}) => [String(pk), fields]));
         const activeCandidates = electionData.final_overall_results.map(r => r.candidate);
         const topCands = [...electionData.final_overall_results].sort((a,b) => b.popular_votes - a.popular_votes);
         if (topCands.length < 2) throw new Error("Could not find two main candidates.");
@@ -36816,5 +36684,3 @@ if (musicKey === previousMusicKey) {
     autoplayHandle = window.setInterval(autoplayWithHeirPopups, 50);
   }
 })();
-
-
