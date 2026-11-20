@@ -89,7 +89,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Independent",
             "state": "Saint Petersburg",
             "priority": 1,
-            "description": "<p>We all know what this election was going to be: a disgraceful shame.  But with protests in the streets and a split state apparatus, President Medvedev has found an opportunity no one else may see again: ripping the rug from under Putin.  Medvedev is betting that a liberalized Russia will take their chance on him—all while praying he can outmaneuver the very security services he once commanded.</p>",
+            "description": "<p>We all know what this election was going to be: a disgraceful shame.  The governors had been told and the outcome was settled long before the first campaign poster went up. But then the snow came, and with it tens of thousands of people on Bolotnaya Square who refused to be treated as an afterthought. With the streets restless and the state apparatus quietly divided, Medvedev has seen an opening that may never come again. He is betting that a country tired of the old arrangement will take a chance on the man who was never supposed to be more than a placeholder. He is also betting that he can outmaneuver the very security services he once commanded, and that they have not already chosen their side.</p>",
             "color_hex": "#969696",
             "secondary_color_hex": null,
             "is_active": 1,
@@ -120,7 +120,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>Medvedev’s most loyal economic advisor and a leading voice for the \"Liberal\" wing within the government. Dvorkovich has long argued that Russia’s future lies in technology, global markets, and the rule of law. \n<br>\n<br>\nBy naming Dvorkovich as his PM, Medvedev is doubling down on a technocratic, pro-Western vision for Russia, aiming to win over the urban middle class and international investors.</p>",
+            "description_as_running_mate": "<p>Arkady Dvorkovich is Medvedev’s most trusted economic mind and the leading voice of the <i>liberal</i> wing within the government. For years, while others in the Kremlin spoke of strength, he argued that Russia’s future lay in technology, open markets, and the rule of law. His selection as future Prime Minister is Medvedev’s clearest statement of intent. It is a bet on technocrats over generals and a pledge to the urban middle class and foreign investors that the old way of doing things is finished. It is also a provocation. The <i>siloviki</i> understand exactly what it means, and none of them will forget it.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -135,10 +135,10 @@ campaignTrail_temp.candidate_json = [
             "party": "United Russia",
             "state": "Saint Petersburg",
             "priority": 2,
-            "description": "<p>For twelve years, Vladimir Putin has been the undisputed architect of Russian stability.  But now, the apprentice has rebelled against the master.  What was originally going to be his “Return of the King” moment, must now become his “Empire Strikes Back.”  To his supporters, he is the only man capable of protecting the state from chaos and foreign interference. To his detractors, he is an autocrat clinging to power. Seeing Medvedev’s \"betrayal\" as a threat to the very foundation of the Russian Federation, Putin is running to reclaim the Presidency and restore the \"Vertical of Power\" by any means necessary.</p>",
+            "description": "<p>For twelve years, Vladimir Putin has been the architect of Russian stability, and he does not forgive those who threaten it. This was meant to be his Return of the King, a quiet and orderly handover of the Kremlin to the man who built it. Instead the apprentice has turned on the master, and the Empire must now strike back. To his supporters, Putin is the only man who stands between the state and the chaos of the 1990s. To his critics, he is an autocrat who has mistaken the country for his own property. He sees Medvedev’s defiance as a <i>betrayal</i> that endangers the foundations of the Russian Federation, and he is running to take back the presidency and restore the <i>Vertical of Power</i> by any means necessary.</p>",
             "color_hex": "#0000FF",
             "secondary_color_hex": null,
-            "is_active": 1,
+            "is_active": 0,
             "image_url": "https://images.openai.com/static-rsc-4/uOuNBHfMl1ejrZgqa6XUqOg2Ge221TchaevEK9dHohcSzf3kJTX2iDX__iuxNiRuYfcqUMjXKrGF9pFnQgOVMHr5jWRIb55J0uwoRo7eGdCLyzOxvvNRma0eQNWNhXGebXip0XUJE003bvul5URaPRe7OSiwkBDK6vWIf7ByDNIat1khRfymZPMknuq8MpQc?purpose=fullsize",
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
@@ -166,7 +166,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<p>The \"Darth Vader\" of the Kremlin and leader of the Siloviki faction. As Putin's promised Prime Minister, Sechin represents the hardline integration of state security and the energy sector. \n<br>\n<br>\nHis presence on the ticket signals a total crackdown on the dissent in the streets and a definitive pivot away from the “modernization” influence in the Kremlin. \nIf Putin is the face of the state, Sechin is its iron fist.</p>",
+            "description_as_running_mate": "<p>Known in the corridors of the Kremlin as its <i>Darth Vader</i>, Igor Sechin leads the <i>Siloviki</i> and sits at the point where state security meets the energy empire. Few men in Russia are feared more quietly, and fewer still have so little need to raise their voice. As Putin’s promised Prime Minister, he is the clearest signal of what a second Putin presidency would mean. The protests would be ended, the <i>“modernization”</i> experiment would be buried, and those who had flirted with it would be reminded of the cost. If Putin is the face of the state, Sechin is its iron fist, and he has been waiting a long time to use it.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -507,7 +507,7 @@ clamp = function(a, max, min, overflow=true) {
 
 var soundtracks = {
   0: {
-    name: "Snow Revolution Soundtrack",
+    name: "Маруся ФМ",
     tracklist: [
       {
         "name": "Swamp Electro (For Young Ladies)",
@@ -518,8 +518,76 @@ var soundtracks = {
         "url": "https://audio.jukehost.co.uk/4iaFFJjfrUL9v0t3kYlWqUGgDXMNhJKl"
       },
       {
+        "name": "Нет Монет",
+        "url": "https://audio.jukehost.co.uk/01a1f212-b4bb-704b-8c6d-914efb6bc783"
+      },
+    ]
+  },
+  1: {
+    name: "Putin’s Gym Jams",
+    tracklist: [
+      {
+        "name": "Chaika",
+        "url": "https://audio.jukehost.co.uk/01a1f220-c09f-7134-90e1-d31b012d2d47"
+      },
+      {
+        "name": "Няш Мяш",
+        "url": "https://audio.jukehost.co.uk/01a1f213-f799-738b-b551-5f47f11ffc2d"
+      },
+      {
+        "name": "Пампин Нефть",
+        "url": "https://audio.jukehost.co.uk/01a1f214-ee56-73e4-85ff-94cefaa1b398"
+      },
+    ]
+  },
+  2: {
+    name: "Medvedev’s TikTok Feed",
+    tracklist: [
+      {
+        "name": "В Последний Раз",
+        "url": "https://audio.jukehost.co.uk/01a1f215-dd7d-7120-8548-db00dc4915dd"
+      },
+      {
+        "name": "Базовый Минимум",
+        "url": "https://audio.jukehost.co.uk/01a1f215-6c07-73fc-a961-926ee42c38a8"
+      },
+      {
         "name": "Kamaz",
         "url": "https://audio.jukehost.co.uk/oTa9JSUf2QWGcu7DwDTWZbrX4ad8XsxW"
+      },
+    ]
+  },
+  3: {
+    name: "Average Zyuganov Voter’s Spotify Playlist",
+    tracklist: [
+      {
+        "name": "The Internationale",
+        "url": "https://audio.jukehost.co.uk/01a1f216-5a72-716a-b791-65c2485f3951"
+      },
+      {
+        "name": "Ты — Человек",
+        "url": "https://audio.jukehost.co.uk/01a1f217-51f0-73cc-86fa-6a84e54872ea"
+      },
+      {
+        "name": "To Serve Russia",
+        "url": "https://audio.jukehost.co.uk/01a1f216-ccd2-70d9-8f42-a1ebd0aa09c4"
+      },
+    ]
+  },
+  4: {
+    name: "Music from Zhirinovsky’s Peak",
+    tracklist: [
+      {
+        "name": "Summer is Ending",
+        "url": "https://audio.jukehost.co.uk/01a1f217-dc01-7398-850d-5f7011bc4098"
+      },
+      {
+        "name": "Capital",
+        "url": "https://audio.jukehost.co.uk/01a1f218-39c1-7337-acb5-dd1f9870b19a"
+      },
+      {
+        "name": "Faina",
+        "url": "https://audio.jukehost.co.uk/01a1f218-b1c4-73ca-8a3f-0acd43000eca"
       },
     ]
   },        
@@ -537,6 +605,40 @@ HistEV=[59,24,0,0];
 HistPV=["37,969,214","33,381,450","0","0"];
 HistPVP=["53.2%","46.8%","0%","0%"];
 
+
+campaignTrail_temp.achievements = {
+    "Four Legs Good, Two Legs Better" : {
+        "image" : "https://i.pinimg.com/474x/40/82/dd/4082ddf0b31f13c1194bd5a6fed44c50.jpg",
+        "description" : "Achieve Ending 1"
+    },
+    "Uneasy Lies the Head" : {
+        "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWo3KqkOdNZG8-LYdB6KSR28ciusdMYlprIcNb_JzJOg&s",
+        "description" : "Achieve Ending 2",
+    },
+    "A New Hope" : {
+        "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Yv7NL8GdXleinRjMFzlU6KeQspB-3Q4WyKQg15CyRQ&s=10",
+        "description" : "Achieve Ending 3",
+    },
+    "Return of the King" : {
+        "image" : "https://static0.srcdn.com/wordpress/wp-content/uploads/2025/08/gandalf-crowning-aragorn-in-the-lord-of-the-rings.jpg",
+        "description" : "Achieve Ending 4"
+    },
+    "Do You Hear the People Sing?" : {
+        "image" : "https://upload.wikimedia.org/wikipedia/commons/e/e7/Philippoteaux_-_Lamartine_in_front_of_the_Town_Hall_of_Paris_rejects_the_red_flag_%28cropped_3x2%29.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+        "description" : "Achieve Ending 5",
+    },
+    "It Was Never Your Seat" : {
+        "image" : "https://public-media.smithsonianmag.com/filer/7b/e8/7be86cc8-22ee-42fd-9ca3-a055b11a49d9/mar2017_g01_leninsodyssey.jpg",
+        "description" : "Achieve Ending 6",
+    },
+    "Cui Bono?" : {
+        "image" : "https://images.immediate.co.uk/production/volatile/sites/7/2015/02/GettyImages-587489068-2-130285e.jpg?quality=90&resize=980,654",
+        "description" : "Achieve Ending 7",
+    },
+    "Please Stand By" : {
+        "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-NWhgf7MUj0YD0t5fzN_6ZtQwHfkZjeEQmYBSQJ8F1w&s=10",
+        "description" : "Achieve Ending 8",
+    }
+}
+
 //#endcode
-
-
