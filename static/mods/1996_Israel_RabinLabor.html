@@ -107,18 +107,12 @@ campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/KgIKfpv.png';
             }
         },
         _onClick: function(e) { var t = this._getStateFromEvent(e); if (this.options.click) this.options.click(e, t) },
+        // Show province results on hover without modifying the map's SVG colors.
         _onOver: function(e) {
-            var t = this._getStateFromEvent(e);
-            var hoverStyle = t.shape.data("hoverStyle") || this.options.stateHoverStyles;
-            t.shape.animate(hoverStyle, 200);
-            // Mirror click behavior on hover so state results/summary update without clicking.
-            if (this.options.click) this.options.click(e, t);
+            var region = this._getStateFromEvent(e);
+            if (this.options.click) this.options.click(e, region);
         },
-        _onOut: function(e) {
-            var t = this._getStateFromEvent(e);
-            var baseStyle = t.shape.data("baseStyle") || this.options.stateStyles;
-            t.shape.animate(baseStyle, 200);
-        },
+        _onOut: function(e) {},
         _getStateFromEvent: function(e) { var t = e.target && e.target.dataState || e.dataState; return { shape: this.stateShapes[t], name: t } }
     };
     s(e, "usmap", l, [])
@@ -2279,9 +2273,7 @@ function israel96RabinUseNormalEndingWindow(theme) {
       results.style.background = t.resultsBg || "#dff1d8";
       results.style.border = "1px solid " + (t.resultsBorder || "#5e8a57");
       results.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,0.35)";
-      results.style.position = "relative";
-      results.style.top = "-16px";
-      results.style.marginBottom = "-16px";
+
     }
     if (header) header.style.backgroundColor = t.headerBg || "#4d8a4f";
     desc.style.background = t.descBg || "#eef8ea";
@@ -2289,6 +2281,9 @@ function israel96RabinUseNormalEndingWindow(theme) {
     desc.style.padding = "14px 16px";
     desc.style.color = t.textColor || "#000000";
     desc.style.opacity = "1";
+    // Match Netanyahu: keep the description scrollable instead of displacing the results.
+    desc.style.maxHeight = "560px";
+    desc.style.overflowY = "auto";
     if (t.separateDesc) {
       if (main) main.style.position = "relative";
       desc.style.display = "block";
@@ -3043,3 +3038,67 @@ endingPicker = function(out, totv, aa, quickstats) {
   if (window.israel96RabinHideEvLoop) clearInterval(window.israel96RabinHideEvLoop);
   window.israel96RabinHideEvLoop = setInterval(hideElectoralVotesUi, 50);
 })();
+
+/* Advisor feedback: Showcase uses #visit_window, #visit_content and
+   #visit_buttons (not #feedback_content). Keep controls outside the scroller. */
+(function israel96FixActualAdvisorDialog() {
+  var old = document.getElementById('israel96_advisor_buttons_flow_style');
+  if (old) old.remove();
+  var style = document.getElementById('israel96_actual_advisor_dialog_style');
+  if (!style) {
+    style = document.createElement('style');
+    style.id = 'israel96_actual_advisor_dialog_style';
+    style.textContent = [
+      '#visit_window {',
+      '  display: flex !important;',
+      '  flex-direction: column !important;',
+      '  box-sizing: border-box !important;',
+      '  height: min(62vh, 360px) !important;',
+      '  max-height: calc(100vh - 20px) !important;',
+      '  overflow: hidden !important;',
+      '}',
+      '#visit_window #visit_content {',
+      '  display: block !important;',
+      '  flex: 1 1 auto !important;',
+      '  min-height: 0 !important;',
+      '  height: auto !important;',
+      '  max-height: none !important;',
+      '  overflow-y: auto !important;',
+      '  overflow-x: hidden !important;',
+      '  box-sizing: border-box !important;',
+      '  padding-bottom: 12px !important;',
+      '}',
+      '#visit_window #visit_content p {',
+      '  position: static !important;',
+      '  height: auto !important;',
+      '  max-height: none !important;',
+      '  overflow: visible !important;',
+      '  margin-bottom: 12px !important;',
+      '}',
+      '#visit_window #visit_buttons {',
+      '  display: flex !important;',
+      '  flex: 0 0 auto !important;',
+      '  flex-direction: column !important;',
+      '  align-items: center !important;',
+      '  gap: 5px !important;',
+      '  position: static !important;',
+      '  inset: auto !important;',
+      '  transform: none !important;',
+      '  height: auto !important;',
+      '  max-height: none !important;',
+      '  margin: 0 !important;',
+      '  padding: 7px 4px 10px !important;',
+      '  box-sizing: border-box !important;',
+      '  background: #f7f7f7 !important;',
+      '}',
+      '#visit_window #visit_buttons button {',
+      '  position: static !important;',
+      '  inset: auto !important;',
+      '  transform: none !important;',
+      '  margin: 0 !important;',
+      '}',
+      '#visit_window #visit_buttons br { display: none !important; }'
+    ].join('\n');
+    (document.head || document.documentElement).appendChild(style);
+  }
+})()
