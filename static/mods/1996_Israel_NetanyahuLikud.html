@@ -106,18 +106,13 @@ if (typeof e !== "undefined") e.opponents_list = [1002];
             }
         },
         _onClick: function(e) { var t = this._getStateFromEvent(e); if (this.options.click) this.options.click(e, t) },
+        // Show province results on hover without applying a hover fill or animation.
+        // The click callback updates the results panel; the SVG's colors stay untouched.
         _onOver: function(e) {
-            var t = this._getStateFromEvent(e);
-            var hoverStyle = t.shape.data("hoverStyle") || this.options.stateHoverStyles;
-            t.shape.animate(hoverStyle, 200);
-            // Mirror click behavior on hover so state results/summary update without clicking.
-            if (this.options.click) this.options.click(e, t);
+            var region = this._getStateFromEvent(e);
+            if (this.options.click) this.options.click(e, region);
         },
-        _onOut: function(e) {
-            var t = this._getStateFromEvent(e);
-            var baseStyle = t.shape.data("baseStyle") || this.options.stateStyles;
-            t.shape.animate(baseStyle, 200);
-        },
+        _onOut: function(e) {},
         _getStateFromEvent: function(e) { var t = e.target && e.target.dataState || e.dataState; return { shape: this.stateShapes[t], name: t } }
     };
     s(e, "usmap", l, [])
@@ -1016,6 +1011,7 @@ endingPicker = function(out, totv, aa, quickstats) {
   }
 
   function buildPagedEnding(title, pages, credit) {
+    pages = pages.slice();
     var html = '<div id="israel96_ending_pages" data-page="0" style="margin-top:-22px;">';
     html += '<h3 style="margin:-2px 0 6px 0; line-height:1.1;">' + title + '</h3>';
     for (var pi = 0; pi < pages.length; pi++) {
@@ -1151,7 +1147,7 @@ endingPicker = function(out, totv, aa, quickstats) {
         'Against the expectations of much of the media, you have won Israel\'s first direct election for Prime Minister. They do have Netanyahu to kick around now, whether they want it or not!!!<br><br>During your stint, you expanded existing settlements, slowed down the progress of Oslo, sped up the neoliberal transition of the Israeli economy, and opened a futile backchannel with the Syrians regarding a partial withdrawal from the Golan. You also made Khaled Mashal a hero in the ranks of Hamas by poisoning him during his stay in Jordan and then being forced to save his life after your agents got caught and the king threatened to freeze the peace deal, compelling you to also release the spiritual leader of Hamas for good measure. Hard to tell if that\'s the worst moment for you, though, when it is competing with a corruption scandal involving you and the leader of Shas, Deri, which stopped short of your indictment. But all of that was secondary to the real drama of your time: your extraordinary ability to piss everyone off,  from world leaders like Egyptian President Mubarak ("I wish to believe one word that came from Netanyahu\'s mouth"), to your own party members who left your government one after another, to diehard rightists who felt betrayed by your tepid continuation of Oslo, with your mentor Moshe Arens mounting a leadership challenge against you, getting around 20%. Really Misha? So what if they got 80% of Hebron? At least we didn\'t experience as much terror from them as our dummy opponents',
         'Attacked from all directions, abandoned by unsatisfied coalition partners, and challenged by a Labor Party willing to finally close the door on a unity government in favor of pushing for elections, Israelis went to the polls early, in 1999. You fought like a tiger, but Labor\'s candidate Ehud Barak,  your boss from your army years and former  you\'ll never guess what of the IDF,  was leading so comfortably in the polls that he evaded the debate, leaving you to duke it out with your ally-turned-rival, Yitzhak Mordechai, a decision vindicated by the 56-44 final result.<br><br>Announcing your departure from politics right after the election, you spent time dealing with a leftover investigation and planning your return, this time leaving no loose ends. Getting back into government in 2002 as foreign minister and then finance minister, you pushed sweeping capitalist reforms to get Israel out of a recession. While the economy recovered, your austerity measures got a lot of heat from social organizations, which accused you of heartlessness. Waffling endlessly on the question of Prime Minister Sharon\'s plan to disengage from Gaza, you eventually voted for it,  a move which logically left you as the leader of the anti-disengagement part of the Likud MPs who stayed in the party while Sharon left to form his own, taking a third of the representatives. Although he quickly became incapacitated, you still suffered another loss in 2006. Three years later, though, with a powerful team behind you and an aura of "responsible statesmanship" you managed to create, similar to "the new Nixon", you got your coveted comeback.',
         'Cold, calculated, and disciplined as never before, you will surpass even Israel\'s badass founder Ben Gurion, becoming the longest-serving PM in Israeli history. "Protector of Israel", "Mr. Security", "Mr. Economy", and numerous other labels became synonymous with you. A lot of it was your pitch, for sure, but it nonetheless reflected a growing sense that you had achieved the most sought-after thing for a politician in a weary country: becoming the candidate for medioc.... I mean "normalcy". Other parties rose and fell, but with large swaths of voters unable to imagine the country functioning under a different leader, you always came out on top, like the default app on mobile. Meanwhile, the \"professional journalists\" of the mainstream media were always ready to latch onto any opportunity to show that the king is naked. In a galaxy not far away, people still despised you with passion, for the failure of Oslo, for Rabin\'s death, for your divisiveness, for your lack of attention to (boring!) public services, and in general for being the obstacle to the "enlightened" direction they wanted Israel to move into. "Pickles", you called those sour, arrogant pricks from the middle to upper class, using their privilege of having large amounts of spare time to complain about "the dire state of the nation". So what if there are scarcely any big policy moves in the economy? Can\'t they see that, thanks to your term at the treasury and a growing tech sector, living standards are steadily rising? Can\'t they take a look at the debt-to-GDP ratio going down under your thrifty stewardship? If you overlook the Arab and Haredi populations, consisting of a mere third of the country, we are practically Europe!',
-        'On social policy, you stuck to the secular-religious status quo, playing an endless ping-pong match with the judiciary over the hand grenade of conscripting the ultra-Orthodox to the IDF. You also passed a five-year investment plan in the Arab sector for the first time in Israel, which will feature in one of your election campaigns, in between the polite warnings of Arabs flooding the polling stations to vote for your opponents. It\'s Bibi or Tibi, capisce?<br><br>Surprisingly, you also managed to extend this uneventfulness into foreign policy, presiding over what, by Israeli standards, is considered a relatively peaceful, low-casualty decade. While in 2009 you vowed to remove the rocket-exporting utopia Hamas carved for itself in Gaza following the disengagement (A real pity you missed the oppotunity to be right on that issue), several factors led you to shift your public position toward containment: the disastrous political fallout your predecessor faced after the Second Lebanon War, weariness with regime change from the first one, fear of international backlash, strategic reorientation toward the larger threats of Iran and Hezbollah, and the advantage you saw for your "no further concessions" agenda in keeping the Palestinians divided. This approach resulted in periodic limited warfare whenever you decided they had crossed the line, a threshold often dependent on what you could get away with, or, as your minister put it: "There is a difference between Gaza Envelope and Tel Aviv". You also tightened and loosened the Gaza blockade depending on the state of your relationship with Hamas (How thoughtful of them to butt heads with Egypt and make this tool more effective), and allowed Qatar to send money there from 2018 onward. In the West Bank, military rule and settlement expansion persisted, prompting routine international condemnation, and indignation from Israeli leftists who \"forgot what it means to be Jewish\". The other side is building too hypocrites. It\'s like a real-life game of Go there and we intend to win it. Also, the violence is under control, so keep crying.',
+        'On social policy, you stuck to the secular-religious status quo, playing an endless ping-pong match with the judiciary over the hand grenade of conscripting the ultra-Orthodox to the IDF. You also passed a five-year investment plan in the Arab sector for the first time in Israel, which will feature in one of your election campaigns, in between the polite warnings of Arabs flooding the polling stations to vote for your opponents. It\'s Bibi or Tibi, capisce?<br><br>Surprisingly, you also managed to extend this uneventfulness into foreign policy, presiding over what, by Israeli standards, is considered a relatively peaceful, low-casualty decade. While in 2009 you vowed to remove the rocket-exporting utopia Hamas carved for itself in Gaza following the disengagement (A real pity you missed the oppotunity to be right on that issue), several factors led you to shift your public position toward containment: the disastrous political fallout your predecessor faced after the Second Lebanon War, weariness with regime change from the first one, fear of international backlash, strategic reorientation toward the larger threats of Iran and Hezbollah, and the advantage you saw for your "no further concessions" agenda in keeping the Palestinians divided. This approach resulted in periodic limited warfare whenever you decided they had crossed the line, a threshold often dependent on what you could get away with, or, as your minister put it: "There is a difference between Gaza Envelope and Tel Aviv". You also tightened and loosened the Gaza blockade depending on the state of your relationship with Hamas (How thoughtful of them to butt heads with Egypt and make this tool more effective), and allowed Qatar to send money there from 2018 onward. In the West Bank, military rule and settlement expansion persisted, prompting routine international condemnation, and indignation from Israeli leftists who \"forgot what it means to be Jewish\". The other side is building too hypocrites. It\'s like a real-life game of Go there and we intend to win it. Cry more!',
         'Contrary to your once-stated agenda, you also opted for a prisoner exchange with Hamas in 2011, agreeing to release 1,027 prisoners in exchange for the kidnapped soldier Gilad Shalit. Among those released was Yahya al-Sinwar, who thanked Israeli surgeons for successfully removing his brain tumor by becoming the new leader of Hamas in 2017. But hey, who could have known that a guy who showed leadership qualities in prison would climb so high? The important thing is that he wasn\'t imprisoned for killing Jews, but for killing fellow Palestinians who allegedly cooperated with Israel, making him, apparently, wholly kosher for the Shalit deal.<br><br>With the "Home Alone 2" guest star coming to the White House, you shrewdly made yourself a favorite of the administration. In 2017, the weird uncle from overseas recognized Jerusalem as Israel\'s capital. Then he abandoned Obama\'s brilliant scheme of letting Iran have some money, in exchange for being good boys and not developing nukes for a while, in favor of your ingenious plan of preventing Iran from going nuclear through targeted intelligence operations, pushing them back a few months each time. After recognizing the Golan Heights too and organizing Soleimani\'s solemn end, you obtained the biggest gift of all: "The Abraham Accords".',
         'Years after writing about it in your book, you were finally able to secure a normalization deal with an Arab country without any pinky promises of proceeding to negotiate with those pesky Palestinians. Just a few more years for Israel to grow stronger and for the crybabies to become irrelevant and isolated, and you will be able to force the issue and conclude this headache of a conflict with nothing more than a demilitarized autonomy or, as you once called it, \"a Palestinian state minus\".<br><br>Amid the historic diplomatic breakthrough and a widely praised vaccination campaign against COVID, your political position became increasingly shaky. With mounting corruption charges, a reputation for unreliability, and fatigue from your ruthless theatrics, your impaired ability to form a coalition led to a series of inconclusive election results until the unthinkable happened: A Frankenstein coalition \"for change\" rose up against you, with a composition ranging from the Islamist Ra\'am party to the national-conservative Yamina (Rightward), the leader of which became prime minister with a mere 6 seats in parliament.',
         'Like the scorpion from "The Scorpion and the Frog" fable, you eventually touched the cold water, owing to your stinging nature, but it wasn\'t meant to last. You already managed to normalize your new frog with the name of Ben Gvir. The chubby gentleman was previously a member of Kach, a far-right party which former Likud prime minister Shamir refused to cooperate with in 1984, necessitating a rotation agreement with Labor. Later it was also designated as a terrorist organization, following Baruch Goldstein\'s mass shooting in 1994. Thank god Ben Gvir was kind enough to get the picture of Goldstein out of his damn living room and that, after years of purges and resignations, there was virtually no one to oppose this pact in the Likud, as you gradually turned the party into your fan club. With this gem of a partner, Haredi parties used to your expert mastery of keeping them powerful without nagging secular Jews too much, and religious Zionists bracing to see you shift rightward in your future government, you won the 2022 election with a comfortable majority of 64 seats to 56 (Shout-out to the electoral threshold and leftist division).<br><br>Your sixth government started its term, promising to deal with the cost of living, (selectively) restore law and order, increase Jewish presence in the West Bank, and somehow convince the Saudis to join the Abraham Accords without addressing the Palestinian question. The new justice minister appears to be a real visionary as well, presenting a proposal to trim the powers of the Israeli Supreme Court, an institution long protected by that progressive weakling Netanyahu, and the holiest site for the Israeli (but maybe not for long), secular, center-left, Ashkenazi liberal Jew.<br> Wait, are you sure this is a good idea?'
@@ -2119,24 +2115,67 @@ var terms = [
     return terms.find(function (t) { return t.id === id; }) || null;
   }
 
+  // Prefer the longest matching alias at each position, and never match inside
+  // a previously created glossary span (e.g. "Levy" inside "David Levy").
+  var glossaryAliases = [];
+  terms.forEach(function (term) {
+    term.aliases.forEach(function (alias) {
+      glossaryAliases.push({ alias: alias, id: term.id });
+    });
+  });
+  glossaryAliases.sort(function (a, b) { return b.alias.length - a.alias.length; });
+  var glossaryPattern = new RegExp("\\b(?:" + glossaryAliases.map(function (entry) {
+    return escapeRegExp(entry.alias);
+  }).join("|") + ")\\b", "g");
+
   function linkifyContainer(container) {
     if (!container) return;
-    var html = container.innerHTML;
-    // Remove prior glossary wrappers before re-linking to avoid span nesting/dancing text.
-    html = html
-      .replace(/<span class=['"]israel96-term['"][^>]*>(.*?)<\/span>/g, "$1");
-    // Re-run linkification when content changes (same DOM node reused across questions).
-    if (container.dataset.israel96GlossarySource === html) return;
 
-    terms.forEach(function (term) {
-      term.aliases.forEach(function (alias) {
-        var rx = new RegExp("\\b" + escapeRegExp(alias) + "\\b", "g");
-        html = html.replace(rx, "<span class='israel96-term' data-term='" + term.id + "'>" + alias + "</span>");
-      });
+    // Compare the *unwrapped* content so the periodic refresh does not
+    // repeatedly rebuild the DOM and make highlights flicker.
+    var probe = container.cloneNode(true);
+    var oldSpans = probe.querySelectorAll("span.israel96-term");
+    for (var i = oldSpans.length - 1; i >= 0; i--) {
+      oldSpans[i].replaceWith(document.createTextNode(oldSpans[i].textContent));
+    }
+    probe.normalize();
+    var source = probe.innerHTML;
+    if (container.dataset.israel96GlossarySource === source) return;
+    var existing = container.querySelectorAll("span.israel96-term");
+    for (var j = existing.length - 1; j >= 0; j--) {
+      existing[j].replaceWith(document.createTextNode(existing[j].textContent));
+    }
+    container.normalize();
+
+    var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
+    var nodes = [];
+    while (walker.nextNode()) {
+      var node = walker.currentNode;
+      if (!node.nodeValue || !node.nodeValue.trim()) continue;
+      if (node.parentElement && node.parentElement.closest("script,style,textarea,a,.israel96-term")) continue;
+      nodes.push(node);
+    }
+    nodes.forEach(function (node) {
+      var value = node.nodeValue;
+      glossaryPattern.lastIndex = 0;
+      var match, last = 0, fragment = document.createDocumentFragment(), found = false;
+      while ((match = glossaryPattern.exec(value)) !== null) {
+        found = true;
+        if (match.index > last) fragment.appendChild(document.createTextNode(value.slice(last, match.index)));
+        var chosen = glossaryAliases.find(function (entry) { return entry.alias === match[0]; });
+        var span = document.createElement("span");
+        span.className = "israel96-term";
+        span.setAttribute("data-term", chosen.id);
+        span.textContent = match[0];
+        fragment.appendChild(span);
+        last = match.index + match[0].length;
+      }
+      if (found) {
+        if (last < value.length) fragment.appendChild(document.createTextNode(value.slice(last)));
+        node.parentNode.replaceChild(fragment, node);
+      }
     });
-
-    container.innerHTML = html;
-    container.dataset.israel96GlossarySource = html.replace(/<span class=['"]israel96-term['"][^>]*>(.*?)<\/span>/g, "$1");
+    container.dataset.israel96GlossarySource = source;
   }
 
   document.addEventListener("click", function (evt) {
@@ -2228,4 +2267,68 @@ var terms = [
   }
   if (window.israel96BibiHideEvLoop) clearInterval(window.israel96BibiHideEvLoop);
   window.israel96BibiHideEvLoop = setInterval(hideElectoralVotesUi, 50);
+})();
+
+/* Advisor feedback: Showcase uses #visit_window, #visit_content and
+   #visit_buttons (not #feedback_content). Keep controls outside the scroller. */
+(function israel96FixActualAdvisorDialog() {
+  var old = document.getElementById('israel96_advisor_buttons_flow_style');
+  if (old) old.remove();
+  var style = document.getElementById('israel96_actual_advisor_dialog_style');
+  if (!style) {
+    style = document.createElement('style');
+    style.id = 'israel96_actual_advisor_dialog_style';
+    style.textContent = [
+      '#visit_window {',
+      '  display: flex !important;',
+      '  flex-direction: column !important;',
+      '  box-sizing: border-box !important;',
+      '  height: min(62vh, 360px) !important;',
+      '  max-height: calc(100vh - 20px) !important;',
+      '  overflow: hidden !important;',
+      '}',
+      '#visit_window #visit_content {',
+      '  display: block !important;',
+      '  flex: 1 1 auto !important;',
+      '  min-height: 0 !important;',
+      '  height: auto !important;',
+      '  max-height: none !important;',
+      '  overflow-y: auto !important;',
+      '  overflow-x: hidden !important;',
+      '  box-sizing: border-box !important;',
+      '  padding-bottom: 12px !important;',
+      '}',
+      '#visit_window #visit_content p {',
+      '  position: static !important;',
+      '  height: auto !important;',
+      '  max-height: none !important;',
+      '  overflow: visible !important;',
+      '  margin-bottom: 12px !important;',
+      '}',
+      '#visit_window #visit_buttons {',
+      '  display: flex !important;',
+      '  flex: 0 0 auto !important;',
+      '  flex-direction: column !important;',
+      '  align-items: center !important;',
+      '  gap: 5px !important;',
+      '  position: static !important;',
+      '  inset: auto !important;',
+      '  transform: none !important;',
+      '  height: auto !important;',
+      '  max-height: none !important;',
+      '  margin: 0 !important;',
+      '  padding: 7px 4px 10px !important;',
+      '  box-sizing: border-box !important;',
+      '  background: #f7f7f7 !important;',
+      '}',
+      '#visit_window #visit_buttons button {',
+      '  position: static !important;',
+      '  inset: auto !important;',
+      '  transform: none !important;',
+      '  margin: 0 !important;',
+      '}',
+      '#visit_window #visit_buttons br { display: none !important; }'
+    ].join('\n');
+    (document.head || document.documentElement).appendChild(style);
+  }
 })();
