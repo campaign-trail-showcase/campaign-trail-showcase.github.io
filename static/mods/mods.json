@@ -794,6 +794,17 @@
     ]
   },
   {
+	  "value": "1996_Israel",
+    "text": "1996 Israel",
+    "mode": "new",
+	  "tags": [
+		"Historical",
+		"International"
+	  ],
+    "awards": "",
+    "awardimageurls": ""
+	},
+  {
     "value": "1993PC",
     "text": "1993: Post-Communist USA",
     "mode": "",
