@@ -15808,7 +15808,7 @@ endingPicker = (out, totv, aa, quickstats) => {
   }
 
 
-  if (noMajority || tie) ctsAchievement("Unbossed and Unbought");
+  if (noMajority || tie) ctsAchievement("Unbought and Unbossed");
   else if (ev >= 538) ctsAchievement("Bring Us Together");
   else if (ev >= 240 && ev < 270) ctsAchievement("All the People"); 
 
