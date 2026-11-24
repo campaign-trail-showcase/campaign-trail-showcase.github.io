@@ -12,7 +12,7 @@ campaignTrail_temp.election_json = [
             "has_visits": 1,
             "no_electoral_majority_image": "https://gitlab.com/hoorayforjane/assortedprojects/-/raw/main/1976%20Chisholm/Chisholm_Candidate.png",
             "creator": "Jane",
-            "display_year": "1976: Unbought and Unbossed",
+            "display_year": "1976 - Unbought and Unbossed",
             "is_historical": true,
             "recommended_reading_enabled": true,
             "site_description": "<p>The race in 1976 is a dead heat as President Shirley Chisholm seeks to win another historic term in office.</p><p>President Chisholm has spent four years straddling the balance between her activist base and the Democratic establishment. With her renomination an open question, she must choose her lot this time around.</p><p>Governor Meldrim Thomson has made his name from his very loud opposition to the Chisholm agenda.  He must now rally the right to win the election both in decibels and electoral votes.</p>"
@@ -26,7 +26,7 @@ campaignTrail_temp.temp_election_list = [
         "year": 1976,
         "is_premium": 0,
         "is_historical": true,
-        "display_year": "1976: Unbought and Unbossed"
+        "display_year": "1976 - Unbought and Unbossed"
     }
 ];
 
