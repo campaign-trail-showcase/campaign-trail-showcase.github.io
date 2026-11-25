@@ -17617,7 +17617,7 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 			unity: { name: "Brian Sandoval", img: "https://www.ontheissues.org/Governor/Brian_Sandoval.jpg", formerRole: "Governor of Nevada (R)", state: "Nevada" }
 		},
 		interior: {
-			progressive: { name: "Raúl Grijalva", img: "https://reproductivefreedomforall.org/wp-content/uploads/2017/11/croc-raul-grijalva.jpg", formerRole: "U.S. Representative", state: "Arizona" },
+			progressive: { name: "Raúl Grijalva", img: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Raul_Grijalva_Official_Portrait%2C_2014.jpg", formerRole: "U.S. Representative", state: "Arizona" },
 			establishment: { name: "Sally Jewell", img: "https://www.usatoday.com/gcdn/media/USATODAY/USATODAY/2013/02/06/ap-obama-interior-3_4.jpg?width=660&height=879&fit=crop&format=pjpg&auto=webp", formerRole: "Secretary of the Interior", state: "Washington" },
 			western_dem: { name: "John Hickenlooper", img: "https://upload.wikimedia.org/wikipedia/commons/1/15/John_W._Hickenlooper_World_Economic_Forum_2013_%28cropped%29.jpg", formerRole: "Governor of Colorado", state: "Colorado" },
 			tribal_affairs: { name: "Denise Juneau", img: "https://epe.brightspotcdn.com/ca/bc/76bc24b7eedcbc75a3680df57e61/10-campaign-denise-juneau-mug.jpg", formerRole: "State Supt. of Public Instruction", state: "Montana" }
@@ -17651,7 +17651,7 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 			establishment: { name: "Julián Castro", img: "https://npeaction.org/wp-content/uploads/2019/02/oEOE5IDE_400x400.jpg", formerRole: "Secretary of HUD", state: "Texas" },
 			progressive: { name: "Keith Ellison", img: "https://s3.amazonaws.com/berkley-center/KeithEllison.jpg", formerRole: "U.S. Representative", state: "Minnesota" },
 			mayor: { name: "Stephanie Rawlings-Blake", img: "https://m.media-amazon.com/images/M/MV5BMTc5OTgwNTg5NV5BMl5BanBnXkFtZTgwMDY3MzcyOTE@._V1_.jpg", formerRole: "Mayor of Baltimore", state: "Maryland" },
-			booker_vp_loyalist: { name: "Shaun Donovan", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy4AHQdOABzeH4kcS3d1BzX-BbAgTz-OWxwA&s", formerRole: "Former Secretary of HUD", state: "New York" }
+			booker_vp_loyalist: { name: "Shaun Donovan", img: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Shaun_Donovan_official_photo.jpg", formerRole: "Former Secretary of HUD", state: "New York" }
 		},
 		transportation: {
 			infrastructure: { name: "Eric Garcetti", img: "https://cdn.britannica.com/14/191614-050-DFF52410/Eric-Garcetti.jpg", formerRole: "Mayor of Los Angeles", state: "California" },

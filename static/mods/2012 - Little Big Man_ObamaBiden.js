@@ -25182,7 +25182,7 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
       alternative: { name: "Vivek Murthy", img: "https://imagesvs.oneindia.com/img/2014/12/16-1418705548-vivek.jpg", formerRole: "Physician", state: "Florida" }
     },
     hud: {
-      continuity: { name: "Shaun Donovan", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy4AHQdOABzeH4kcS3d1BzX-BbAgTz-OWxwA&s", formerRole: "Secretary of HUD", state: "New York" },
+      continuity: { name: "Shaun Donovan", img: "https://upload.wikimedia.org/wikipedia/commons/f/f8/DonovanShaunLS.jpg", formerRole: "Secretary of HUD", state: "New York" },
       alternative: { name: "Julián Castro", img: "https://npeaction.org/wp-content/uploads/2019/02/oEOE5IDE_400x400.jpg", formerRole: "Mayor of San Antonio", state: "Texas" }
     },
     transportation: {
