@@ -17588,11 +17588,11 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
     // candidates & etc
 	const clintonCandidates = {
 		state: {
-			hawk: { name: "Victoria Nuland", img: "https://upload.wikimedia.org/wikipedia/commons/8/89/Victoria_Nuland_State_Department.jpg", formerRole: "Assistant Secretary of State", state: "Connecticut" },
+			hawk: { name: "Victoria Nuland", img: "https://upload.wikimedia.org/wikipedia/commons/8/89/Victoria_Nuland_State_Department.jpg", formerRole: "Assistant Secretary of State for European and Eurasian Affairs", state: "Connecticut" },
 			establishment: { name: "Bill Burns", img: "https://upload.wikimedia.org/wikipedia/commons/9/91/Assignment-_59-CF-DS-22432-05%29_Official_portrait_of_William_Burns%2C_U.S._Ambassador-designate_to_Russia_%28Photographer-_Ann_Thomas--State%29_%2859-CF-DS-22432-05_Amb_BillBurns0086_fromPSD_-_DPLA_-_24e3adb7aadd75ad1930cff23ef02645.jpg", formerRole: "Deputy Secretary of State", state: "Pennsylvania" },
 			loyalist: { name: "Jake Sullivan", img: "https://ballotpedia.s3.amazonaws.com/images/thumb/f/fb/Jake_Sullivan.jpg/150px-Jake_Sullivan.jpg", formerRole: "National Security Advisor to the VP", state: "Minnesota" },
 			progressive: { name: "Chris Murphy", img: "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/412194-200px.jpeg", formerRole: "U.S. Senator", state: "Connecticut" },
-			biden_vp_loyalist: { name: "Antony Blinken", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Secretary_Blinken%27s_Official_Department_Photo_%28cropped%29.jpg/220px-Secretary_Blinken%27s_Official_Department_Photo_%28cropped%29.jpg", formerRole: "Deputy National Security Advisor", state: "New York" }
+			biden_vp_loyalist: { name: "Antony Blinken", img: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Antony_Blinken.jpg/250px-Antony_Blinken.jpg", formerRole: "Deputy National Security Advisor", state: "New York" }
 		},
 		treasury: {
 			progressive: { name: "Gary Gensler", img: "https://www.cftc.gov/sites/default/files/inline-images/38817-1.gif", formerRole: "Chair of the CFTC", state: "Maryland" },

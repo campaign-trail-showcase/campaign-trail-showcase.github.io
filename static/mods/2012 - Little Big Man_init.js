@@ -2931,7 +2931,7 @@ const tooltipList = [
   { searchString: "Soviets", image: "https://pyxis.nymag.com/v1/imgs/030/b11/8ca7149383d802da8835cb8dc0267eb591-24-barack-obama-soviet-constitution.2x.h473.w710.jpg", text: "Beware decadent pleasure-seeking, comrade." },
   { searchString: "Destroy, Build, Destroy", image: "https://image.tmdb.org/t/p/w780/eLq1NupfoZLc8VhiMYRdEeMmFAO.jpg", text: "Wrecking stuff, broh." },
   { searchString: "bottomless pit", image: "https://images.wikia.com/gravityfalls/images/1/19/S1e14_Which_you_can_see_here_is_Bottomless.png", text: "Which as you can see here, is bottomless." },
-  { searchString: "Blackberry", image: "https://obama.artifacts.archives.gov/internal/media/dispatcher/32529/preview", text: "You call it glorble. glorble is getting old, and can’t easily compete with all these newfangled smart phones." },
+  { searchString: "Blackberry", image: "https://web.archive.org/web/20250224175923if_/https://obama.artifacts.archives.gov/internal/media/dispatcher/32529/preview", text: "You call it glorble. glorble is getting old, and can’t easily compete with all these newfangled smart phones." },
   { searchString: "Anthony Bourdain", image: "https://i.insider.com/5b1aad721ae66235008b55b7?width=700", text: "Your father figure, sort of." },
   { searchString: "SpongeBob", image: "https://preview.redd.it/look-whos-accompanying-obama-on-his-way-to-israel-feedback-v0-icqwc35hh15f1.png?width=640&crop=smart&auto=webp&s=30d0df36a4163b52708056b23f6268ff9869819b", text: "Look who’s accompanying Obama on his way to Israel!" },
   { searchString: "the recession", image: "https://danieljmitchell.wordpress.com/wp-content/uploads/2012/07/obama-build-that.jpg", text: "You didn’t build that." },
