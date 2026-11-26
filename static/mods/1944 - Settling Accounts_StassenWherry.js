@@ -14209,9 +14209,9 @@ campaignTrail_temp.answer_feedback_json = [
 ];
 
 campaignTrail_temp.candidate_image_url = "https://upload.wikimedia.org/wikipedia/commons/e/e1/Gov._Harold_E._Stassen_LCCN2016877428_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
-campaignTrail_temp.running_mate_image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a0/Arthur_W._Mitchell.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
+campaignTrail_temp.running_mate_image_url = "https://upload.wikimedia.org/wikipedia/commons/7/78/Kenneth_Wherry%2C_Repub._Nat%27l._Committeeman_from_Nebraska%2C_April_1940_LCCN2016877363_%283x4a%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
 campaignTrail_temp.candidate_last_name = "Stassen";
-campaignTrail_temp.running_mate_last_name = "Mitchell";
+campaignTrail_temp.running_mate_last_name = "Wherry";
 
 // [TCT_BANNER_SIGN_START]
 ;(() => {

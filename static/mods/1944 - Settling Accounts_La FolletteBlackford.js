@@ -12121,9 +12121,9 @@ campaignTrail_temp.answer_feedback_json = [
 ];
 
 campaignTrail_temp.candidate_image_url = "https://upload.wikimedia.org/wikipedia/commons/7/71/Deputy_Chief_Counsel%2C_Charles_M._LaFollette_leads_the_prosecution_in_the_Judges%27_Trial_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
-campaignTrail_temp.running_mate_image_url = "https://upload.wikimedia.org/wikipedia/commons/4/4f/James_Michael_Curley.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
+campaignTrail_temp.running_mate_image_url = "https://upload.wikimedia.org/wikipedia/commons/f/f4/Emily_Sophie_Brown_1921.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
 campaignTrail_temp.candidate_last_name = "La Follette";
-campaignTrail_temp.running_mate_last_name = "Curley";
+campaignTrail_temp.running_mate_last_name = "Blackford";
 
 // [TCT_BANNER_SIGN_START]
 ;(() => {
