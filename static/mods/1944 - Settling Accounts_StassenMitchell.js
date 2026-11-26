@@ -103,7 +103,7 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 1027,
         "fields": {
-            "description": "President La Follette addressed the nation today, and with two German and Austrian ambassadors by his side, announced his support for the National Union Treaty, a voluntary multinational organization signed by all the dominant powers of the globe, designed to be a place for all nations to discuss their issues and come to peaceful resolutions. This is an idea that has been around for a while, but now it’s gaining momentum. What do you think of it?"
+            "description": "President La Follette addressed the nation today, and, with two German and Austrian ambassadors by his side, announced his support for the National Union Treaty, a voluntary multinational organization signed by all the dominant powers of the globe, designed to be a place for all nations to discuss their issues and come to peaceful resolutions. This is an idea that has been around for a while, but now it’s gaining momentum. What do you think of it?"
         }
     },
     {
@@ -852,7 +852,7 @@ campaignTrail_temp.answers_json = [
         "pk": 152177,
         "fields": {
             "question": 1034,
-            "description": "Let’s travel to the Great Plains. Usually a stronghold of the Socialists and Democrats, but with Stassen’s assassination, we can gain momentum."
+            "description": "Let’s travel to the Great Plains. It's usually a stronghold of the Socialists and Democrats, but with Stassen’s assassination, we can gain momentum."
         }
     },
     {
@@ -15525,4 +15525,3 @@ campaignTrail_temp.jet_data = [{
     }
 }
 ]
-
