@@ -12,7 +12,7 @@ campaignTrail_temp.election_json = [
             "has_visits": 1,
             "no_electoral_majority_image": "https://thecampaigntrail.net/static/images/1960-no-majority-photo.jpg",
             "creator": "Neo and RouteVenus with writing help from CTA",
-            "display_year": "1944-Settling Accounts",
+            "display_year": "1944 - Settling Accounts",
             "recommended_reading_enabled": true
         }
     }
@@ -23,7 +23,7 @@ campaignTrail_temp.temp_election_list = [
         "id": 12,
         "year": 1944,
         "is_premium": 0,
-        "display_year": "1944-Settling Accounts"
+        "display_year": "1944 - Settling Accounts"
     }
 ];
 
