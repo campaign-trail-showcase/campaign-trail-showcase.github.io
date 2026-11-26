@@ -3,28 +3,28 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 1000,
         "fields": {
-            "description": "Three years ago Jake Featherston and his genocidal Confederate States invaded America, overran Ohio and killed President Al Smith in a bombing raid. You never wanted the presidency, it came to you anyway. Now, after three long years of war you’re finally winning. Two potential offensives have been presented to you, General Abner Dowling suggests an invasion of Texas, while General Irving Morrell suggests invading Tennessee."
+            "description": "Three years ago, Jake Featherston and his genocidal Confederate States invaded America, overran Ohio, and killed President Al Smith in a bombing raid. You never wanted the presidency; it came to you anyway. Now, after three long years of war, you’re finally winning. Two potential offensives have been presented to you: General Abner Dowling suggests an invasion of Texas, while General Irving Morrell suggests invading Tennessee."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1007,
         "fields": {
-            "description": "Representative Flora Blackford, called the Conscience of Congress by the press, has once again called for you to address the nation and spread awareness of the ‘population reductions’ in the Confederate States. Jake Featherston is wiping out the Black population of the South in his death camps and few Americans know. What will you do?"
+            "description": "Representative Flora Blackford, called the Conscience of Congress by the press, has once again called for you to address the nation and spread awareness of the ‘population reductions’ in the Confederate States. Jake Featherston is wiping out the Black population of the South in his death camps, and few Americans know. What will you do?"
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1006,
         "fields": {
-            "description": "Death. Disaster. Desecration. Half of America’s de facto capital, Philadelphia, is gone, hundreds of thousands of Americans are dead. More will die in the coming days. The Confederates have beat you in the race to the atom bomb. The Joint Chiefs suspect a Confederate commando squad snuck it through the front lines. \n"
+            "description": "Death. Disaster. Desecration. Half of America’s de facto capital, Philadelphia, is gone; hundreds of thousands of Americans are dead. More will die in the coming days. The Confederates have beaten you in the race to the atom bomb. The Joint Chiefs suspect a Confederate commando squad snuck it through the front lines."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1001,
         "fields": {
-            "description": "This war began as a Confederate surprise attack over the Ohio River and has only grown. Across the pond your German and Austrian allies lash out against the French, British and Russians. Closer to home the Canadians and Mormons rose up in a bloody rebellion against the United States. You led America through the storm, the Mormons have unconditionally surrendered, the Canadians are in flight and the Confederates are on their last legs. Now you stand before a gathered crowd of reporters and prepare yourself to answer the one question that really matters: what was it all for?\n"
+            "description": "This war began as a Confederate surprise attack over the Ohio River and has only grown. Across the pond, your German and Austrian allies lash out against the French, British, and Russians. Closer to home, the Canadians and Mormons rose up in a bloody rebellion against the United States. You led America through the storm; the Mormons have unconditionally surrendered, the Canadians are in flight, and the Confederates are on their last legs. Now you stand before a gathered crowd of reporters and prepare yourself to answer the one question that really matters: what was it all for?"
         }
     },
     {
@@ -39,7 +39,7 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 1019,
         "fields": {
-            "description": "Jake Featherston is dead. A Black Communist named Cassius Madison found him in the Southern countryside and shot him dead. The pitiful remnants of the Confederate government have announced their unconditional surrender. You’ve done it Charles. You’ve won the war.",
+            "description": "Jake Featherston is dead. A Black Communist named Cassius Madison found him in the Southern countryside and shot him dead. The pitiful remnants of the Confederate government have announced their unconditional surrender. You’ve done it, Charles. You’ve won the war.",
             "likelihood": 0.5
         }
     },
@@ -47,28 +47,28 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 1008,
         "fields": {
-            "description": "The Second Great War has come to an end in America. For the first time you can take a breath and turn to domestic politics. And things aren’t great. Thomas Dewey has seized the Democratic nomination, forging a more vengeful, internationalist party. Harold Stassen - the only Republican to run for the nomination this year - is even worse, he says that the nuclear bombing of Philadelphia is a sign of your incompetence. Sensing weakness, Henry Wallace is running to steal the Socialist Party’s nomination out from under you.\n"
+            "description": "The Second Great War has come to an end in America. For the first time, you can take a breath and turn to domestic politics. And things aren’t great. Thomas Dewey has seized the Democratic nomination, forging a more vengeful, internationalist party. Harold Stassen - the only Republican to run for the nomination this year - is even worse; he says that the nuclear bombing of Philadelphia is a sign of your incompetence. Sensing weakness, Henry Wallace is running to steal the Socialist Party’s nomination out from under you."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1011,
         "fields": {
-            "description": "Six decades ago the Socialist Party was founded on the principles of three men. Karl Marx, Friedrich Engels and former-President Abraham Lincoln. Since then the more popular Reformist faction of Socialists and the more enthusiastic Communist faction have battled constantly. Now you stand before a crowd of thousands in Chicago. They await your acceptance speech with excitement, waiting to see what sort of a President you’ll be in peacetime."
+            "description": "Six decades ago, the Socialist Party was founded on the principles of three men: Karl Marx, Friedrich Engels, and former President Abraham Lincoln. Since then, the more popular Reformist faction of Socialists and the more enthusiastic Communist faction have battled constantly. Now you stand before a crowd of thousands in Chicago. They await your acceptance speech with excitement, waiting to see what sort of President you’ll be in peacetime."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1009,
         "fields": {
-            "description": "The Second Great War in North America has ended but in Europe it still rages. Your ally Germany trades nuclear bombs with France and Britain. The British navy is a scourge on the high seas, while Germany and Austria-Hungary starve. Admiral Nimitz has asked for permission to move into the Atlantic to destroy the British navy.\n"
+            "description": "The Second Great War in North America has ended, but in Europe, it still rages. Your ally Germany trades nuclear bombs with France and Britain. The British navy is a scourge on the high seas, while Germany and Austria-Hungary starve. Admiral Nimitz has asked for permission to move into the Atlantic to destroy the British navy."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1038,
         "fields": {
-            "description": "London is gone. The German Kaiser dropped a nuclear bomb on it a few hours ago. The British tried to drop their own bomb, but it was shot down over the Netherlands. France and England are suing for peace. The Second Great War is over. It's time for you to sit down and record an address to the nation.\n"
+            "description": "London is gone. The German Kaiser dropped a nuclear bomb on it a few hours ago. The British tried to drop their own bomb, but it was shot down over the Netherlands. France and England are suing for peace. The Second Great War is over. It's time for you to sit down and record an address to the nation."
         }
     },
     {
@@ -82,21 +82,21 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 1022,
         "fields": {
-            "description": "Throughout the ‘40s there has been growing support for a national healthcare service throughout the three major political parties. The bill died when Jake Featherston began his invasion. Do you have any plans to bring it back?"
+            "description": "Throughout the ‘40s, there has been growing support for a national healthcare service throughout the three major political parties. The bill died when Jake Featherston began his invasion. Do you have any plans to bring it back?"
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1020,
         "fields": {
-            "description": "Ever since the War of Secession the question of where America’s capital should be has been complex. The de facto capital is in Philadelphia, much of the government offices located in the half of the city not destroyed by the nuclear bomb. The President’s permanent residence in the city is called the Powell House, and Congress meets at Liberty Hall. Yet, the ruins of Washington D.C. are still the official capital. Many say that Philadelphia should be the official capital, or others that we should move it even further north, to New York City or Boston. Where do you stand?"
+            "description": "Ever since the War of Secession, the question of where America’s capital should be has been complex. The de facto capital is in Philadelphia, with many of the government offices located in the half of the city not destroyed by the nuclear bomb. The President’s permanent residence in the city is called the Powell House, and Congress meets at Liberty Hall. Yet, the ruins of Washington, D.C. are still the official capital. Many say that Philadelphia should be the official capital, while others say we should move it even further north, to New York City or Boston. Where do you stand?"
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1012,
         "fields": {
-            "description": " With the war over and the South mostly pacified, the same question is on everyone’s lips: What will you do with the Confederacy? Dewey says he would keep the Confederacy an occupied territory for years to come, while Stassen and the Republicans want to loot the South for all its worth. While the mood of the nation leans towards vengeance, your party expects you to stake a more lenient course."
+            "description": "With the war over and the South mostly pacified, the same question is on everyone’s lips: What will you do with the Confederacy? Dewey says he would keep the Confederacy an occupied territory for years to come, while Stassen and the Republicans want to loot the South for all it's worth. While the mood of the nation leans towards vengeance, your party expects you to stake a more lenient course."
         }
     },
     {
@@ -110,35 +110,35 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 1027,
         "fields": {
-            "description": "Ambassador Fritz Baade, representing the German Kaiser as well as the dominant faction of the Bundesrat, has approached you with an idea. A National Union Treaty, voluntarily signed by all the dominant powers of the globe, designed to be a place for all nations to discuss their issues and come to peaceful resolutions. The idea has bounced around the globe for years, but now the Austrians and Germans want to make it a reality. Baade asks for your thoughts."
+            "description": "Ambassador Fritz Baade, representing the German Kaiser as well as the dominant faction of the Bundesrat, has approached you with an idea: a National Union Treaty, voluntarily signed by all the dominant powers of the globe, designed to be a place for all nations to discuss their issues and come to peaceful resolutions. The idea has bounced around the globe for years, but now the Austrians and Germans want to make it a reality. Baade asks for your thoughts."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1014,
         "fields": {
-            "description": "Two states deserted the union to join the Confederates just before the rebels invaded, Kentucky and Houston (the state, not the city). Now that American soldiers have retaken both, politicians beg you to reinstate them into the Union. Some of these men are ardent patriots, but most are turncoats. How will you approach the two states?"
+            "description": "Two states deserted the Union to join the Confederates just before the rebels invaded: Kentucky and Houston (the state, not the city). Now that American soldiers have retaken both, politicians beg you to reinstate them into the Union. Some of these men are ardent patriots, but most are turncoats. How will you approach the two states?"
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1016,
         "fields": {
-            "description": "The worst has happened, a reporter from Minneapolis uncovered evidence of Jim Curley, your Vice President, bribing the police commissioner and city judges to ignore financial fraud while he was mayor of the city. This has caused an uproar as both Dewey and Stassen harangue your “corrupt administration”. \n"
+            "description": "The worst has happened: a reporter from Minneapolis uncovered evidence of Jim Curley, your Vice President, bribing the police commissioner and city judges to ignore financial fraud while he was mayor of the city. This has caused an uproar as both Dewey and Stassen harangue your “corrupt administration.”"
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1029,
         "fields": {
-            "description": "The Mormons have been a thorn in the side of the United States ever since they first fought President Buchanan nearly nine decades ago. They’ve staged three revolts since then, killing more Americans each time. Now they’ve been shattered, their temple lies in ruins, their men and women disarmed by the US army. With the war over congress has now taken up the question of what to do about this endlessly rebellious population. What do you think should be done?"
+            "description": "The Mormons have been a thorn in the side of the United States ever since they first fought President Buchanan nearly nine decades ago. They’ve staged three revolts since then, killing more Americans each time. Now they’ve been shattered; their temple lies in ruins, and their men and women have been disarmed by the U.S. Army. With the war over, Congress has now taken up the question of what to do about this endlessly rebellious population. What do you think should be done?"
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 1021,
         "fields": {
-            "description": "Canada was dismantled after the Great War, when the United States and Quebec split it between them. For the past three years the Canadians have waged a doomed revolution aimed at achieving independence. They’ve largely accomplished nothing, but the American public wants peace. What will you do about the Canadian Revolt?"
+            "description": "Canada was dismantled after the Great War, when the United States and Quebec split it between them. For the past three years, the Canadians have waged a doomed revolution aimed at achieving independence. They’ve largely accomplished nothing, but the American public wants peace. What will you do about the Canadian Revolt?"
         }
     },
     {
@@ -146,7 +146,7 @@ campaignTrail_temp.questions_json = [
         "pk": 1025,
         "fields": {
             "priority": -6,
-            "description": "After the Great War bureaucratic councils sprang up to help organize American industry. Then, after the South invaded, they grew to regulate everything from coal rations to housing allotments. With the war over Congress now debates the Curley-Barkley Bill, an attempt to systematize and rationalize the bureaucracy that now governs every aspect of American life. Many Socialists now turn to you, do you support the bill?"
+            "description": "After the Great War, bureaucratic councils sprang up to help organize American industry. Then, after the South invaded, they grew to regulate everything from coal rations to housing allotments. With the war over, Congress now debates the Curley-Barkley Bill, an attempt to systematize and rationalize the bureaucracy that now governs every aspect of American life. Many Socialists now turn to you: do you support the bill?"
         }
     },
     {
@@ -154,7 +154,7 @@ campaignTrail_temp.questions_json = [
         "pk": 1033,
         "fields": {
             "priority": -4,
-            "description": "Two candidates campaign against you this year, but only one has a chance at victory. Thomas Dewey took control of the Democrats back from the isolationists, and campaigned on sending the US army to occupy the South for decades to come. The Republicans, once little more than ceremonial third party, has come roaring back to life rallying behind the vengeful fury of Harold Stassen. Do you plan on campaigning against either of these men?"
+            "description": "Two candidates campaign against you this year, but only one has a chance at victory. Thomas Dewey took control of the Democrats back from the isolationists and campaigned on sending the U.S. Army to occupy the South for decades to come. The Republicans, once little more than a ceremonial third party, have come roaring back to life, rallying behind the vengeful fury of Harold Stassen. Do you plan on campaigning against either of these men?"
         }
     },
     {
@@ -162,7 +162,7 @@ campaignTrail_temp.questions_json = [
         "pk": 1035,
         "fields": {
             "priority": -3,
-            "description": "President Blaine’s loss to the Confederacy during the Second Mexican-American War resulted in the South annexing the Mexican states of Sonora and Chihuahua. Now, the Confederacy has collapsed, and American troops have defeated her Mexican Royalist puppet state. The question now remains, what is to be done with the Mexican-majority states in the Confederacy?"
+            "description": "President Blaine’s loss to the Confederacy during the Second Mexican-American War resulted in the South annexing the Mexican states of Sonora and Chihuahua. Now, the Confederacy has collapsed, and American troops have defeated her Mexican Royalist puppet state. The question now remains: what is to be done with the Mexican-majority states in the Confederacy?"
         }
     },
     {
@@ -170,7 +170,7 @@ campaignTrail_temp.questions_json = [
         "pk": 1034,
         "fields": {
             "priority": -3,
-            "description": "Election day is coming up soon, where do you want to hold your last campaign rally?"
+            "description": "Election Day is coming up soon; where do you want to hold your last campaign rally?"
         }
     }
 ];
@@ -181,7 +181,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5000,
         "fields": {
             "question": 1000,
-            "description": "General Abner Dowling might’ve lost Ohio, but had anyone else commanded the army in that state we would’ve lost Indiana and Illinois as well. I trust him. If he thinks he can take out the death factories in Texas then give him everything he wants.\n"
+            "description": "General Abner Dowling might’ve lost Ohio, but had anyone else commanded the army in that state, we would’ve lost Indiana and Illinois as well. I trust him. If he thinks he can take out the death factories in Texas, then give him everything he wants."
         }
     },
     {
@@ -189,7 +189,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5001,
         "fields": {
             "question": 1000,
-            "description": "Had President Smith listened to Irving Morrell four years ago this war would already be over. Give that man every bomb, gun and barrel he asks for. \n"
+            "description": "Had President Smith listened to Irving Morrell four years ago, this war would already be over. Give that man every bomb, gun, and barrel he asks for."
         }
     },
     {
@@ -197,7 +197,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5002,
         "fields": {
             "question": 1000,
-            "description": "These plans are far too risky. Does no one remember President Blaine? The rebels lured him into a bloody offensive that broke the back of America for a generation. Stop the offensives.\n"
+            "description": "These plans are far too risky. Does no one remember President Blaine? The rebels lured him into a bloody offensive that broke the back of America for a generation. Stop the offensives."
         }
     },
     {
@@ -205,7 +205,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5003,
         "fields": {
             "question": 1001,
-            "description": "Freedom. Everything the Confederates touch they enslave. It’s in their nature. In America we govern through consensus and unity. Our soldiers spent their blood to ensure that no man, woman or child is ever oppressed on our continent again."
+            "description": "Freedom. Everything the Confederates touch, they enslave. It’s in their nature. In America, we govern through consensus and unity. Our soldiers spent their blood to ensure that no man, woman, or child is ever oppressed on our continent again."
         }
     },
     {
@@ -213,7 +213,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5004,
         "fields": {
             "question": 1001,
-            "description": "Peace. No true American wants war. Now that the Second Great War is nearly over, Americans can look forward to a long period of prosperity and rest. Our best days are yet to come.\n"
+            "description": "Peace. No true American wants war. Now that the Second Great War is nearly over, Americans can look forward to a long period of prosperity and rest. Our best days are yet to come."
         }
     },
     {
@@ -221,7 +221,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5013,
         "fields": {
             "question": 1006,
-            "description": "This is worse than a tragedy, it is a crime against humanity. Get my generals together, tell them I want the men who built the bomb found, put on trial then executed. \n"
+            "description": "This is worse than a tragedy; it is a crime against humanity. Get my generals together; tell them I want the men who built the bomb found, put on trial, then executed."
         }
     },
     {
@@ -229,7 +229,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5014,
         "fields": {
             "question": 1006,
-            "description": "Jesus Christ. Goddamn. Alright let’s drop an a-bomb on Charleston, South Carolina. That’s the den of vipers that began this eight decades ago. We have a second atom bomb - right? Drop that wherever you think Featherston is. I don’t care about the cost. Get it done. "
+            "description": "Jesus Christ. Goddamn. Alright, let’s drop an A-bomb on Charleston, South Carolina. That’s the den of vipers that began this eight decades ago. We have a second atom bomb - right? Drop that wherever you think Featherston is. I don’t care about the cost. Get it done."
         }
     },
     {
@@ -237,7 +237,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5015,
         "fields": {
             "question": 1006,
-            "description": "Find me a car. I’m going to see the destruction for myself. I want to speak to the survivors and do what I can for them. After that I’ll ensure Featherston reaps what he sowed."
+            "description": "Find me a car. I’m going to see the destruction for myself. I want to speak to the survivors and do what I can for them. After that, I’ll ensure Featherston reaps what he sowed."
         }
     },
     {
@@ -245,7 +245,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5016,
         "fields": {
             "question": 1007,
-            "description": "I feel for their plight, I really do, but Americans don’t. I’m not touching this issue, maybe I’ll give General Dowling a few more barrels to destroy the death factory in Camp Determination.\n"
+            "description": "I feel for their plight, I really do, but Americans don’t. I’m not touching this issue; maybe I’ll give General Dowling a few more barrels to destroy the death factory in Camp Determination."
         }
     },
     {
@@ -253,7 +253,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5017,
         "fields": {
             "question": 1007,
-            "description": "Representative Blackford was on my Vice President shortlist for a reason. She is smart, and knows what issues matter. I will sit down with her over the radio and together we will talk to the nation about what Featherston is doing.\n"
+            "description": "Representative Blackford was on my Vice President shortlist for a reason. She is smart and knows what issues matter. I will sit down with her over the radio, and together we will talk to the nation about what Featherston is doing."
         }
     },
     {
@@ -261,7 +261,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5018,
         "fields": {
             "question": 1007,
-            "description": "I’m tired of this. After the Second Mexican War we thought we could ignore the way the rebels are treating their former-slaves. No longer. I want every resource directed at this issue. I’m going to bribe, cheat and bully congress into passing a civil rights act that grants citizenship to any Black southerner who makes it to America."
+            "description": "I’m tired of this. After the Second Mexican War, we thought we could ignore the way the rebels are treating their former slaves. No longer. I want every resource directed at this issue. I’m going to bribe, cheat, and bully Congress into passing a civil rights act that grants citizenship to any Black Southerner who makes it to America."
         }
     },
     {
@@ -269,7 +269,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5020,
         "fields": {
             "question": 1008,
-            "description": "Wallace is a nobody, he’s a back-bench Senator from Iowa whose claim to fame is almost passing a farm reform bill during President Sinclair’s first term. I don’t need to worry.\n"
+            "description": "Wallace is a nobody; he’s a back-bench Senator from Iowa whose claim to fame is almost passing a farm reform bill during President Sinclair’s first term. I don’t need to worry."
         }
     },
     {
@@ -277,7 +277,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5021,
         "fields": {
             "question": 1008,
-            "description": "Americans blame me for the trials they’ve suffered throughout the war because they can’t blame poor, dead Al Smith. Instead of attacking Wallace I’ll make a positive case for myself. Who did the Mormons surrender to? Me. Who beat the South? Me. Who’ll ensure a safe, prosperous future? You bet it’ll be me."
+            "description": "Americans blame me for the trials they’ve suffered throughout the war because they can’t blame poor, dead Al Smith. Instead of attacking Wallace, I’ll make a positive case for myself. Who did the Mormons surrender to? Me. Who beat the South? Me. Who’ll ensure a safe, prosperous future? You bet it’ll be me."
         }
     },
     {
@@ -285,7 +285,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5022,
         "fields": {
             "question": 1008,
-            "description": "It’s time to break out the old reliable. Cart out the traditional Socialist promises, more union rights and representation, a proposal for worker’s councils and all the rest. Think of a snappy name for it, something like ‘A Contract with Charles’. Our base will eat that up."
+            "description": "It’s time to break out the old reliable. Cart out the traditional Socialist promises: more union rights and representation, a proposal for workers' councils, and all the rest. Think of a snappy name for it, something like ‘A Contract with Charles.’ Our base will eat that up."
         }
     },
     {
@@ -293,7 +293,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5024,
         "fields": {
             "question": 1009,
-            "description": "In the Great War we scored two victories against the British, first with a surprise attack on the Sandwich Islands and second through sheer, dumb luck. I want our navy to be cautious and protect our ports, I don’t think we can beat them in the open ocean."
+            "description": "In the Great War, we scored two victories against the British: first with a surprise attack on the Sandwich Islands, and second through sheer, dumb luck. I want our navy to be cautious and protect our ports; I don’t think we can beat them in the open ocean."
         }
     },
     {
@@ -301,7 +301,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5025,
         "fields": {
             "question": 1009,
-            "description": "If Nimitz thinks we can whip the British then I trust him. More importantly, we need to open back up the shipping lanes to our allies. They are starving and we can help."
+            "description": "If Nimitz thinks we can whip the British, then I trust him. More importantly, we need to open back up the shipping lanes to our allies. They are starving, and we can help."
         }
     },
     {
@@ -317,7 +317,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5030,
         "fields": {
             "question": 1011,
-            "description": "I’m the man who will bring America permanent victory. President Lincoln, President Blaine, they fought the South and lost. President Roosevelt let them rise again. I am the only man who will ensure the Confederacy returns to the dustbin of history, where it belongs. "
+            "description": "I’m the man who will bring America permanent victory. President Lincoln, President Blaine, they fought the South and lost. President Roosevelt let them rise again. I am the only man who will ensure the Confederacy returns to the dustbin of history, where it belongs."
         }
     },
     {
@@ -325,7 +325,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5031,
         "fields": {
             "question": 1011,
-            "description": "The Socialists are the only party that wants peace. We didn’t want this war - President Smith did damn near everything he could to avoid it. Now that I’ve won it I’ll ensure we integrate the South back into the United States, and end this cycle of violence forever."
+            "description": "The Socialists are the only party that wants peace. We didn’t want this war - President Smith did damn near everything he could to avoid it. Now that I’ve won it, I’ll ensure we integrate the South back into the United States and end this cycle of violence forever."
         }
     },
     {
@@ -333,7 +333,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5032,
         "fields": {
             "question": 1011,
-            "description": "My friends, my comrades. If I win in November I’ll heal the scars Capitalism has left across our country. The Federal Government will protect your unions, your pensions and your children. The promise of Socialism, long deferred, will come to America."
+            "description": "My friends, my comrades. If I win in November, I’ll heal the scars capitalism has left across our country. The federal government will protect your unions, your pensions, and your children. The promise of Socialism, long deferred, will come to America."
         }
     },
     {
@@ -341,7 +341,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5033,
         "fields": {
             "question": 1012,
-            "description": "We will reconstruct the Southern government from the ground up, instilling a sense of equality and proletarian unity that was missing from their culture prior to the war. The Confederacy has been independent for generations, annexing it entirely would be unthinkable. "
+            "description": "We will reconstruct the Southern government from the ground up, instilling a sense of equality and proletarian unity that was missing from their culture prior to the war. The Confederacy has been independent for generations; annexing it entirely would be unthinkable."
         }
     },
     {
@@ -349,7 +349,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5034,
         "fields": {
             "question": 1012,
-            "description": "The Confederate States and United States are fundamentally different. Once, we might’ve been one nation, but we are better off separated. We will destroy their industry, demolish their army and return to a time of prosperity in our own lands."
+            "description": "The Confederate States and United States are fundamentally different. Once, we might’ve been one nation, but we are better off separated. We will destroy their industry, demolish their army, and return to a time of prosperity in our own lands."
         }
     },
     {
@@ -357,7 +357,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5035,
         "fields": {
             "question": 1012,
-            "description": "The malign tree of secession must be uprooted. We will demolish the South then rebuild it slowly, handing the means of production over to the proletarian Blacks, who have been oppressed for generations. "
+            "description": "The malign tree of secession must be uprooted. We will demolish the South, then rebuild it slowly, handing the means of production over to the proletarian Blacks, who have been oppressed for generations."
         }
     },
     {
@@ -381,7 +381,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5042,
         "fields": {
             "question": 1014,
-            "description": "This decision isn’t mine alone. I’ll ask congress to create a bipartisan commission to investigate the question, and take its recommendation."
+            "description": "This decision isn’t mine alone. I’ll ask Congress to create a bipartisan commission to investigate the question and take its recommendation."
         }
     },
     {
@@ -389,7 +389,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5048,
         "fields": {
             "question": 1016,
-            "description": "Christ. I didn’t want to believe Jim was so stupid. I want him dropped from the ticket, yesterday. Grab some backbencher, I don’t care who, and then have the FBI open up an investigation into Curley. I refuse to lose because of Jim.\n"
+            "description": "Christ. I didn’t want to believe Jim was so stupid. I want him dropped from the ticket, yesterday. Grab some backbencher, I don’t care who, and then have the FBI open up an investigation into Curley. I refuse to lose because of Jim."
         }
     },
     {
@@ -397,7 +397,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5060,
         "fields": {
             "question": 1019,
-            "description": "Then why does it feel like everyone hates me?\n\n"
+            "description": "Then why does it feel like everyone hates me?"
         }
     },
     {
@@ -405,7 +405,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5061,
         "fields": {
             "question": 1019,
-            "description": "Let’s get to work on winning the peace.\n"
+            "description": "Let’s get to work on winning the peace."
         }
     },
     {
@@ -413,7 +413,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5063,
         "fields": {
             "question": 1020,
-            "description": "The capital of the United States is in Philadelphia, and it's been there since the Revolution. We never should’ve allowed dixie malcontents to drag it South. If elected President I will advance a bill to make this official."
+            "description": "The capital of the United States is in Philadelphia, and it's been there since the Revolution. We never should’ve allowed Dixie malcontents to drag it South. If elected President, I will advance a bill to make this official."
         }
     },
     {
@@ -421,7 +421,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5064,
         "fields": {
             "question": 1020,
-            "description": "Washington D.C. is this nation’s capital. It's been that way for over a century, and with the Southern secessionists finally crushed we should begin moving the government there straight away."
+            "description": "Washington, D.C. is this nation’s capital. It's been that way for over a century, and with the Southern secessionists finally crushed, we should begin moving the government there straight away."
         }
     },
     {
@@ -429,7 +429,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5067,
         "fields": {
             "question": 1021,
-            "description": "Let’s ask for a ceasefire and sit down with their leaders. What do these Canadians want? Independence? Citizenship? Whatever it is, I think it’ll cost us less than endless war in the icy north.\n"
+            "description": "Let’s ask for a ceasefire and sit down with their leaders. What do these Canadians want? Independence? Citizenship? Whatever it is, I think it’ll cost us less than endless war in the icy North."
         }
     },
     {
@@ -437,7 +437,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5068,
         "fields": {
             "question": 1021,
-            "description": "With the Mormons disarmed and the Confederacy defeated, I am confident the Canadians will be next to throw in the towel. I’m going to send General Morrell and his barrels to Ontario, that should solve our northern issue.\n"
+            "description": "With the Mormons disarmed and the Confederacy defeated, I am confident the Canadians will be next to throw in the towel. I’m going to send General Morrell and his barrels to Ontario; that should solve our northern issue."
         }
     },
     {
@@ -453,7 +453,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5071,
         "fields": {
             "question": 1022,
-            "description": "I don’t think an expensive Socialist healthcare program is the solution to the issue. Healthcare has always been run by the private sector and I have no plans to change that. "
+            "description": "I don’t think an expensive Socialist healthcare program is the solution to the issue. Healthcare has always been run by the private sector, and I have no plans to change that."
         }
     },
     {
@@ -461,7 +461,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5072,
         "fields": {
             "question": 1022,
-            "description": "This is something Senator Truman - Dewey’s running mate - talked a lot about prior to his campaign, but hasn’t brought up on the campaign trail. Let’s adopt his universal healthcare plan, and see if he dares to speak against it."
+            "description": "This is something Senator Truman - Dewey’s running mate - talked a lot about prior to his campaign, but hasn’t brought up on the campaign trail. Let’s adopt his universal healthcare plan and see if he dares to speak against it."
         }
     },
     {
@@ -469,7 +469,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5073,
         "fields": {
             "question": 1022,
-            "description": "There’s a compromise here that I don’t think the other candidates are seeing. I believe the government should subsidize hospitals - especially in rural areas - and ensure that they have new beds and the latest medical equipment. "
+            "description": "There’s a compromise here that I don’t think the other candidates are seeing. I believe the government should subsidize hospitals - especially in rural areas - and ensure that they have new beds and the latest medical equipment."
         }
     },
     {
@@ -477,7 +477,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5074,
         "fields": {
             "question": 1022,
-            "description": "I know congress and I know what they’ll pass. Unless I win a historic landslide a universal healthcare plan won’t make it past committee, but no one would dare oppose a plan that provides healthcare to seniors. It's not everything we want, but it's a step closer.  "
+            "description": "I know Congress, and I know what they’ll pass. Unless I win a historic landslide, a universal healthcare plan won’t make it past committee, but no one would dare oppose a plan that provides healthcare to seniors. It's not everything we want, but it's a step closer."
         }
     },
     {
@@ -485,7 +485,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5083,
         "fields": {
             "question": 1025,
-            "description": "Of course I do. These councils are how the American worker regulates the economy around them. Sure, in a few places they’ve gone too far, but the Curley-Barkley bill will create a better system. "
+            "description": "Of course I do. These councils are how the American worker regulates the economy around them. Sure, in a few places they’ve gone too far, but the Curley-Barkley Bill will create a better system."
         }
     },
     {
@@ -493,7 +493,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5084,
         "fields": {
             "question": 1025,
-            "description": "The regulatory, bureaucratic councils have grown to become a serpent, choking the life from the American economy. I do not support the Curley-Barkley Bill and I don’t know why any one else would either."
+            "description": "The regulatory, bureaucratic councils have grown to become a serpent, choking the life from the American economy. I do not support the Curley-Barkley Bill, and I don’t know why anyone else would either."
         }
     },
     {
@@ -501,7 +501,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5085,
         "fields": {
             "question": 1025,
-            "description": "I support the bill, but I wish it could’ve gone further. These regulatory councils could form the basis of the American proletariat seizing the means of production. It's something I intend on pursuing if given another term. "
+            "description": "I support the bill, but I wish it could’ve gone further. These regulatory councils could form the basis of the American proletariat seizing the means of production. It's something I intend on pursuing if given another term."
         }
     },
     {
@@ -509,7 +509,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5086,
         "fields": {
             "question": 1026,
-            "description": "Patman was a Featherston stalwart just a year ago and now he’s pretending to be a patriot? Order General Dowling to continue with his invasion of Texas. "
+            "description": "Patman was a Featherston stalwart just a year ago, and now he’s pretending to be a patriot? Order General Dowling to continue with his invasion of Texas."
         }
     },
     {
@@ -517,7 +517,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5087,
         "fields": {
             "question": 1026,
-            "description": "Let’s cut a deal with this ‘governor’. If he delivers the leaders and guards of the death factories into our custody, and lets American police scour his ‘republic’ for Featherston loyalists, Texas can be as independent as Quebec."
+            "description": "Let’s cut a deal with this ‘governor.’ If he delivers the leaders and guards of the death factories into our custody and lets American police scour his ‘republic’ for Featherston loyalists, Texas can be as independent as Quebec."
         }
     },
     {
@@ -525,7 +525,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5088,
         "fields": {
             "question": 1026,
-            "description": "I read a book once, what did it say? Don’t bother your enemy while he makes a mistake? Well if the South wants to kill itself we won’t stop them, let Texas and the Confederate states attack each other in the West, we’ll sweep up the East. "
+            "description": "I read a book once; what did it say? Don’t bother your enemy while he makes a mistake? Well, if the South wants to kill itself, we won’t stop them; let Texas and the Confederate states attack each other in the West, and we’ll sweep up the East."
         }
     },
     {
@@ -541,7 +541,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5091,
         "fields": {
             "question": 1027,
-            "description": "This isn’t a bad idea, all things considered. At first the only nations that should be allowed to join are those that were on the winning side. Central Powers and their allies. After that we can consider additions on a case by case basis."
+            "description": "This isn’t a bad idea, all things considered. At first, the only nations that should be allowed to join are those that were on the winning side: the Central Powers and their allies. After that, we can consider additions on a case-by-case basis."
         }
     },
     {
@@ -557,7 +557,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5097,
         "fields": {
             "question": 1029,
-            "description": "We will educate them, treat them kindly and remind them why these United States are so great. They’ve been treated badly in the past, we’ll remedy that fact, allow Mormons to worship openly, unban their polygamous marriages, and end the conflict in Utah for good. "
+            "description": "We will educate them, treat them kindly, and remind them why these United States are so great. They’ve been treated badly in the past; we’ll remedy that fact, allow Mormons to worship openly, unban their polygamous marriages, and end the conflict in Utah for good."
         }
     },
     {
@@ -565,7 +565,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5098,
         "fields": {
             "question": 1029,
-            "description": "Representative Flora Blackford is a woman I respect. The press calls her the “Conscience of Congress.” A few days ago she came out with a bipartisan plan to move all the Mormons to the Sandwich Islands, where we can more easily watch them. I’ll throw my support behind her plan.  "
+            "description": "Representative Flora Blackford is a woman I respect. The press calls her the “Conscience of Congress.” A few days ago, she came out with a bipartisan plan to move all the Mormons to the Sandwich Islands, where we can more easily watch them. I’ll throw my support behind her plan."
         }
     },
     {
@@ -573,7 +573,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5099,
         "fields": {
             "question": 1029,
-            "description": "The only way to resolve the ulcer that is Utah is to populate the territory with more loyal Americans than disloyal Mormons. We won’t ban their religion, but we’ll encourage loyal American families to move to Utah and hand rebel property over to them. "
+            "description": "The only way to resolve the ulcer that is Utah is to populate the territory with more loyal Americans than disloyal Mormons. We won’t ban their religion, but we’ll encourage loyal American families to move to Utah and hand rebel property over to them."
         }
     },
     {
@@ -581,7 +581,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5101,
         "fields": {
             "question": 1030,
-            "description": "I - uh - I don’t think I want to answer that. Next question.\n"
+            "description": "I - uh - I don’t think I want to answer that. Next question."
         }
     },
     {
@@ -589,7 +589,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5102,
         "fields": {
             "question": 1030,
-            "description": "We stand here amidst the ruins of Pittsburgh, a city Al Smith tried to save from the horrors of war. His intentions were admirable, even if things didn’t work out as he wanted, still I think if he saw America today he’d be damn proud of what we accomplished.\n"
+            "description": "We stand here amidst the ruins of Pittsburgh, a city Al Smith tried to save from the horrors of war. His intentions were admirable, even if things didn’t work out as he wanted; still, I think if he saw America today, he’d be damn proud of what we accomplished."
         }
     },
     {
@@ -597,7 +597,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5111,
         "fields": {
             "question": 1033,
-            "description": "Not really, no. I want to run a unifying campaign that emphasizes my role in America’s victory over her enemies. "
+            "description": "Not really, no. I want to run a unifying campaign that emphasizes my role in America’s victory over her enemies."
         }
     },
     {
@@ -613,7 +613,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5113,
         "fields": {
             "question": 1033,
-            "description": "We should go after Harold Stassen. Americans love him because he was loud and passionate, but so was President Blaine and where did he leave America?\n"
+            "description": "We should go after Harold Stassen. Americans love him because he was loud and passionate, but so was President Blaine, and where did he leave America?"
         }
     },
     {
@@ -629,7 +629,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5115,
         "fields": {
             "question": 1034,
-            "description": "We should take a train ride to San Francisco, we need to win the West Coast if we want to have a shot at the Powell House. "
+            "description": "We should take a train ride to San Francisco; we need to win the West Coast if we want to have a shot at the Powell House."
         }
     },
     {
@@ -637,7 +637,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5116,
         "fields": {
             "question": 1034,
-            "description": "Our final rally should be in New York City, hopefully the Mid-Atlantic states stay in my column."
+            "description": "Our final rally should be in New York City; hopefully, the Mid-Atlantic states stay in my column."
         }
     },
     {
@@ -669,7 +669,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5120,
         "fields": {
             "question": 1035,
-            "description": "Did Sonora and Chihuahua vote Featherston into office? We aren’t going to treat them any differently from the rest of the Confederate states. "
+            "description": "Did Sonora and Chihuahua vote Featherston into office? We aren’t going to treat them any differently from the rest of the Confederate states."
         }
     },
     {
@@ -677,7 +677,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5127,
         "fields": {
             "question": 1038,
-            "description": "The trial of our lifetimes is over. The dictatorships and genocidal tyrants in France, England and the South have been defeated. The flag of Liberty has risen across the globe, my fellow Americans you can rest easy. We’ve won.\n"
+            "description": "The trial of our lifetimes is over. The dictatorships and genocidal tyrants in France, England, and the South have been defeated. The flag of Liberty has risen across the globe; my fellow Americans, you can rest easy. We’ve won."
         }
     },
     {
@@ -685,7 +685,7 @@ campaignTrail_temp.answers_json = [
         "pk": 20664,
         "fields": {
             "question": 1000,
-            "description": "What do I know about the military? I’m sure the Joint Chiefs know more than me. I’ll do whatever they suggest.\n"
+            "description": "What do I know about the military? I’m sure the Joint Chiefs know more than me. I’ll do whatever they suggest."
         }
     },
     {
@@ -693,7 +693,7 @@ campaignTrail_temp.answers_json = [
         "pk": 20781,
         "fields": {
             "question": 1001,
-            "description": "Vengeance. Treachery is in the South’s blood. If we are ever going to end this cycle of bloodshed we need to uproot the tree of secession. The South will never rise again.\n"
+            "description": "Vengeance. Treachery is in the South’s blood. If we are ever going to end this cycle of bloodshed, we need to uproot the tree of secession. The South will never rise again."
         }
     },
     {
@@ -701,7 +701,7 @@ campaignTrail_temp.answers_json = [
         "pk": 20782,
         "fields": {
             "question": 1001,
-            "description": "Liberation. Our Black brethren have long been oppressed by the Confederacy and ignored by our nation. No longer. My administration will empower our black Communist brothers in the South and free them from oppression forever.\n"
+            "description": "Liberation. Our Black brethren have long been oppressed by the Confederacy and ignored by our nation. No longer. My administration will empower our Black Communist brothers in the South and free them from oppression forever."
         }
     },
     {
@@ -709,7 +709,7 @@ campaignTrail_temp.answers_json = [
         "pk": 21124,
         "fields": {
             "question": 1030,
-            "description": "Al Smith was the best President this country has ever seen. He gave his life to bring this nation closer to Socialism than we’ve ever been before, despite the fact that the South stabbed him in the back. I wish he was still with us.\n"
+            "description": "Al Smith was the best President this country has ever seen. He gave his life to bring this nation closer to Socialism than we’ve ever been before, despite the fact that the South stabbed him in the back. I wish he were still with us."
         }
     },
     {
@@ -717,7 +717,7 @@ campaignTrail_temp.answers_json = [
         "pk": 21192,
         "fields": {
             "question": 1027,
-            "description": "I have a small hope, vain as it may be, that one day conflicts like the First and Second Great War will be resolved not through bullets and violence, but through spilt ink and spirited debate. I will push for this union in America, let us hope it ends war forever. "
+            "description": "I have a small hope, vain as it may be, that one day conflicts like the First and Second Great Wars will be resolved not through bullets and violence, but through spilt ink and spirited debate. I will push for this union in America; let us hope it ends war forever."
         }
     },
     {
@@ -725,7 +725,7 @@ campaignTrail_temp.answers_json = [
         "pk": 21261,
         "fields": {
             "question": 1025,
-            "description": "This is a congressional issue. If they pass it I won’t veto it, but I don’t feel a need to get involved.\n"
+            "description": "This is a congressional issue. If they pass it, I won’t veto it, but I don’t feel a need to get involved."
         }
     },
     {
@@ -733,7 +733,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150032,
         "fields": {
             "question": 1006,
-            "description": "How did this happen? I want an investigation immediately launched into how the damned rebels got through our lines. There are spies in our midst and I want to find out who they are."
+            "description": "How did this happen? I want an investigation immediately launched into how the damned rebels got through our lines. There are spies in our midst, and I want to find out who they are."
         }
     },
     {
@@ -741,7 +741,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150082,
         "fields": {
             "question": 1026,
-            "description": "If Governor Patman wants to escape the whirlwind that’ll engulf the rest of the South he needs to give Blacks in his country full legal equality, and he needed to do it yesterday. American troops will march into his nation to ensure he complies.\n"
+            "description": "If Governor Patman wants to escape the whirlwind that’ll engulf the rest of the South, he needs to give Blacks in his country full legal equality, and he needed to do it yesterday. American troops will march into his nation to ensure he complies."
         }
     },
     {
@@ -749,7 +749,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150123,
         "fields": {
             "question": 1008,
-            "description": "They think Wallace is a better candidate than me? Do they know anything about him? Oh - they don’t? Well why don’t my surrogates scour the Midwest and Great Plains spreading rumors of Wallace’s ties to mystics."
+            "description": "They think Wallace is a better candidate than me? Do they know anything about him? Oh - they don’t? Well, why don’t my surrogates scour the Midwest and Great Plains spreading rumors of Wallace’s ties to mystics?"
         }
     },
     {
@@ -757,7 +757,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150200,
         "fields": {
             "question": 1020,
-            "description": "Philadelphia is a ruin, unfortunately, and can’t be our capital any longer. Washington D.C. may as well be Richmond. We should move the capital to Boston, the cauldron that birthed both American liberty and abolitionism."
+            "description": "Philadelphia is a ruin, unfortunately, and can’t be our capital any longer. Washington, D.C. may as well be Richmond. We should move the capital to Boston, the cauldron that birthed both American liberty and abolitionism."
         }
     },
     {
@@ -765,7 +765,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150206,
         "fields": {
             "question": 1020,
-            "description": "Philadelphia and Washington are both our capitals. We should allow some of the more independent agencies, and the Supreme Court, to return to Washington D.C. The Powell House should remain the residence of the President, and Congress should continue meeting in Liberty Hall."
+            "description": "Philadelphia and Washington are both our capitals. We should allow some of the more independent agencies and the Supreme Court to return to Washington, D.C. The Powell House should remain the residence of the President, and Congress should continue meeting in Liberty Hall."
         }
     },
     {
@@ -773,7 +773,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150232,
         "fields": {
             "question": 1012,
-            "description": "There was no Confederacy, merely a prolonged period of insurrection in the South. After a prolonged period of occupation - eighteen years or so - we will consider adding the secessionist territories to the union on a case by case basis. Certainly no states should be allowed to join the Union that still have rebellious tendencies. And under no circumstances will the occupied territories ever gain independence again. "
+            "description": "There was no Confederacy, merely a prolonged period of insurrection in the South. After a prolonged period of occupation - eighteen years or so - we will consider adding the secessionist territories to the Union on a case-by-case basis. Certainly, no states should be allowed to join the Union that still have rebellious tendencies. And under no circumstances will the occupied territories ever gain independence again."
         }
     },
     {
@@ -781,7 +781,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150306,
         "fields": {
             "question": 1030,
-            "description": "President Smith was reelected in 1940 because of his pledge to the American people to hold plebiscites in Kentucky, Houston and Sequoyah. It isn’t his fault that Featherston stabbed him in the back. His final days were spent pushing back the dixie menace, his last thoughts were spent worrying not for himself, but for the fate of the nation."
+            "description": "President Smith was reelected in 1940 because of his pledge to the American people to hold plebiscites in Kentucky, Houston, and Sequoyah. It isn’t his fault that Featherston stabbed him in the back. His final days were spent pushing back the Dixie menace; his last thoughts were spent worrying not for himself, but for the fate of the nation."
         }
     },
     {
@@ -789,7 +789,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150422,
         "fields": {
             "question": 1014,
-            "description": "We’ll rob Kentucky and Houston for all we can, take their industry, their resources and anything else we can find, then we’ll leave. I’ve had quite enough of the South."
+            "description": "We’ll rob Kentucky and Houston for all we can, take their industry, their resources, and anything else we can find; then we’ll leave. I’ve had quite enough of the South."
         }
     },
     {
@@ -797,7 +797,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150478,
         "fields": {
             "question": 1029,
-            "description": "We whipped them this time, and we’ll whip them the next time too. Ban their temples, break up their polygamous marriages and arrest anyone - man or woman - who fought in their doomed revolt. "
+            "description": "We whipped them this time, and we’ll whip them the next time too. Ban their temples, break up their polygamous marriages, and arrest anyone - man or woman - who fought in their doomed revolt."
         }
     },
     {
@@ -805,7 +805,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150551,
         "fields": {
             "question": 1033,
-            "description": "Many say Thomas Dewey is a man of the future, but he’s a modern President Roosevelt. Teddy lifted his foot from the neck of the South, Dewey says he won’t, but how can we trust him?\n"
+            "description": "Many say Thomas Dewey is a man of the future, but he’s a modern President Roosevelt. Teddy lifted his foot from the neck of the South; Dewey says he won’t, but how can we trust him?"
         }
     },
     {
@@ -813,7 +813,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150609,
         "fields": {
             "question": 150608,
-            "description": "He should campaign for me in Boston and New England more broadly. That’s his home turf and that’s where he can be most useful."
+            "description": "He should campaign for me in Boston and New England more broadly. That’s his home turf, and that’s where he can be most useful."
         }
     },
     {
@@ -821,7 +821,7 @@ campaignTrail_temp.answers_json = [
         "pk": 150610,
         "fields": {
             "question": 150608,
-            "description": "Jim is a champion of Socialist bread-and-butter policies. We should have him negotiate with congress while I campaign throughout the country."
+            "description": "Jim is a champion of Socialist bread-and-butter policies. We should have him negotiate with Congress while I campaign throughout the country."
         }
     },
     {
@@ -11294,7 +11294,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5000,
             "candidate": 11000,
-            "answer_feedback": "Dowling means well, but he’s not a great general. Confederate cavalry strap machine guns onto the backs of trucks and slow his advance to a crawl. He liberates Houston (the state) and eventually reaches Camp Determination, but it wasn’t the knockout blow you hoped for.\n"
+            "answer_feedback": "Dowling means well, but he’s not a great general. Confederate cavalry strap machine guns onto the backs of trucks and slow his advance to a crawl. He liberates Houston (the state) and eventually reaches Camp Determination, but it wasn’t the knockout blow you hoped for."
         }
     },
     {
@@ -11303,7 +11303,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5001,
             "candidate": 11000,
-            "answer_feedback": "Morrell’s barrel columns blast through Confederate defenses around Nashville and turn East, plowing through the Appalachians and into Georgia. A disaster for Jake Featherston, and a nice victory for you.\n"
+            "answer_feedback": "Morrell’s barrel columns blast through Confederate defenses around Nashville and turn east, plowing through the Appalachians and into Georgia. A disaster for Jake Featherston, and a nice victory for you."
         }
     },
     {
@@ -11312,7 +11312,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5002,
             "candidate": 11000,
-            "answer_feedback": "You’ve pissed off the army with this decision. Morrell stews and rants to the Joint Chiefs in Philadelphia, but Abner Dowling makes his disapproval public. A scandal erupts, and congress passes a law forcing you to launch both offensives. You’re sure it's unconstitutional, but the Supreme Court doesn’t care. Worse for you, Morrell’s offensive is wildly successful."
+            "answer_feedback": "You’ve pissed off the army with this decision. Morrell stews and rants to the Joint Chiefs in Philadelphia, but Abner Dowling makes his disapproval public. A scandal erupts, and Congress passes a law forcing you to launch both offensives. You’re sure it's unconstitutional, but the Supreme Court doesn’t care. Worse for you, Morrell’s offensive is wildly successful."
         }
     },
     {
@@ -11321,7 +11321,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5003,
             "candidate": 11000,
-            "answer_feedback": "Rousing words. Though cynics note that ‘consensus and unity’ is exactly what’s caused a dozen useless bureaucratic councils to crop up in every town and neighborhood. \n"
+            "answer_feedback": "Rousing words, though cynics note that ‘consensus and unity’ is exactly what’s caused a dozen useless bureaucratic councils to crop up in every town and neighborhood."
         }
     },
     {
@@ -11330,7 +11330,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5004,
             "candidate": 11000,
-            "answer_feedback": "Four years ago Al Smith was elected President because he promised peace at any cost. Instead America’s heartland was devastated and its capital was nearly wiped off the map. Few Americans want peace, they want vengeance.\n"
+            "answer_feedback": "Four years ago, Al Smith was elected President because he promised peace at any cost. Instead, America’s heartland was devastated, and its capital was nearly wiped off the map. Few Americans want peace; they want vengeance."
         }
     },
     {
@@ -11339,7 +11339,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5013,
             "candidate": 11000,
-            "answer_feedback": "Your generals stare at you, blank faced. This is exactly what they’ve been trying to do for the past three years. A nuclear bomb just blew up half the capital, and this is all you have to say?\n"
+            "answer_feedback": "Your generals stare at you, blank-faced. This is exactly what they’ve been trying to do for the past three years. A nuclear bomb just blew up half the capital, and this is all you have to say?"
         }
     },
     {
@@ -11348,7 +11348,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5014,
             "candidate": 11000,
-            "answer_feedback": "American troops on the outskirts of Charleston are confused when they’re ordered to retreat. When Charleston is wiped off the map they celebrate. The second bomb falls on Newport News, it misses Featherston but the point is made. \n"
+            "answer_feedback": "American troops on the outskirts of Charleston are confused when they’re ordered to retreat. When Charleston is wiped off the map, they celebrate. The second bomb falls on Newport News; it misses Featherston, but the point is made."
         }
     },
     {
@@ -11357,7 +11357,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5015,
             "candidate": 11000,
-            "answer_feedback": "The survivors are touched that you’d visit them, and the press report on your trip favorably. Then you begin dropping atom bombs on the South. Charleston is wiped off the map, then Birmingham. Your aides report on the number of rebels killed, you find you no longer care.\n"
+            "answer_feedback": "The survivors are touched that you’d visit them, and the press reports on your trip favorably. Then you begin dropping atom bombs on the South. Charleston is wiped off the map, then Birmingham. Your aides report on the number of rebels killed; you find you no longer care."
         }
     },
     {
@@ -11375,7 +11375,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5017,
             "candidate": 11000,
-            "answer_feedback": "Few Americans believed the rumors of a slaughter in the South were real. When they hear you two discussing the evidence over the radio their minds change. You smile as letters from Black communities across the country flood in."
+            "answer_feedback": "Few Americans believed the rumors of a slaughter in the South were real. When they hear you two discussing the evidence over the radio, their minds change. You smile as letters from Black communities across the country flood in."
         }
     },
     {
@@ -11384,7 +11384,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5018,
             "candidate": 11000,
-            "answer_feedback": "The Black Communists in the South appreciate the support, but the average American is apprehensive. They don’t want to believe this is real. Still, you convince congress to pass the Escapee Rights Act and earn the undying loyalty of tens of thousands of new American citizens."
+            "answer_feedback": "The Black Communists in the South appreciate the support, but the average American is apprehensive. They don’t want to believe this is real. Still, you convince Congress to pass the Escapee Rights Act and earn the undying loyalty of tens of thousands of new American citizens."
         }
     },
     {
@@ -11393,7 +11393,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5020,
             "candidate": 11000,
-            "answer_feedback": "While Wallace can’t win the nomination, he gives you a bloody nose in Iowa and Illinois. You limp your way to the nomination and grind your teeth when Wallace talks of unity during his concession speech.\n"
+            "answer_feedback": "While Wallace can’t win the nomination, he gives you a bloody nose in Iowa and Illinois. You limp your way to the nomination and grind your teeth when Wallace talks of unity during his concession speech."
         }
     },
     {
@@ -11402,7 +11402,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5021,
             "candidate": 11000,
-            "answer_feedback": "This works well. People don’t want to hate you, they want to hate Smith. Still, when Stassen hears of your comments he remarks to a reporter, “The only future Charles’ll ensure is one where the South rises again.”\n"
+            "answer_feedback": "This works well. People don’t want to hate you; they want to hate Smith. Still, when Stassen hears of your comments, he remarks to a reporter, “The only future Charles’ll ensure is one where the South rises again.”"
         }
     },
     {
@@ -11411,7 +11411,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5022,
             "candidate": 11000,
-            "answer_feedback": "The Socialist Party has elected three Presidents, Upton Sinclair, Hosea Blackford and Al Smith. Few of their reforms amounted to anything, and President Smith said outright that he was a Capitalist. Your promises fall on deaf ears and Wallace gives you a bloody nose in Iowa."
+            "answer_feedback": "The Socialist Party has elected three Presidents: Upton Sinclair, Hosea Blackford, and Al Smith. Few of their reforms amounted to anything, and President Smith said outright that he was a capitalist. Your promises fall on deaf ears, and Wallace gives you a bloody nose in Iowa."
         }
     },
     {
@@ -11429,7 +11429,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5025,
             "candidate": 11000,
-            "answer_feedback": "Nimitz stalks the British for the better part of a month, skirmishing them four times before he finally catches them off of the coast of Spain. The American fleet is mauled and you lose two aircraft carriers in the fighting. The British retreat to their home islands, and you realize you’ve won a bloody victory."
+            "answer_feedback": "Nimitz stalks the British for the better part of a month, skirmishing with them four times before he finally catches them off the coast of Spain. The American fleet is mauled, and you lose two aircraft carriers in the fighting. The British retreat to their home islands, and you realize you’ve won a bloody victory."
         }
     },
     {
@@ -11438,7 +11438,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5026,
             "candidate": 11000,
-            "answer_feedback": "A laissez-faire approach to the military has become a theme of your presidency. Nimitz sails into the Atlantic Ocean but isn’t able to pin down the British in a decisive battle. The Germans rant and rave, but your Admirals assure you there is nothing they can do.\n"
+            "answer_feedback": "A laissez-faire approach to the military has become a theme of your presidency. Nimitz sails into the Atlantic Ocean, but isn’t able to pin down the British in a decisive battle. The Germans rant and rave, but your admirals assure you there is nothing they can do."
         }
     },
     {
@@ -11447,7 +11447,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5030,
             "candidate": 11000,
-            "answer_feedback": "The crowd roars, but only because they are ardent Socialists. Outside of the hall many note that your rhetoric is identical to Dewey’s and Stassen continues to be far more hawkish than you."
+            "answer_feedback": "The crowd roars, but only because they are ardent Socialists. Outside of the hall, many note that your rhetoric is identical to Dewey’s, and Stassen continues to be far more hawkish than you."
         }
     },
     {
@@ -11456,7 +11456,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5031,
             "candidate": 11000,
-            "answer_feedback": "There is a pause amongst the crowd, then a roar. The more militant Socialists want vengeance, but Stassen and Dewey are already on the more vengeful edge of politics. You’ve won the war, now you promise peace. In any other election you’d win in a landslide, surely 1944 will be no different."
+            "answer_feedback": "There is a pause amongst the crowd, then a roar. The more militant Socialists want vengeance, but Stassen and Dewey are already on the more vengeful edge of politics. You’ve won the war; now you promise peace. In any other election, you’d win in a landslide; surely 1944 will be no different."
         }
     },
     {
@@ -11465,7 +11465,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5032,
             "candidate": 11000,
-            "answer_feedback": "No one thought you'd be brave enough say something like this. You rock the hall and scare the pants off of any capitalists who hear your words. Union workers look at you in a new light, and Dewey finds his wallet growing heavier by the second."
+            "answer_feedback": "No one thought you'd be brave enough to say something like this. You rock the hall and scare the pants off of any capitalists who hear your words. Union workers look at you in a new light, and Dewey finds his wallet growing heavier by the second."
         }
     },
     {
@@ -11474,7 +11474,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5033,
             "candidate": 11000,
-            "answer_feedback": "Democrats call you naive, Republicans call you a defeatist traitor. Still, peace and reconciliation isn’t unpopular in the border states. "
+            "answer_feedback": "Democrats call you naive; Republicans call you a defeatist traitor. Still, peace and reconciliation aren’t unpopular in the border states."
         }
     },
     {
@@ -11483,7 +11483,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5034,
             "candidate": 11000,
-            "answer_feedback": "This is exactly what President Roosevelt did after the first Great War, how well did it work then? Stassen and Dewey rant and rave, saying you’ll “lose the peace”. Henry Wallace and Flora Blackford speak out against your plan. Hopefully you see something they don’t."
+            "answer_feedback": "This is exactly what President Roosevelt did after the First Great War; how well did it work then? Stassen and Dewey rant and rave, saying you’ll “lose the peace.” Henry Wallace and Flora Blackford speak out against your plan. Hopefully, you see something they don’t."
         }
     },
     {
@@ -11519,7 +11519,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5048,
             "candidate": 11000,
-            "answer_feedback": "James Edward Murray, an inoffensive Socialist senator from Montana, joins your ticket. Boston recoils from you as you abandon their man.\n"
+            "answer_feedback": "James Edward Murray, an inoffensive Socialist senator from Montana, joins your ticket. Boston recoils from you as you abandon their man."
         }
     },
     {
@@ -11528,7 +11528,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5060,
             "candidate": 11000,
-            "answer_feedback": "You’ve defeated America’s worst enemy. Peace has finally come. Everyone expects the public to finally rally around you. A landslide victory is inevitable in November.\n"
+            "answer_feedback": "You’ve defeated America’s worst enemy. Peace has finally come. Everyone expects the public to finally rally around you. A landslide victory is inevitable in November."
         }
     },
     {
@@ -11537,7 +11537,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5061,
             "candidate": 11000,
-            "answer_feedback": "The issue is no one believes the Socialists can do it. The Democrats blame your party for mishandling Featherston’s rise, the Republicans blame both parties for not burning the South to the ground when they had the chance after the last war. Still, the war is over. Peace has finally come. Everyone expects the public to finally rally around you.\n"
+            "answer_feedback": "The issue is no one believes the Socialists can do it. The Democrats blame your party for mishandling Featherston’s rise; the Republicans blame both parties for not burning the South to the ground when they had the chance after the last war. Still, the war is over. Peace has finally come. Everyone expects the public to finally rally around you."
         }
     },
     {
@@ -11564,7 +11564,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5069,
             "candidate": 11000,
-            "answer_feedback": "Quebec turns you down flat. The next day the New York Times ran the headline: “Quebec to Follette: Drop Dead!” And the whole country laughed. The laughter stopped when Harold Stassen promised to send our barrels into Quebec to remind them who is in charge."
+            "answer_feedback": "Quebec turns you down flat. The next day, the New York Times ran the headline: “Quebec to Follette: Drop Dead!” And the whole country laughed. The laughter stopped when Harold Stassen promised to send our barrels into Quebec to remind them who is in charge."
         }
     },
     {
@@ -11573,7 +11573,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5071,
             "candidate": 11000,
-            "answer_feedback": "Charles La Follette. A Socialist In Name Only. "
+            "answer_feedback": "Charles La Follette: a Socialist In Name Only."
         }
     },
     {
@@ -11582,7 +11582,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5072,
             "candidate": 11000,
-            "answer_feedback": "Much to Thomas Dewey’s horror, in Missouri Truman speaks favorably of your plan, saying that he thinks “Congress oughta pass it.” With one move you divided your opponents and united your base."
+            "answer_feedback": "Much to Thomas Dewey’s horror, in Missouri, Truman speaks favorably of your plan, saying that he thinks “Congress oughta pass it.” With one move, you divided your opponents and united your base."
         }
     },
     {
@@ -11591,7 +11591,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5073,
             "candidate": 11000,
-            "answer_feedback": "Nobody votes Socialist because they are looking for a compromise, Charles. That said, this isn’t a bad plan - merely an uninspiring one. "
+            "answer_feedback": "Nobody votes Socialist because they are looking for a compromise, Charles. That said, this isn’t a bad plan - merely an uninspiring one."
         }
     },
     {
@@ -11609,7 +11609,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5083,
             "candidate": 11000,
-            "answer_feedback": "Union halls across the midwest cheer you on. Housewives in Boston waiting for coal at the council office and curse you and the bill you support."
+            "answer_feedback": "Union halls across the Midwest cheer you on. Housewives in Boston waiting for coal at the council office curse you and the bill you support."
         }
     },
     {
@@ -11627,7 +11627,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5085,
             "candidate": 11000,
-            "answer_feedback": "Charles La Follette, Communist crusader. Many never would have imagined it, but after this the left wing of your party no longer doubts your conviction. "
+            "answer_feedback": "Charles La Follette, Communist crusader. Many never would have imagined it, but after this, the left wing of your party no longer doubts your conviction."
         }
     },
     {
@@ -11636,7 +11636,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5086,
             "candidate": 11000,
-            "answer_feedback": "Patman begs, then he pleads, but nothing can save his fledgling republic. Belatedly he tries to flee to Mexico, but he doesn't make it out of the state, Comanche bushwackers catch him near the border and deliver him to Dowling. You order him put on trial the next day."
+            "answer_feedback": "Patman begs, then he pleads, but nothing can save his fledgling republic. Belatedly, he tries to flee to Mexico, but he doesn't make it out of the state; Comanche bushwhackers catch him near the border and deliver him to Dowling. You order him put on trial the next day."
         }
     },
     {
@@ -11645,7 +11645,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5087,
             "candidate": 11000,
-            "answer_feedback": "Wright complies. Jefferson Pinckard, the mastermind of Featherston’s ‘population reductions’, is captured by the Texas Rangers. The justice department invents a new crime to charge Pinckard with: crimes against humanity."
+            "answer_feedback": "Wright complies. Jefferson Pinckard, the mastermind of Featherston’s ‘population reductions,’ is captured by the Texas Rangers. The Justice Department invents a new crime to charge Pinckard with: crimes against humanity."
         }
     },
     {
@@ -11654,7 +11654,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5088,
             "candidate": 11000,
-            "answer_feedback": "Irving Morell sweeps through Alabama, and Mississippi, then Florida and Louisiana. The Confederacy collapses between the hammer of the American barrel corps and the anvil of the Texan rebellion. The only problem now is that Texas believes it's truly independent."
+            "answer_feedback": "Irving Morrell sweeps through Alabama and Mississippi, then Florida and Louisiana. The Confederacy collapses between the hammer of the American barrel corps and the anvil of the Texan rebellion. The only problem now is that Texas believes it's truly independent."
         }
     },
     {
@@ -11663,7 +11663,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5090,
             "candidate": 11000,
-            "answer_feedback": "Your isolationism disappoints Baade, but he isn’t surprised. Your home region, the midwest, is resolutely isolationist. Don’t be surprised when you take a hit in New England though."
+            "answer_feedback": "Your isolationism disappoints Baade, but he isn’t surprised. Your home region, the Midwest, is resolutely isolationist. Don’t be surprised when you take a hit in New England, though."
         }
     },
     {
@@ -11672,7 +11672,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5091,
             "candidate": 11000,
-            "answer_feedback": "Baade considers your words and nods. Japan, with its vast pacific empire, might be threatened by the agreement. But perhaps with Austria, America and Germany in lock step behind this National Union you can stop their expansion. Still, any answer besides resolute isolationism hurts you in the Midwest."
+            "answer_feedback": "Baade considers your words and nods. Japan, with its vast Pacific empire, might be threatened by the agreement. But perhaps with Austria, America, and Germany in lockstep behind this National Union, you can stop their expansion. Still, any answer besides resolute isolationism hurts you in the Midwest."
         }
     },
     {
@@ -11681,7 +11681,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5092,
             "candidate": 11000,
-            "answer_feedback": "Baade stares at you, slack-jawed. Eventually he says, “Revolution begins at home, Mr. President. What have you done for your own proletariat?” Your words are leaked to the press later that day and Democrats across the nation rage against you."
+            "answer_feedback": "Baade stares at you, slack-jawed. Eventually, he says, “Revolution begins at home, Mr. President. What have you done for your own proletariat?” Your words are leaked to the press later that day, and Democrats across the nation rage against you."
         }
     },
     {
@@ -11699,7 +11699,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5098,
             "candidate": 11000,
-            "answer_feedback": "Congress doesn’t pass her plan right away, but support for it only grows as time passes. After the election Blackford’s plan to ethnically cleanse the Mormons from mainland America will pass, and you will be complicit."
+            "answer_feedback": "Congress doesn’t pass her plan right away, but support for it only grows as time passes. After the election, Blackford’s plan to ethnically cleanse the Mormons from mainland America will pass, and you will be complicit."
         }
     },
     {
@@ -11708,7 +11708,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5099,
             "candidate": 11000,
-            "answer_feedback": " Many in congress, Representative Blackford among them, look on this plan with skepticism. Harold Stassen calls it “lunacy”. Do you think confiscating Mormon property won’t cause hard feelings? Or do you just expect to win the next war?"
+            "answer_feedback": "Many in Congress, Representative Blackford among them, look on this plan with skepticism. Harold Stassen calls it “lunacy.” Do you think confiscating Mormon property won’t cause hard feelings? Or do you just expect to win the next war?"
         }
     },
     {
@@ -11717,7 +11717,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5101,
             "candidate": 11000,
-            "answer_feedback": "Your non-answer is answer enough for the jackals of the press. In the morning stories are run speculating on the secret animosity you have for Smith."
+            "answer_feedback": "Your non-answer is answer enough for the jackals of the press. In the morning, stories are run speculating on the secret animosity you have for Smith."
         }
     },
     {
@@ -11726,7 +11726,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5102,
             "candidate": 11000,
-            "answer_feedback": "In many ways his tragic death during the war is the best thing that could’ve happened for him. Many Americans who thought him an idiot a day before, genuinely mourned him when he was killed. "
+            "answer_feedback": "In many ways, his tragic death during the war is the best thing that could’ve happened for him. Many Americans who thought him an idiot a day before genuinely mourned him when he was killed."
         }
     },
     {
@@ -11735,7 +11735,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5111,
             "candidate": 11000,
-            "answer_feedback": "The public doesn’t want positivity, not right now. Dewey and Stassen ignore your positivity and criticize your administration relentlessly. Americans listen.  "
+            "answer_feedback": "The public doesn’t want positivity, not right now. Dewey and Stassen ignore your positivity and criticize your administration relentlessly. Americans listen."
         }
     },
     {
@@ -11753,7 +11753,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5113,
             "candidate": 11000,
-            "answer_feedback": "Americans don’t like Republicans, and it's good to remind them why. Still, many Socialists privately worry that Stassen is immune to the revulsion Americans feel for his party. "
+            "answer_feedback": "Americans don’t like Republicans, and it's good to remind them why. Still, many Socialists privately worry that Stassen is immune to the revulsion Americans feel for his party."
         }
     },
     {
@@ -11798,7 +11798,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5118,
             "candidate": 11000,
-            "answer_feedback": "The population of Sonora and Chihuahua have grown into a confusing mix of Confederate and Mexican. Many of the most ardent, fiercest supporters of Jake Featherston were Spanish speaking Chihuahuans. You’ve ensured Democratic Mexico is permanently at war with fascist paramilitaries in its Northern provinces. But that’s not your problem any more. "
+            "answer_feedback": "The population of Sonora and Chihuahua has grown into a confusing mix of Confederate and Mexican. Many of the most ardent, fiercest supporters of Jake Featherston were Spanish-speaking Chihuahuans. You’ve ensured Democratic Mexico is permanently at war with fascist paramilitaries in its northern provinces. But that’s not your problem anymore."
         }
     },
     {
@@ -11816,7 +11816,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5120,
             "candidate": 11000,
-            "answer_feedback": "This neatly avoids the question of how you’ll treat the Spanish speaking Confederates in the provinces you now occupy. "
+            "answer_feedback": "This neatly avoids the question of how you’ll treat the Spanish-speaking Confederates in the provinces you now occupy."
         }
     },
     {
@@ -11825,7 +11825,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5127,
             "candidate": 11000,
-            "answer_feedback": "The nation breathes a sigh of relief. While Austria and Germany have slowly liberalized, neither is exactly a Democracy and most Americans don’t love their allies. Few Americans wanted to die for the German Kaiser.\n"
+            "answer_feedback": "The nation breathes a sigh of relief. While Austria and Germany have slowly liberalized, neither is exactly a democracy, and most Americans don’t love their allies. Few Americans wanted to die for the German Kaiser."
         }
     },
     {
@@ -11834,7 +11834,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 20664,
             "candidate": 11000,
-            "answer_feedback": "They suggest you fund both operations. It isn’t the worst compromise, but when his offensives slows, General Dowling tells the press that you are ignoring the death factory in Texas and a scandal erupts. Still Morrell’s offensive breaks into Georgia."
+            "answer_feedback": "They suggest you fund both operations. It isn’t the worst compromise, but when his offensive slows, General Dowling tells the press that you are ignoring the death factory in Texas, and a scandal erupts. Still, Morrell’s offensive breaks into Georgia."
         }
     },
     {
@@ -11843,7 +11843,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 20781,
             "candidate": 11000,
-            "answer_feedback": "Your words are drowned out by the cheers of a nation. The Socialists have been associated with peacekniks and isolationists for a generation, maybe you plan on changing that. Regardless, after you give this speech thousands of innocent Confederate civilians become bushwackers overnight. "
+            "answer_feedback": "Your words are drowned out by the cheers of a nation. The Socialists have been associated with peaceniks and isolationists for a generation; maybe you plan on changing that. Regardless, after you give this speech, thousands of innocent Confederate civilians become bushwhackers overnight."
         }
     },
     {
@@ -11852,7 +11852,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 20782,
             "candidate": 11000,
-            "answer_feedback": "If a presidential candidate said this four years ago they wouldn’t have won a single electoral vote. Nowadays most Yankees view Black Communists as their natural allies against treacherous Confederates - as long as they stay in the South. "
+            "answer_feedback": "If a presidential candidate said this four years ago, they wouldn’t have won a single electoral vote. Nowadays, most Yankees view Black Communists as their natural allies against treacherous Confederates - as long as they stay in the South."
         }
     },
     {
@@ -11861,7 +11861,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 21124,
             "candidate": 11000,
-            "answer_feedback": "You will find only a few even in your own party who agree with you. President Smith was a failure who did little to reform Capitalism and less to stop Jake Featherston. That said, there is a certain fervor to your defense that some find compelling. Are you onto something here?"
+            "answer_feedback": "You will find only a few, even in your own party, who agree with you. President Smith was a failure who did little to reform capitalism and less to stop Jake Featherston. That said, there is a certain fervor to your defense that some find compelling. Are you onto something here?"
         }
     },
     {
@@ -11870,7 +11870,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 21192,
             "candidate": 11000,
-            "answer_feedback": "You live in a cynical age, Charles, but maybe you can change that. If you manage to build this union now, perhaps a century from now a war like the Second Great War will be unimaginable. Hopefully nuclear bombs are never dropped again. "
+            "answer_feedback": "You live in a cynical age, Charles, but maybe you can change that. If you manage to build this union now, perhaps a century from now a war like the Second Great War will be unimaginable. Hopefully, nuclear bombs are never dropped again."
         }
     },
     {
@@ -11879,7 +11879,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5067,
             "candidate": 11000,
-            "answer_feedback": "You are right, unfortunately no one else in the country agrees. Harold Stassen accuses you of selling rightful American conquests to Winston Churchill. More Americans find themselves agreeing with Dewey, who says he is confident that we have the Canadians on the brink of defeat."
+            "answer_feedback": "You are right; unfortunately, no one else in the country agrees. Harold Stassen accuses you of selling rightful American conquests to Winston Churchill. More Americans find themselves agreeing with Dewey, who says he is confident that we have the Canadians on the brink of defeat."
         }
     },
     {
@@ -11888,7 +11888,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5068,
             "candidate": 11000,
-            "answer_feedback": "It doesn’t. Morrell and his barrels find themselves bogged down by more Canadian resistance than ever, the Republicans and Democrats both lambast you as an incompetent who is going to lose the peace.\n"
+            "answer_feedback": "It doesn’t. Morrell and his barrels find themselves bogged down by more Canadian resistance than ever; the Republicans and Democrats both lambast you as an incompetent who is going to lose the peace."
         }
     },
     {
@@ -11897,7 +11897,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 21261,
             "candidate": 11000,
-            "answer_feedback": "No harm, no foul. Some begin to wonder if you are leading the country, or if congress is."
+            "answer_feedback": "No harm, no foul. Some begin to wonder if you are leading the country, or if Congress is."
         }
     },
     {
@@ -11915,7 +11915,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 150032,
             "candidate": 11000,
-            "answer_feedback": "A ‘blue’ scare begins as you scour every level of the government and military for evidence of Confederate spies. Some are obviously guilty, others are only suspected. To a vengeful America evidence doesn’t matter. They all face the firing squad."
+            "answer_feedback": "A ‘blue’ scare begins as you scour every level of the government and military for evidence of Confederate spies. Some are obviously guilty; others are only suspected. To a vengeful America, evidence doesn’t matter. They all face the firing squad."
         }
     },
     {
@@ -11924,7 +11924,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 150082,
             "candidate": 11000,
-            "answer_feedback": "Patman agrees, the moment Texans hear about the deal they storm the Governor’s mansion and hang the supposed leader of their new Republic. You face embarrassment in the press as Texas rejoins the Confederacy."
+            "answer_feedback": "Patman agrees; the moment Texans hear about the deal, they storm the Governor’s Mansion and hang the supposed leader of their new Republic. You face embarrassment in the press as Texas rejoins the Confederacy."
         }
     },
     {
@@ -11933,7 +11933,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 150123,
             "candidate": 11000,
-            "answer_feedback": "Wallace is beloved by the Great Plains, mostly because they only know of his economic proposals. As soon as news of his ties to mysticism hits, Henry's campaign collapses. "
+            "answer_feedback": "Wallace is beloved by the Great Plains, mostly because they only know of his economic proposals. As soon as news of his ties to mysticism hits, Henry's campaign collapses."
         }
     },
     {
@@ -11942,7 +11942,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 150200,
             "candidate": 11000,
-            "answer_feedback": "Philadelphians are outraged when they hear of your decision. Protestors turn to rioters as the desperate, traumatized populace does anything they can to stop the federal government from abandoning them."
+            "answer_feedback": "Philadelphians are outraged when they hear of your decision. Protesters turn to rioters as the desperate, traumatized populace does anything they can to stop the federal government from abandoning them."
         }
     },
     {
@@ -11969,7 +11969,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 150306,
             "candidate": 11000,
-            "answer_feedback": "Throughout the first year of the war the country watched as President Smith gave all he had in futile attempts to hold back Featherston’s armored columns. His hair went grey, then fell from his head. In his final weeks Smith’s skin was full of open, bleeding sores. Playing on that image may strike a chord with the public. "
+            "answer_feedback": "Throughout the first year of the war, the country watched as President Smith gave all he had in futile attempts to hold back Featherston’s armored columns. His hair went gray, then fell from his head. In his final weeks, Smith’s skin was full of open, bleeding sores. Playing on that image may strike a chord with the public."
         }
     },
     {
@@ -11987,7 +11987,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 150478,
             "candidate": 11000,
-            "answer_feedback": "Charles La Follette, vengeful militarist. It is an unexpected image, and one that throws Harold Stassen on the back foot as he struggles to differentiate his plan from yours. Of course you are only sowing the seeds for the next Mormon revolt with this plan, but maybe you don’t care. "
+            "answer_feedback": "Charles La Follette, vengeful militarist. It is an unexpected image, and one that throws Harold Stassen on the back foot as he struggles to differentiate his plan from yours. Of course, you are only sowing the seeds for the next Mormon revolt with this plan, but maybe you don’t care."
         }
     },
     {
@@ -11996,7 +11996,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 150551,
             "candidate": 11000,
-            "answer_feedback": "Teddy Roosevelt’s armistice with the South after the Great War isn’t remembered especially fondly. It may be unfair to both men, but it works. "
+            "answer_feedback": "Teddy Roosevelt’s armistice with the South after the Great War isn’t remembered especially fondly. It may be unfair to both men, but it works."
         }
     },
     {
@@ -12014,7 +12014,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 150610,
             "candidate": 11000,
-            "answer_feedback": "Jim convinces the Democrats in congress to increase funding for welfare and Sinclair’s old age pension program. A nice win for you!"
+            "answer_feedback": "Jim convinces the Democrats in Congress to increase funding for welfare and Sinclair’s old-age pension program. A nice win for you!"
         }
     },
     {
@@ -12023,7 +12023,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 150622,
             "candidate": 11000,
-            "answer_feedback": "Surrounded by his supporters, Jim is charismatic and convincing. He explains away all the accusations against him. You’ll still take a hit, but it isn’t a knock-out blow. "
+            "answer_feedback": "Surrounded by his supporters, Jim is charismatic and convincing. He explains away all the accusations against him. You’ll still take a hit, but it isn’t a knockout blow."
         }
     }
 ];
@@ -12889,4 +12889,3 @@ campaignTrail_temp.jet_data = [{
     }
 }
 ]
-
