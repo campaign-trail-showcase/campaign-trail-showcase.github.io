@@ -37610,7 +37610,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       coverLink: "https://lh3.googleusercontent.com/oGD5OqEmUIFFMP-qP8lyH5sDy13R2LI52NEl82c7qjdeKyoieWQUJh56Cx2wYoLNgxaOBB2cPwRoj3Cj=w544-h544-l90-rj",
       videoIds: ["udwMPDmvxGw", "fh7BJ1ylbJw", "Fg4MfA3BCyI"]
     },
-	{
+    {
       title: "Disparate Youth",
       artist: "Santigold",
       coverLink: "https://i.scdn.co/image/ab67616d0000b27381a3294d8cb52667c8701e6f",
@@ -37699,18 +37699,17 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       artist: "Sigur Rós",
       coverLink: "https://lh3.googleusercontent.com/S8yuT62t5KFQHwx5dzO3oYOj2mY2gMuANdm3FiRFeENRLAP_F7qZpRO6B1JOg4CnsR5f9Ikt30hgDLo=w544-h544-l90-rj",
       videoIds: ["Hhxlvf0N6H0", "sMLaKb32QyE"]
-    },
-
+    }
   ];
 
   let PLAYLISTS_DATA = [];
 
-  // constants
   const PLAYER_ELEMENT_ID = "nice-music-player";
   const PLAYLIST_SELECTOR_ID = "player-playlist-selector";
   const YOUTUBE_PLAYER_DIV_ID = "youtube-player-container";
   const TITLE_ID = "player-title";
   const ARTIST_ID = "player-artist";
+  const MINI_COVER_ID = "player-mini-cover";
   const CONTROLS_CONTAINER_ID = "player-controls-container";
   const PREV_BUTTON_ID = "player-prev-button";
   const PLAY_PAUSE_BUTTON_ID = "player-play-pause-button";
@@ -37731,11 +37730,11 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   const QUEUE_LIST_ID = "player-queue-list";
   const PLAYER_QUEUE_ITEM_CLASS = "player-queue-item";
   const QUEUE_TOGGLE_ICON_ID = "player-queue-toggle-icon";
+  const FAVORITE_BUTTON_ID = "player-favorite-button";
+  const MINIMIZE_BUTTON_ID = "player-minimize-button";
 
-  // persistence key
   const STORAGE_KEY = 'nice-music-player-state-v1';
 
-  // icons
   const ICON_PLAY = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23f0f0f0'%3E%3Cpath d='M7.5 5v14l11-7z'/%3E%3C/svg%3E";
   const ICON_PAUSE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23f0f0f0'%3E%3Cpath d='M6 19h4V5H6v14zm8-14v14h4V5h-4z'/%3E%3C/svg%3E";
   const ICON_PREV = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23f0f0f0'%3E%3Cpath d='M6 6h2v12H6zm3.5 6l8.5 6V6z'/%3E%3C/svg%3E";
@@ -37749,7 +37748,8 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   const ICON_SHUFFLE_ON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' width='24' viewBox='0 0 24 24' fill='%2366b3ff'%3E%3Cpath d='M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z'/%3E%3C/svg%3E";
   const ICON_HEART_EMPTY = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='none' stroke='%23f0f0f0' stroke-width='2'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/%3E%3C/svg%3E";
   const ICON_HEART_FULL = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23ff4b4b'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E";
-  const FAVORITE_BUTTON_ID = "player-favorite-button";
+  const ICON_MINIMIZE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23f0f0f0'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E";
+  const ICON_EXPAND = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23f0f0f0'%3E%3Cpath d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/%3E%3C/svg%3E";
 
   class Song {
     constructor(title, artist, coverLink, videoIds) {
@@ -37764,25 +37764,36 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     getCoverLink() { return this.coverLink; }
     getVideoId() { return this.videoIds.length > 0 ? this.videoIds[this.currentVideoIndex] : null; }
     containsVideoId(id) { return this.videoIds.includes(id); }
+    matches(other) { return Boolean(other) && this.title === other.title && this.artist === other.artist; }
     tryNextVideo() { if (this.currentVideoIndex < this.videoIds.length - 1) { this.currentVideoIndex++; return true; } return false; }
     resetVideoIndex() { this.currentVideoIndex = 0; }
+    toJSON() { return { title: this.title, artist: this.artist, coverLink: this.coverLink, videoIds: this.videoIds }; }
   }
 
   class Playlist {
-    constructor(songs = []) { this.songs = songs; this.currentSongIndex = 0; }
+    constructor(songs = []) {
+      this.songs = songs;
+      this.currentSongIndex = 0;
+      this.id = Date.now() + Math.random().toString(36);
+    }
     getCurrentSong() { return this.songs.length > 0 ? this.songs[this.currentSongIndex] : null; }
     playNext() { if (this.songs.length > 0) this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length; }
     playPrevious() { if (this.songs.length > 0) this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length; }
     setCurrentSongIndex(index) { if (index >= 0 && index < this.songs.length) this.currentSongIndex = index; }
     isEmpty() { return this.songs.length === 0; }
     getSongs() { return this.songs; }
-    setSongs(newSongs) { this.songs = newSongs; this.id = Date.now() + Math.random().toString(36); }
+    setSongs(newSongs) {
+      this.songs = newSongs;
+      this.id = Date.now() + Math.random().toString(36);
+      if (this.currentSongIndex >= this.songs.length) this.currentSongIndex = Math.max(0, this.songs.length - 1);
+    }
   }
 
   let playlist;
   let activePlaylistIndex = 0;
   let originalSongOrderForCurrentPlaylist = [];
   let isShuffleActive = false;
+  let isMinimized = false;
   let ytPlayer;
   let playerReady = false;
   let isSeeking = false;
@@ -37791,43 +37802,38 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   let volumeBeforeMute = 0.5;
   let repeatMode = 'none';
   let hasUserInitiatedPlayback = true;
+  let autoplayIntent = false;
 
-  // persisted state + apply mute at onReady
   let persistedState = null;
   let applyMuteOnReady = false;
 
-  const TARGET_FPS = 20;
-  const FRAME_INTERVAL = 1000 / TARGET_FPS;
-  let lastRafUpdateTime = 0;
-  let playerShouldBeUpdatingWhenVisible = false;
-
-  // keep a smoothed progress value to avoid early jank
+  let lastRafFrameTime = 0;
   let lastProgress = 0;
-  // throttle resize
   let resizeRaf = 0;
+  let loadUiRaf = 0;
+  let errorSkipTimer = null;
 
   let pendingSeekTime = null;
   let seekSettlingTime = 0;
 
   let dragRaf = 0;
-  let pendingIndex = null;
+  let pendingDragVisualIndex = null;
 
-  let playerContainer, playlistSelectorElement, titleElement, artistElement;
+  let playerContainer, playlistSelectorElement, titleElement, artistElement, miniCoverElement;
   let controlsContainer, playPauseButton, prevButtonElement, nextButtonElement;
   let progressBar, currentTimeElement, durationElement;
   let volumeContainer, volumeIconElement, volumePercentageElement, volumeSlider;
   let repeatButtonElement, shuffleButtonElement;
-  let queueContainerElement, queueTitleElement, queueListElement, queueToggleButton;
+  let queueContainerElement, queueTitleElement, queueListElement, queueToggleButton, minimizeButtonElement;
 
   let progressFillElement, progressBufferElement, progressThumbElement;
-  let progressBarContainerElement;
   let cachedProgressBarWidth = 0;
   let progressBarObserver = null;
 
-  // cache variables
   let cachedDuration = 0;
   let lastRenderedTitle = "";
   let lastRenderedArtist = "";
+  let lastRenderedMiniCover = "";
   let lastVolumePercent = -1;
   let lastRenderedBuffer = null;
   let lastRenderedSecond = null;
@@ -37835,7 +37841,6 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   let lastQueuePlaylistId = null;
   let lastActiveQueueIndex = -1;
 
-  // helper to prevent repetitive checks
   function isPlayerActive() {
     return playerReady && ytPlayer && typeof ytPlayer.getPlayerState === 'function';
   }
@@ -37849,7 +37854,6 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       link.rel = 'preconnect'; link.href = url; link.crossOrigin = 'anonymous';
       frag.appendChild(link);
     });
-
     const marker = document.createElement('meta');
     marker.id = 'yt-preconnect';
     frag.appendChild(marker);
@@ -37874,25 +37878,38 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     return res;
   }
 
-  // persistence helpers
   let cachedState = null;
+  let stateDirty = false;
+  let isFlushScheduled = false;
 
   function loadState() {
     if (cachedState) return cachedState;
     try {
       cachedState = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
       return cachedState;
-    } catch { return {}; }
+    } catch {
+      cachedState = {};
+      return cachedState;
+    }
+  }
+
+  function flushState() {
+    isFlushScheduled = false;
+    if (!stateDirty) return;
+    stateDirty = false;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cachedState)); } catch {}
   }
 
   function saveState(patch = {}) {
     cachedState = { ...cachedState, ...patch };
+    stateDirty = true;
     if (typeof requestIdleCallback === 'function') {
-        requestIdleCallback(() => {
-            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cachedState)); } catch {}
-        }, { timeout: 2000 });
+      if (!isFlushScheduled) {
+        isFlushScheduled = true;
+        requestIdleCallback(flushState, { timeout: 2000 });
+      }
     } else {
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cachedState)); } catch {}
+      flushState();
     }
   }
   cachedState = loadState();
@@ -37903,6 +37920,15 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     if (s) saveState({ currentVideoId: s.getVideoId() });
   }
 
+  function updateMiniCover(song) {
+    if (!miniCoverElement) return;
+    const coverLink = song ? (song.getCoverLink() || "") : "";
+    if (lastRenderedMiniCover === coverLink) return;
+    lastRenderedMiniCover = coverLink;
+    miniCoverElement.style.backgroundImage = coverLink ? `url("${coverLink}")` : "";
+    miniCoverElement.classList.toggle('is-empty', !coverLink);
+  }
+
   function updateSongMetadataOnly() {
     if (!playlist) return;
     const song = playlist.getCurrentSong();
@@ -37910,6 +37936,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     if (!song) {
       if (lastRenderedTitle !== "No song loaded") { titleElement.textContent = "No song loaded"; lastRenderedTitle = "No song loaded"; }
       if (lastRenderedArtist !== "") { artistElement.textContent = ""; lastRenderedArtist = ""; }
+      updateMiniCover(null);
       return;
     }
 
@@ -37918,13 +37945,17 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     if (lastRenderedTitle !== title) { titleElement.textContent = title; lastRenderedTitle = title; }
     if (lastRenderedArtist !== artist) { artistElement.textContent = artist; lastRenderedArtist = artist; }
+    updateMiniCover(song);
   }
 
   function updateGlobalControls() {
     if (playerReady) updateVolumeIcon();
     updateRepeatButtonUI();
     updateShuffleButtonUI();
-    if (playlistSelectorElement && playlistSelectorElement.value !== activePlaylistIndex.toString()) playlistSelectorElement.value = activePlaylistIndex.toString();
+    updateMinimizeButtonUI();
+    if (playlistSelectorElement && playlistSelectorElement.value !== activePlaylistIndex.toString()) {
+      playlistSelectorElement.value = activePlaylistIndex.toString();
+    }
   }
 
   function updateUI() {
@@ -37955,24 +37986,14 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     if (durationElement.textContent !== formatted) durationElement.textContent = formatted;
   }
 
-  function scheduleDragRender(nextIndex) {
-    pendingIndex = nextIndex;
-    if (dragRaf) return;
-
-    dragRaf = requestAnimationFrame(() => {
-      dragRaf = 0;
-      if (pendingIndex === null) return;
-      if (pendingIndex !== playlist.currentSongIndex) {
-        playlist.setCurrentSongIndex(pendingIndex);
-        updateCoverFlow();
-        updateSongMetadataOnly();
-      }
-      pendingIndex = null;
-    });
-  }
+  const POOL_SIZE = 15;
+  let poolItems = [];
+  const poolAllocation = new Array(POOL_SIZE).fill(-1);
+  const PRELOAD_URL_CAP = 40;
+  const preloadedUrls = new Map();
 
   function updateCoverFlow(fractionalOffset = 0) {
-    if (!poolItems.length) return;
+    if (isMinimized || !poolItems.length || !playlist) return;
 
     const songs = playlist.getSongs();
     const totalSongs = songs.length;
@@ -38019,19 +38040,19 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       const rotationProgress = absOffset < 1 ? absOffset : 1;
       const rotation = -sign * rotationProgress * ROTATION;
 
-      const scaleProgress = 1 - absOffset > 0 ? 1 - absOffset : 0;
+      const scaleProgress = Math.max(0, 1 - absOffset);
       const scale = SCALE_SIDE + (scaleProgress * (SCALE_CENTER - SCALE_SIDE));
 
-      const transformStr = `translate3d(${xPos}px, 0, ${zPos}px) rotateY(${rotation}deg) scale(${scale})`;
+      const transformStr = `translate3d(${xPos.toFixed(1)}px, 0, ${zPos.toFixed(1)}px) rotateY(${rotation.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
       if (item._lastTransform !== transformStr) {
-          item.style.transform = transformStr;
-          item._lastTransform = transformStr;
+        item.style.transform = transformStr;
+        item._lastTransform = transformStr;
       }
 
       const shouldReflect = absOffset <= 2;
       if (item._hasClassReflection !== shouldReflect) {
-          item.classList.toggle('has-reflection', shouldReflect);
-          item._hasClassReflection = shouldReflect;
+        item.classList.toggle('has-reflection', shouldReflect);
+        item._hasClassReflection = shouldReflect;
       }
 
       let opacity = '1';
@@ -38050,82 +38071,96 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     }
   }
 
-	function createCoverFlowPool() {
-		const coverFlowContainer = document.getElementById('cover-flow-container');
-		if (!coverFlowContainer || poolItems.length > 0) return;
+  function scheduleDragRender(visualIndex) {
+    pendingDragVisualIndex = visualIndex;
+    if (dragRaf) return;
 
-		const frag = document.createDocumentFragment();
+    dragRaf = requestAnimationFrame(() => {
+      dragRaf = 0;
+      if (pendingDragVisualIndex === null || !playlist || playlist.isEmpty()) return;
+      const maxIndex = playlist.getSongs().length - 1;
+      const clampedVisual = Math.max(0, Math.min(maxIndex, pendingDragVisualIndex));
+      const nearestIndex = Math.round(clampedVisual);
+      const fractionalOffset = clampedVisual - nearestIndex;
 
-		for (let i = 0; i < POOL_SIZE; i++) {
-			const item = document.createElement('div');
-			item.className = 'cover-flow-item';
-			item.dataset.allocatedSongIndex = "-1";
-            item._lastTransform = "";
-            item._lastOpacity = "";
-            item._lastVisibility = "";
-            item._hasClassReflection = false;
+      if (nearestIndex !== playlist.currentSongIndex) {
+        playlist.setCurrentSongIndex(nearestIndex);
+        updateSongMetadataOnly();
+      }
+      updateCoverFlow(fractionalOffset);
+      pendingDragVisualIndex = null;
+    });
+  }
 
-			item.addEventListener('click', (e) => {
-				if (dragMoved) return;
-				const index = parseInt(e.currentTarget.dataset.allocatedSongIndex, 10);
-				if (!isNaN(index) && index >= 0 && index !== playlist.currentSongIndex) {
-					playlist.setCurrentSongIndex(index);
-					loadCurrentSong(true);
-				}
-			});
+  function createCoverFlowPool() {
+    const coverFlowContainer = document.getElementById('cover-flow-container');
+    if (!coverFlowContainer || poolItems.length > 0) return;
 
-			frag.appendChild(item);
-			poolItems.push(item);
-			poolAllocation[i] = -1;
-		}
+    const frag = document.createDocumentFragment();
 
-		coverFlowContainer.appendChild(frag);
-	}
+    for (let i = 0; i < POOL_SIZE; i++) {
+      const item = document.createElement('div');
+      item.className = 'cover-flow-item';
+      item.dataset.allocatedSongIndex = "-1";
+      item._lastTransform = "";
+      item._lastOpacity = "";
+      item._lastVisibility = "";
+      item._hasClassReflection = false;
 
-	function resetCoverFlow() {
-		for (let i = 0; i < POOL_SIZE; i++) {
-			poolAllocation[i] = -1;
-			if (poolItems[i]) {
-				poolItems[i].dataset.allocatedSongIndex = "-1";
-				poolItems[i].style.backgroundImage = '';
-				poolItems[i].style.visibility = 'hidden';
-				poolItems[i].style.opacity = '0';
-                poolItems[i]._lastVisibility = 'hidden';
-                poolItems[i]._lastOpacity = '0';
-			}
-		}
-		updateCoverFlow(0);
-	}
+      item.addEventListener('click', (e) => {
+        if (dragMoved) return;
+        const index = parseInt(e.currentTarget.dataset.allocatedSongIndex, 10);
+        if (!isNaN(index) && index >= 0 && index !== playlist.currentSongIndex) {
+          e.stopPropagation();
+          playlist.setCurrentSongIndex(index);
+          loadCurrentSong(true);
+        }
+      });
 
-  const POOL_SIZE = 15;
-  let poolItems = [];
-  const poolAllocation = new Array(POOL_SIZE).fill(-1);
-  const PRELOAD_URL_CAP = 40;
-  const preloadedUrls = new Map();
+      frag.appendChild(item);
+      poolItems.push(item);
+      poolAllocation[i] = -1;
+    }
+
+    coverFlowContainer.appendChild(frag);
+  }
+
+  function resetCoverFlow() {
+    for (let i = 0; i < POOL_SIZE; i++) {
+      poolAllocation[i] = -1;
+      if (poolItems[i]) {
+        poolItems[i].dataset.allocatedSongIndex = "-1";
+        poolItems[i].style.backgroundImage = '';
+        poolItems[i].style.visibility = 'hidden';
+        poolItems[i].style.opacity = '0';
+        poolItems[i]._lastVisibility = 'hidden';
+        poolItems[i]._lastOpacity = '0';
+      }
+    }
+    updateCoverFlow(0);
+  }
 
   function preloadCoverUrl(url) {
     if (!url || preloadedUrls.has(url)) return;
-
     if (preloadedUrls.size >= PRELOAD_URL_CAP) {
       const oldest = preloadedUrls.keys().next().value;
       preloadedUrls.delete(oldest);
     }
-
     const img = new Image();
     img.decoding = 'async';
     img.src = url;
     preloadedUrls.set(url, img);
   }
 
-  // cover preloader
   function preloadCovers(songs) {
-    if (!songs || !songs.length || !playlist) return;
+    if (isMinimized || !songs || !songs.length || !playlist) return;
     const preloadRange = 5;
     const currentIdx = playlist.currentSongIndex;
     const start = Math.max(0, currentIdx - preloadRange);
     const end = Math.min(songs.length, currentIdx + preloadRange + 1);
 
     const load = () => {
+      if (isMinimized) return;
       for (let i = start; i < end; i++) {
         preloadCoverUrl(songs[i].getCoverLink());
       }
@@ -38139,6 +38174,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   }
 
   function loadCurrentSong(autoplay = false, isRetry = false) {
+    if (errorSkipTimer) { clearTimeout(errorSkipTimer); errorSkipTimer = null; }
     cachedDuration = 0;
     pendingSeekTime = null;
     seekSettlingTime = 0;
@@ -38148,26 +38184,34 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     stopRafUpdater();
 
-    requestAnimationFrame(() => {
+    if (loadUiRaf) cancelAnimationFrame(loadUiRaf);
+    loadUiRaf = requestAnimationFrame(() => {
+      loadUiRaf = 0;
       lastProgress = 0;
       lastRenderedBuffer = 0;
-      if (progressBar) progressBar.value = 0;
+      if (progressBar) {
+        progressBar.value = 0;
+        progressBar.setAttribute('aria-valuenow', '0');
+      }
       updateProgressVisuals(0, 0);
 
       if (currentTimeElement && lastRenderedSecond !== 0) { currentTimeElement.textContent = "0:00"; lastRenderedSecond = 0; }
       if (durationElement && durationElement.textContent !== "--:--") durationElement.textContent = "--:--";
 
-      updateUI({ queue: true });
+      updateUI();
       updateCoverFlow();
+      if (playlist && !playlist.isEmpty()) preloadCovers(playlist.getSongs());
     });
 
     if (!isPlayerActive() || typeof ytPlayer.loadVideoById !== 'function') {
       if (playPauseButton) updatePlayPauseButton(true);
+      updateFavoriteButtonUI();
       return;
     }
     if (!currentSong) {
       if (typeof ytPlayer.stopVideo === 'function') ytPlayer.stopVideo();
       if (playPauseButton) updatePlayPauseButton(true);
+      updateFavoriteButtonUI();
       return;
     }
 
@@ -38175,10 +38219,10 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     if (!videoIdToLoad) return;
 
     const cfg = { videoId: videoIdToLoad, startSeconds: 0, suggestedQuality: 'small' };
+    autoplayIntent = autoplay;
     if (autoplay) ytPlayer.loadVideoById(cfg);
     else ytPlayer.cueVideoById(cfg);
 
-    window._musicPlayerAutoplayIntent = autoplay;
     persistCurrentSong();
     updateFavoriteButtonUI();
   }
@@ -38195,7 +38239,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     playlist.setSongs(isShuffleActive ? shuffleArray(newSongs) : newSongs);
     playlist.setCurrentSongIndex(0);
 
-    if (queueTitleElement) queueTitleElement.innerHTML = `Up Next — ${selectedPlaylistData.name}`;
+    if (queueTitleElement) queueTitleElement.textContent = `Up Next — ${selectedPlaylistData.name}`;
 
     lastQueuePlaylistId = null;
     resetCoverFlow();
@@ -38223,7 +38267,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     if (!playPauseButton._imgCache) playPauseButton._imgCache = playPauseButton.querySelector('img');
 
     const img = playPauseButton._imgCache;
-	const newState = isPaused ? 'paused' : 'playing';
+    const newState = isPaused ? 'paused' : 'playing';
 
     if (playPauseButton.dataset.state === newState) return;
     playPauseButton.dataset.state = newState;
@@ -38235,68 +38279,74 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   }
 
   function rafUpdateProgress(timestamp) {
-      if (!isUpdaterRunning) return;
-      if (!isPlayerActive() || !hasUserInitiatedPlayback) {
-        stopRafUpdater();
-        return;
-      }
-      if (isSeeking) {
-        rafId = requestAnimationFrame(rafUpdateProgress);
-        return;
-      }
+    if (!isUpdaterRunning) return;
+    if (!isPlayerActive() || !hasUserInitiatedPlayback) {
+      stopRafUpdater();
+      return;
+    }
+    if (isSeeking) {
+      rafId = requestAnimationFrame(rafUpdateProgress);
+      return;
+    }
 
-      let currentTime = ytPlayer.getCurrentTime() || 0;
+    const dtMs = lastRafFrameTime ? Math.min(100, timestamp - lastRafFrameTime) : 16.7;
+    lastRafFrameTime = timestamp || performance.now();
+
+    let currentTime = ytPlayer.getCurrentTime() || 0;
+
+    if (pendingSeekTime !== null) {
+      const timeDiff = Math.abs(currentTime - pendingSeekTime);
+      if (timeDiff < 0.5 || seekSettlingTime > 500) {
+        pendingSeekTime = null;
+        seekSettlingTime = 0;
+      } else {
+        currentTime = pendingSeekTime;
+        seekSettlingTime += dtMs;
+      }
+    }
+
+    if (!cachedDuration) cachedDuration = ytPlayer.getDuration() || 0;
+    const duration = cachedDuration;
+
+    if (duration > 0) {
+      const targetProgress = (currentTime / duration) * 100;
 
       if (pendingSeekTime !== null) {
-        const timeDiff = Math.abs(currentTime - pendingSeekTime);
-        if (timeDiff < 0.5 || seekSettlingTime > 500) {
-          pendingSeekTime = null;
-          seekSettlingTime = 0;
-        } else {
-          currentTime = pendingSeekTime;
-          seekSettlingTime += 16.7;
-        }
+        lastProgress = targetProgress;
+      } else {
+        const alpha = 1 - Math.exp(-12 * (dtMs / 1000));
+        lastProgress += (targetProgress - lastProgress) * alpha;
+        if (Math.abs(targetProgress - lastProgress) < 0.01) lastProgress = targetProgress;
       }
 
-      if (!cachedDuration) cachedDuration = ytPlayer.getDuration() || 0;
-      const duration = cachedDuration;
+      const p = Math.max(0, Math.min(100, lastProgress));
 
-      if (duration > 0) {
-        const targetProgress = (currentTime / duration) * 100;
-
-        if (pendingSeekTime !== null) {
-          lastProgress = targetProgress;
-        } else {
-          lastProgress += (targetProgress - lastProgress) * 0.35;
-          if (Math.abs(targetProgress - lastProgress) < 0.01) lastProgress = targetProgress;
-        }
-
-        const p = Math.max(0, Math.min(100, lastProgress));
-
-        let bufferPercent = lastRenderedBuffer || 0;
-        if (!timestamp || timestamp - lastBufferCheckTime > 500) {
-          const loaded = ytPlayer.getVideoLoadedFraction?.() || 0;
-          bufferPercent = Math.max(0, Math.min(100, loaded * 100));
-          lastRenderedBuffer = bufferPercent;
-          lastBufferCheckTime = timestamp || 0;
-        }
-
-        updateProgressVisuals(p, bufferPercent);
-
-        const currentSecond = currentTime | 0;
-        if (lastRenderedSecond !== currentSecond) {
-          if (currentTimeElement) currentTimeElement.textContent = formatTime(currentTime);
-          lastRenderedSecond = currentSecond;
-        }
+      let bufferPercent = lastRenderedBuffer || 0;
+      if (!timestamp || timestamp - lastBufferCheckTime > 500) {
+        const loaded = ytPlayer.getVideoLoadedFraction?.() || 0;
+        bufferPercent = Math.max(0, Math.min(100, loaded * 100));
+        lastRenderedBuffer = bufferPercent;
+        lastBufferCheckTime = timestamp || 0;
       }
 
-      if (isUpdaterRunning) rafId = requestAnimationFrame(rafUpdateProgress);
+      updateProgressVisuals(p, bufferPercent);
+
+      const currentSecond = currentTime | 0;
+      if (lastRenderedSecond !== currentSecond) {
+        if (currentTimeElement) currentTimeElement.textContent = formatTime(currentTime);
+        if (progressBar) progressBar.setAttribute('aria-valuenow', p.toFixed(1));
+        lastRenderedSecond = currentSecond;
+      }
+    }
+
+    if (isUpdaterRunning) rafId = requestAnimationFrame(rafUpdateProgress);
   }
 
   function startRafUpdater() {
     if (isUpdaterRunning || !isPlayerActive() || ytPlayer.getPlayerState() !== YT.PlayerState.PLAYING || !hasUserInitiatedPlayback) return;
-    if (document.visibilityState === 'hidden') { playerShouldBeUpdatingWhenVisible = true; return; }
-    isUpdaterRunning = true; lastRafUpdateTime = 0;
+    if (document.visibilityState === 'hidden') return;
+    isUpdaterRunning = true;
+    lastRafFrameTime = 0;
     if (rafId) cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(rafUpdateProgress);
   }
@@ -38304,23 +38354,25 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   function stopRafUpdater() {
     if (!isUpdaterRunning && !rafId) return;
     isUpdaterRunning = false;
+    lastRafFrameTime = 0;
     if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
   }
 
   function handleVisibilityChange() {
     if (!isPlayerActive() || !hasUserInitiatedPlayback) return;
     if (document.visibilityState === 'hidden') {
-      if (isUpdaterRunning) { stopRafUpdater(); playerShouldBeUpdatingWhenVisible = true; }
+      if (isUpdaterRunning) stopRafUpdater();
     } else if (document.visibilityState === 'visible') {
       if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
-        lastProgress = (ytPlayer.getCurrentTime() / (cachedDuration || ytPlayer.getDuration() || 1)) * 100;
-        updateProgressVisuals(lastProgress);
+        const duration = cachedDuration || ytPlayer.getDuration() || 1;
+        lastProgress = ((ytPlayer.getCurrentTime() || 0) / duration) * 100;
+        updateProgressVisuals(lastProgress, lastRenderedBuffer || 0);
         startRafUpdater();
       }
     }
   }
 
-  function onPlayerReady(event) {
+  function onPlayerReady() {
     playerReady = true;
     setVolumeFromSlider(false);
     if (applyMuteOnReady && typeof ytPlayer.mute === 'function') ytPlayer.mute();
@@ -38333,13 +38385,14 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     if (document.visibilityState === 'visible' && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING && hasUserInitiatedPlayback) {
       startRafUpdater();
-    } else if (document.visibilityState === 'hidden' && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING && hasUserInitiatedPlayback) {
-      playerShouldBeUpdatingWhenVisible = true;
     }
   }
 
   function onPlayerStateChange(event) {
     const state = event.data;
+    if (playerContainer) {
+      playerContainer.classList.toggle('player-buffering', state === YT.PlayerState.BUFFERING);
+    }
     updateDurationDisplay();
 
     switch (state) {
@@ -38355,7 +38408,10 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         stopRafUpdater();
         if (playPauseButton) updatePlayPauseButton(true);
         lastProgress = 100;
-        if (progressBar) progressBar.value = 100;
+        if (progressBar) {
+          progressBar.value = 100;
+          progressBar.setAttribute('aria-valuenow', '100');
+        }
         updateProgressVisuals(100, lastRenderedBuffer || 100);
         if (currentTimeElement && ytPlayer && typeof ytPlayer.getDuration === 'function') {
           currentTimeElement.textContent = formatTime(ytPlayer.getDuration());
@@ -38380,7 +38436,10 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       case YT.PlayerState.CUED:
         stopRafUpdater();
         lastProgress = 0;
-        if (progressBar) progressBar.value = 0;
+        if (progressBar) {
+          progressBar.value = 0;
+          progressBar.setAttribute('aria-valuenow', '0');
+        }
         updateProgressVisuals(0, 0);
         if (currentTimeElement) currentTimeElement.textContent = "0:00";
         updateUI();
@@ -38401,16 +38460,20 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     if (currentSong && recoverableErrorCodes.includes(event.data)) {
       if (currentSong.tryNextVideo()) {
-        loadCurrentSong(window._musicPlayerAutoplayIntent, true);
+        loadCurrentSong(autoplayIntent, true);
         return;
       }
     }
 
-    updatePlayPauseButton(true); stopRafUpdater();
+    updatePlayPauseButton(true);
+    stopRafUpdater();
+    if (playerContainer) playerContainer.classList.remove('player-buffering');
     if (titleElement) { titleElement.textContent = "Error"; lastRenderedTitle = "Error"; }
     if (artistElement) { artistElement.textContent = "Could not load video."; lastRenderedArtist = "Could not load video."; }
 
-    setTimeout(() => {
+    if (errorSkipTimer) clearTimeout(errorSkipTimer);
+    errorSkipTimer = setTimeout(() => {
+      errorSkipTimer = null;
       if (!playlist || playlist.isEmpty()) return;
       playlist.playNext();
       loadCurrentSong(true);
@@ -38423,18 +38486,18 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     const newVolumePercent = Math.round(volumeValue * 100);
 
     if (lastVolumePercent !== newVolumePercent) {
-        volumeSlider.style.setProperty('--volume-percent', `${newVolumePercent}%`);
+      volumeSlider.style.setProperty('--volume-percent', `${newVolumePercent}%`);
 
-        if (isPlayerActive()) {
-            ytPlayer.setVolume(newVolumePercent);
-            if (shouldUnmute && newVolumePercent > 0 && ytPlayer.isMuted()) ytPlayer.unMute();
-            if (newVolumePercent === 0 && !ytPlayer.isMuted()) ytPlayer.mute();
-        }
+      if (isPlayerActive()) {
+        ytPlayer.setVolume(newVolumePercent);
+        if (shouldUnmute && newVolumePercent > 0 && ytPlayer.isMuted()) ytPlayer.unMute();
+        if (newVolumePercent === 0 && !ytPlayer.isMuted()) ytPlayer.mute();
+      }
 
-        volumePercentageElement.textContent = `${newVolumePercent}%`;
-        volumeSlider.setAttribute('aria-valuenow', String(newVolumePercent));
-        updateVolumeIcon();
-        lastVolumePercent = newVolumePercent;
+      volumePercentageElement.textContent = `${newVolumePercent}%`;
+      volumeSlider.setAttribute('aria-valuenow', String(newVolumePercent));
+      updateVolumeIcon();
+      lastVolumePercent = newVolumePercent;
     }
   }
 
@@ -38447,17 +38510,12 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       ytPlayer.setVolume(restoreVolume * 100);
       volumeSlider.value = restoreVolume;
       setVolumeFromSlider(false);
-      volumeIconElement.src = ICON_VOLUME;
-      volumeIconElement.alt = "Mute";
-      volumeIconElement.title = "Mute";
     } else {
       const currentSliderValue = parseFloat(volumeSlider.value);
       if (currentSliderValue > 0) volumeBeforeMute = currentSliderValue;
       ytPlayer.mute();
       volumeSlider.value = 0;
       setVolumeFromSlider(false);
-      volumeIconElement.alt = "Unmute";
-      volumeIconElement.title = "Unmute";
     }
 
     saveState({
@@ -38487,12 +38545,14 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   function updateRepeatButtonUI() {
     if (!repeatButtonElement) return;
     const img = repeatButtonElement.querySelector('img');
-    let iconSrc = ICON_REPEAT_NONE; let label = "Repeat Off";
+    let iconSrc = ICON_REPEAT_NONE;
+    let label = "Repeat Off";
     repeatButtonElement.classList.remove('repeat-active', 'repeat-one');
     if (repeatMode === 'all') { iconSrc = ICON_REPEAT_ALL; label = "Repeat All"; repeatButtonElement.classList.add('repeat-active'); }
     else if (repeatMode === 'one') { iconSrc = ICON_REPEAT_ONE; label = "Repeat One"; repeatButtonElement.classList.add('repeat-active', 'repeat-one'); }
     if (img) img.src = iconSrc;
-    repeatButtonElement.setAttribute('aria-label', label); repeatButtonElement.title = label;
+    repeatButtonElement.setAttribute('aria-label', label);
+    repeatButtonElement.title = label;
   }
 
   function toggleShuffleMode() {
@@ -38517,11 +38577,61 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     }
 
     lastQueuePlaylistId = null;
-	resetCoverFlow();
+    resetCoverFlow();
     preloadCovers(playlist.getSongs());
     updateCoverFlow();
     updateUI();
     persistCurrentSong();
+  }
+
+  function toggleMinimize() {
+    isMinimized = !isMinimized;
+    saveState({ minimized: isMinimized });
+    applyMinimizedState();
+  }
+
+  function applyMinimizedState() {
+    if (playerContainer) {
+      playerContainer.classList.toggle('minimized', isMinimized);
+      syncQueueContainerState();
+    }
+    updateMinimizeButtonUI();
+    if (playlist) updateMiniCover(playlist.getCurrentSong());
+    if (!isMinimized && playlist) {
+      updateCoverFlow();
+      preloadCovers(playlist.getSongs());
+    }
+  }
+
+  function updateMinimizeButtonUI() {
+    if (!minimizeButtonElement) return;
+    const img = minimizeButtonElement.querySelector('img');
+    const label = isMinimized ? "Expand player" : "Minimize player";
+    if (img) {
+      img.src = isMinimized ? ICON_EXPAND : ICON_MINIMIZE;
+      img.alt = label;
+    }
+    minimizeButtonElement.setAttribute('aria-label', label);
+    minimizeButtonElement.setAttribute('aria-expanded', String(!isMinimized));
+    minimizeButtonElement.title = label;
+  }
+
+  function syncQueueContainerState() {
+    if (!playerContainer || !queueContainerElement) return;
+    const isOpen = !queueContainerElement.classList.contains('hidden');
+    playerContainer.classList.toggle('has-open-queue', isOpen);
+    if (queueToggleButton) {
+      queueToggleButton.setAttribute('aria-expanded', String(isOpen));
+    }
+  }
+
+  function toggleQueue() {
+    if (!queueContainerElement) return;
+    queueContainerElement.classList.toggle('hidden');
+    const visible = !queueContainerElement.classList.contains('hidden');
+    syncQueueContainerState();
+    saveState({ queueVisible: visible });
+    if (visible) updateQueueDisplay();
   }
 
   const queueItemTemplate = document.createElement('template');
@@ -38542,156 +38652,306 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   function updateQueueDisplay() {
     if (!queueListElement || !playlist) return;
 
-      if (playlist.isEmpty()) {
-        const emptyItem = document.createElement('li');
-        emptyItem.className = `${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty`;
-        emptyItem.textContent = 'Queue is empty';
-        queueListElement.replaceChildren(emptyItem);
-        lastQueuePlaylistId = null;
-        lastActiveQueueIndex = -1;
-        return;
-      }
-
-      const songs = playlist.getSongs();
-      const currentIndex = playlist.currentSongIndex;
-      const playlistId = playlist.id;
-      const queueVisible = queueContainerElement && !queueContainerElement.classList.contains('hidden');
-
-      if (lastQueuePlaylistId === playlistId) {
-        if (lastActiveQueueIndex !== currentIndex) {
-          if (lastActiveQueueIndex !== -1 && queueItemCache[lastActiveQueueIndex]) {
-            queueItemCache[lastActiveQueueIndex].classList.remove('current');
-          }
-          if (queueItemCache[currentIndex]) {
-            queueItemCache[currentIndex].classList.add('current');
-            if (queueVisible) {
-              queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-          }
-          lastActiveQueueIndex = currentIndex;
-        }
-        return;
-      }
-
-      // Full queue rebuild
-      lastQueuePlaylistId = playlistId;
-      lastActiveQueueIndex = currentIndex;
+    if (playlist.isEmpty()) {
+      const emptyItem = document.createElement('li');
+      emptyItem.className = `${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty`;
+      emptyItem.textContent = 'Queue is empty';
+      queueListElement.replaceChildren(emptyItem);
       queueItemCache = [];
-      const frag = document.createDocumentFragment();
-      const isFavPlaylist = Boolean(PLAYLISTS_DATA[activePlaylistIndex]?.isFavorites);
+      lastQueuePlaylistId = null;
+      lastActiveQueueIndex = -1;
+      return;
+    }
 
-      for (let index = 0; index < songs.length; index++) {
-        const song = songs[index];
-        const li = createQueueItem();
-        li.title = `${song.getTitle()} — ${song.getArtist()}`;
-        li.dataset.index = String(index);
-        li.children[0].textContent = song.getTitle();
-        li.children[1].textContent = ` - ${song.getArtist()}`;
+    const songs = playlist.getSongs();
+    const currentIndex = playlist.currentSongIndex;
+    const playlistId = playlist.id;
+    const queueVisible = queueContainerElement && !queueContainerElement.classList.contains('hidden');
 
-        if (index === currentIndex) li.classList.add('current');
-        if (isFavPlaylist) li.draggable = true;
-
-        frag.appendChild(li);
-        queueItemCache.push(li);
+    if (lastQueuePlaylistId === playlistId) {
+      if (lastActiveQueueIndex !== currentIndex) {
+        if (lastActiveQueueIndex !== -1 && queueItemCache[lastActiveQueueIndex]) {
+          queueItemCache[lastActiveQueueIndex].classList.remove('current');
+          queueItemCache[lastActiveQueueIndex].removeAttribute('aria-selected');
+        }
+        if (queueItemCache[currentIndex]) {
+          queueItemCache[currentIndex].classList.add('current');
+          queueItemCache[currentIndex].setAttribute('aria-selected', 'true');
+          if (queueVisible) {
+            queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+        lastActiveQueueIndex = currentIndex;
       }
+      return;
+    }
 
-      queueListElement.replaceChildren(frag);
-      if (queueVisible && queueItemCache[currentIndex]) {
-        queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    lastQueuePlaylistId = playlistId;
+    lastActiveQueueIndex = currentIndex;
+    queueItemCache = [];
+    const frag = document.createDocumentFragment();
+    const isFavPlaylist = Boolean(PLAYLISTS_DATA[activePlaylistIndex]?.isFavorites);
+
+    for (let index = 0; index < songs.length; index++) {
+      const song = songs[index];
+      const li = createQueueItem();
+      li.title = `${song.getTitle()} — ${song.getArtist()}`;
+      li.dataset.index = String(index);
+      li.children[0].textContent = song.getTitle();
+      li.children[1].textContent = ` - ${song.getArtist()}`;
+
+      if (index === currentIndex) {
+        li.classList.add('current');
+        li.setAttribute('aria-selected', 'true');
       }
+      if (isFavPlaylist) li.draggable = true;
+
+      frag.appendChild(li);
+      queueItemCache.push(li);
+    }
+
+    queueListElement.replaceChildren(frag);
+    if (queueVisible && queueItemCache[currentIndex]) {
+      queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   function updateShuffleButtonUI() {
     if (!shuffleButtonElement) return;
     const img = shuffleButtonElement.querySelector('img');
-    let iconSrc = isShuffleActive ? ICON_SHUFFLE_ON : ICON_SHUFFLE_OFF;
-    let label = isShuffleActive ? "Shuffle On" : "Shuffle Off";
+    const iconSrc = isShuffleActive ? ICON_SHUFFLE_ON : ICON_SHUFFLE_OFF;
+    const label = isShuffleActive ? "Shuffle On" : "Shuffle Off";
     shuffleButtonElement.classList.toggle('shuffle-active', isShuffleActive);
     if (img) img.src = iconSrc;
-    shuffleButtonElement.setAttribute('aria-label', label); shuffleButtonElement.title = label;
+    shuffleButtonElement.setAttribute('aria-label', label);
+    shuffleButtonElement.title = label;
   }
 
   function updateProgressVisuals(percentage, bufferPercentage = 0) {
     if (!progressFillElement || !progressThumbElement) return;
 
     const ratio = Math.max(0, Math.min(1, percentage / 100));
-    progressFillElement.style.transform = `scaleX(${ratio})`;
+    progressFillElement.style.transform = `scaleX(${ratio.toFixed(4)})`;
 
-    if (progressBufferElement && bufferPercentage > 0) {
+    if (progressBufferElement) {
       const bufferRatio = Math.max(0, Math.min(1, bufferPercentage / 100));
-      progressBufferElement.style.transform = `scaleX(${bufferRatio})`;
+      progressBufferElement.style.transform = `scaleX(${bufferRatio.toFixed(4)})`;
     }
 
     const px = cachedProgressBarWidth * ratio;
-    progressThumbElement.style.transform = `translate3d(${px}px, 0, 0)`;
+    progressThumbElement.style.transform = `translate3d(${px.toFixed(2)}px, 0, 0)`;
   }
 
   function createPlayerElements() {
     const fragment = document.createDocumentFragment();
-    playerContainer = document.createElement("div"); playerContainer.id = PLAYER_ELEMENT_ID; playerContainer.tabIndex = 0; fragment.appendChild(playerContainer);
-    const coverFlowStage = document.createElement('div'); coverFlowStage.id = 'cover-flow-stage';
-    const coverFlowContainer = document.createElement('div'); coverFlowContainer.id = 'cover-flow-container';
-    coverFlowStage.appendChild(coverFlowContainer); playerContainer.appendChild(coverFlowStage);
-    queueContainerElement = document.createElement("div"); queueContainerElement.id = QUEUE_CONTAINER_ID; queueContainerElement.classList.add('hidden');
-    queueTitleElement = document.createElement("h4"); queueTitleElement.id = QUEUE_TITLE_ID; queueTitleElement.innerHTML = `Up Next`; queueContainerElement.appendChild(queueTitleElement);
-    queueListElement = document.createElement("ul"); queueListElement.id = QUEUE_LIST_ID; queueListElement.setAttribute('role', 'listbox'); queueContainerElement.appendChild(queueListElement); playerContainer.appendChild(queueContainerElement);
-    const controlsWrapper = document.createElement("div"); controlsWrapper.id = "player-controls-wrapper";
-    const songInfoContainer = document.createElement("div"); songInfoContainer.id = "cover-flow-song-info";
-    // live region for SRs
-    songInfoContainer.setAttribute('role', 'status'); songInfoContainer.setAttribute('aria-live', 'polite');
-    titleElement = document.createElement("h3"); titleElement.id = TITLE_ID; songInfoContainer.appendChild(titleElement);
-    artistElement = document.createElement("p"); artistElement.id = ARTIST_ID; songInfoContainer.appendChild(artistElement); controlsWrapper.appendChild(songInfoContainer);
-    controlsContainer = document.createElement("div"); controlsContainer.id = CONTROLS_CONTAINER_ID;
-    const progressBarContainer = document.createElement("div"); progressBarContainer.id = PROGRESS_BAR_CONTAINER_ID;
-    currentTimeElement = document.createElement("span"); currentTimeElement.id = CURRENT_TIME_ID; progressBarContainer.appendChild(currentTimeElement);
+    playerContainer = document.createElement("div");
+    playerContainer.id = PLAYER_ELEMENT_ID;
+    playerContainer.tabIndex = 0;
+    fragment.appendChild(playerContainer);
 
-    const progressWrapper = document.createElement("div"); progressWrapper.id = "progress-visual-wrapper";
-    const visualTrack = document.createElement("div"); visualTrack.className = "progress-visual-track";
+    const coverFlowStage = document.createElement('div');
+    coverFlowStage.id = 'cover-flow-stage';
+    const coverFlowContainer = document.createElement('div');
+    coverFlowContainer.id = 'cover-flow-container';
+    coverFlowStage.appendChild(coverFlowContainer);
+    playerContainer.appendChild(coverFlowStage);
 
-    progressBufferElement = document.createElement("div"); progressBufferElement.className = "progress-buffer-bar"; visualTrack.appendChild(progressBufferElement);
-    progressFillElement = document.createElement("div"); progressFillElement.className = "progress-fill-bar"; visualTrack.appendChild(progressFillElement);
+    queueContainerElement = document.createElement("div");
+    queueContainerElement.id = QUEUE_CONTAINER_ID;
+    queueContainerElement.classList.add('hidden');
+    queueTitleElement = document.createElement("h4");
+    queueTitleElement.id = QUEUE_TITLE_ID;
+    queueTitleElement.textContent = "Up Next";
+    queueContainerElement.appendChild(queueTitleElement);
+    queueListElement = document.createElement("ul");
+    queueListElement.id = QUEUE_LIST_ID;
+    queueListElement.setAttribute('role', 'listbox');
+    queueContainerElement.appendChild(queueListElement);
+    playerContainer.appendChild(queueContainerElement);
+
+    const controlsWrapper = document.createElement("div");
+    controlsWrapper.id = "player-controls-wrapper";
+
+    miniCoverElement = document.createElement("div");
+    miniCoverElement.id = MINI_COVER_ID;
+    miniCoverElement.title = "Expand player";
+    miniCoverElement.setAttribute('role', 'button');
+    miniCoverElement.setAttribute('aria-label', 'Expand player');
+    controlsWrapper.appendChild(miniCoverElement);
+
+    const controlsMain = document.createElement("div");
+    controlsMain.id = "player-controls-main";
+
+    const songInfoContainer = document.createElement("div");
+    songInfoContainer.id = "cover-flow-song-info";
+    songInfoContainer.setAttribute('role', 'status');
+    songInfoContainer.setAttribute('aria-live', 'polite');
+    titleElement = document.createElement("h3");
+    titleElement.id = TITLE_ID;
+    songInfoContainer.appendChild(titleElement);
+    artistElement = document.createElement("p");
+    artistElement.id = ARTIST_ID;
+    songInfoContainer.appendChild(artistElement);
+    controlsMain.appendChild(songInfoContainer);
+
+    controlsContainer = document.createElement("div");
+    controlsContainer.id = CONTROLS_CONTAINER_ID;
+    const progressBarContainer = document.createElement("div");
+    progressBarContainer.id = PROGRESS_BAR_CONTAINER_ID;
+    currentTimeElement = document.createElement("span");
+    currentTimeElement.id = CURRENT_TIME_ID;
+    currentTimeElement.textContent = "0:00";
+    progressBarContainer.appendChild(currentTimeElement);
+
+    const progressWrapper = document.createElement("div");
+    progressWrapper.id = "progress-visual-wrapper";
+    const visualTrack = document.createElement("div");
+    visualTrack.className = "progress-visual-track";
+
+    progressBufferElement = document.createElement("div");
+    progressBufferElement.className = "progress-buffer-bar";
+    visualTrack.appendChild(progressBufferElement);
+    progressFillElement = document.createElement("div");
+    progressFillElement.className = "progress-fill-bar";
+    visualTrack.appendChild(progressFillElement);
     progressWrapper.appendChild(visualTrack);
 
-    progressThumbElement = document.createElement("div"); progressThumbElement.className = "progress-thumb"; progressWrapper.appendChild(progressThumbElement);
+    progressThumbElement = document.createElement("div");
+    progressThumbElement.className = "progress-thumb";
+    progressWrapper.appendChild(progressThumbElement);
 
-    progressBar = document.createElement("input"); progressBar.type = "range"; progressBar.id = PROGRESS_BAR_ID; progressBar.className = "transparent-seeker";
-    progressBar.min = 0; progressBar.max = 100; progressBar.step = 0.01; progressBar.setAttribute('aria-label', 'Seek'); progressWrapper.appendChild(progressBar);
+    progressBar = document.createElement("input");
+    progressBar.type = "range";
+    progressBar.id = PROGRESS_BAR_ID;
+    progressBar.className = "transparent-seeker";
+    progressBar.min = 0;
+    progressBar.max = 100;
+    progressBar.step = 0.01;
+    progressBar.value = 0;
+    progressBar.setAttribute('aria-label', 'Seek');
+    progressBar.setAttribute('aria-valuemin', '0');
+    progressBar.setAttribute('aria-valuemax', '100');
+    progressBar.setAttribute('aria-valuenow', '0');
+    progressWrapper.appendChild(progressBar);
 
     progressBarContainer.appendChild(progressWrapper);
 
-    durationElement = document.createElement("span"); durationElement.id = DURATION_ID; progressBarContainer.appendChild(durationElement);
+    durationElement = document.createElement("span");
+    durationElement.id = DURATION_ID;
+    durationElement.textContent = "--:--";
+    progressBarContainer.appendChild(durationElement);
     controlsContainer.appendChild(progressBarContainer);
-    const bottomControls = document.createElement('div'); bottomControls.id = 'player-bottom-controls';
-    volumeContainer = document.createElement("div"); volumeContainer.id = VOLUME_CONTAINER_ID;
-    volumeIconElement = document.createElement("img"); volumeIconElement.id = VOLUME_ICON_ID; volumeIconElement.src = ICON_VOLUME; volumeContainer.appendChild(volumeIconElement);
-    volumeSlider = document.createElement("input"); volumeSlider.type = "range"; volumeSlider.id = VOLUME_SLIDER_ID; volumeSlider.min = 0; volumeSlider.max = 1; volumeSlider.step = 0.01; volumeSlider.value = 0.5; volumeContainer.appendChild(volumeSlider);
-    volumePercentageElement = document.createElement("span"); volumePercentageElement.id = VOLUME_PERCENTAGE_ID; volumePercentageElement.textContent = "50%"; volumeContainer.appendChild(volumePercentageElement);
-    shuffleButtonElement = document.createElement("button"); shuffleButtonElement.id = SHUFFLE_BUTTON_ID; shuffleButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'extra-control');
-    const shuffleIcon = document.createElement("img"); shuffleIcon.src = ICON_SHUFFLE_OFF; shuffleButtonElement.appendChild(shuffleIcon); volumeContainer.appendChild(shuffleButtonElement);
-    repeatButtonElement = document.createElement("button"); repeatButtonElement.id = REPEAT_BUTTON_ID; repeatButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'extra-control');
-    const repeatIcon = document.createElement("img"); repeatIcon.src = ICON_REPEAT_NONE; repeatButtonElement.appendChild(repeatIcon); volumeContainer.appendChild(repeatButtonElement);
+
+    const bottomControls = document.createElement('div');
+    bottomControls.id = 'player-bottom-controls';
+    volumeContainer = document.createElement("div");
+    volumeContainer.id = VOLUME_CONTAINER_ID;
+    volumeIconElement = document.createElement("img");
+    volumeIconElement.id = VOLUME_ICON_ID;
+    volumeIconElement.src = ICON_VOLUME;
+    volumeContainer.appendChild(volumeIconElement);
+    volumeSlider = document.createElement("input");
+    volumeSlider.type = "range";
+    volumeSlider.id = VOLUME_SLIDER_ID;
+    volumeSlider.min = 0;
+    volumeSlider.max = 1;
+    volumeSlider.step = 0.01;
+    volumeSlider.value = 0.5;
+    volumeSlider.setAttribute('aria-label', 'Volume');
+    volumeSlider.setAttribute('aria-valuemin', '0');
+    volumeSlider.setAttribute('aria-valuemax', '100');
+    volumeSlider.setAttribute('aria-valuenow', '50');
+    volumeContainer.appendChild(volumeSlider);
+    volumePercentageElement = document.createElement("span");
+    volumePercentageElement.id = VOLUME_PERCENTAGE_ID;
+    volumePercentageElement.textContent = "50%";
+    volumeContainer.appendChild(volumePercentageElement);
+    shuffleButtonElement = document.createElement("button");
+    shuffleButtonElement.id = SHUFFLE_BUTTON_ID;
+    shuffleButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'extra-control');
+    const shuffleIcon = document.createElement("img");
+    shuffleIcon.src = ICON_SHUFFLE_OFF;
+    shuffleButtonElement.appendChild(shuffleIcon);
+    volumeContainer.appendChild(shuffleButtonElement);
+    repeatButtonElement = document.createElement("button");
+    repeatButtonElement.id = REPEAT_BUTTON_ID;
+    repeatButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'extra-control');
+    const repeatIcon = document.createElement("img");
+    repeatIcon.src = ICON_REPEAT_NONE;
+    repeatButtonElement.appendChild(repeatIcon);
+    volumeContainer.appendChild(repeatButtonElement);
     bottomControls.appendChild(volumeContainer);
 
-    const mainControlsCenter = document.createElement('div'); mainControlsCenter.id = 'player-main-controls-center';
-    prevButtonElement = document.createElement("button"); prevButtonElement.id = PREV_BUTTON_ID; prevButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
-    const prevIcon = document.createElement("img"); prevIcon.src = ICON_PREV; prevButtonElement.appendChild(prevIcon); mainControlsCenter.appendChild(prevButtonElement);
-    playPauseButton = document.createElement("button"); playPauseButton.id = PLAY_PAUSE_BUTTON_ID; playPauseButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
-    const playPauseIcon = document.createElement("img"); playPauseIcon.src = ICON_PLAY; playPauseButton.appendChild(playPauseIcon); mainControlsCenter.appendChild(playPauseButton);
-    nextButtonElement = document.createElement("button"); nextButtonElement.id = NEXT_BUTTON_ID; nextButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
-    const nextIcon = document.createElement("img"); nextIcon.src = ICON_NEXT; nextButtonElement.appendChild(nextIcon); mainControlsCenter.appendChild(nextButtonElement); bottomControls.appendChild(mainControlsCenter);
+    const mainControlsCenter = document.createElement('div');
+    mainControlsCenter.id = 'player-main-controls-center';
+    prevButtonElement = document.createElement("button");
+    prevButtonElement.id = PREV_BUTTON_ID;
+    prevButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
+    prevButtonElement.setAttribute('aria-label', 'Previous');
+    prevButtonElement.title = 'Previous';
+    const prevIcon = document.createElement("img");
+    prevIcon.src = ICON_PREV;
+    prevButtonElement.appendChild(prevIcon);
+    mainControlsCenter.appendChild(prevButtonElement);
+    playPauseButton = document.createElement("button");
+    playPauseButton.id = PLAY_PAUSE_BUTTON_ID;
+    playPauseButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
+    const playPauseIcon = document.createElement("img");
+    playPauseIcon.src = ICON_PLAY;
+    playPauseButton.appendChild(playPauseIcon);
+    mainControlsCenter.appendChild(playPauseButton);
+    nextButtonElement = document.createElement("button");
+    nextButtonElement.id = NEXT_BUTTON_ID;
+    nextButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
+    nextButtonElement.setAttribute('aria-label', 'Next');
+    nextButtonElement.title = 'Next';
+    const nextIcon = document.createElement("img");
+    nextIcon.src = ICON_NEXT;
+    nextButtonElement.appendChild(nextIcon);
+    mainControlsCenter.appendChild(nextButtonElement);
+    bottomControls.appendChild(mainControlsCenter);
 
-    const extraControlsRight = document.createElement('div'); extraControlsRight.id = 'player-extra-controls-right';
-    const favoriteButton = document.createElement("button"); favoriteButton.id = FAVORITE_BUTTON_ID; favoriteButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'extra-control');
-    favoriteButton.innerHTML = `<img src="${ICON_HEART_EMPTY}" alt="Favorite">`; extraControlsRight.appendChild(favoriteButton);
+    const extraControlsRight = document.createElement('div');
+    extraControlsRight.id = 'player-extra-controls-right';
+    const favoriteButton = document.createElement("button");
+    favoriteButton.id = FAVORITE_BUTTON_ID;
+    favoriteButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'extra-control');
+    favoriteButton.innerHTML = `<img src="${ICON_HEART_EMPTY}" alt="Favorite">`;
+    extraControlsRight.appendChild(favoriteButton);
 
-    playlistSelectorElement = document.createElement("select"); playlistSelectorElement.id = PLAYLIST_SELECTOR_ID; extraControlsRight.appendChild(playlistSelectorElement);
-    queueToggleButton = document.createElement('button'); queueToggleButton.id = QUEUE_TOGGLE_ICON_ID; queueToggleButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'extra-control'); queueToggleButton.innerHTML = '<span>≡</span>'; queueToggleButton.title = "Show/Hide Queue"; extraControlsRight.appendChild(queueToggleButton);
+    playlistSelectorElement = document.createElement("select");
+    playlistSelectorElement.id = PLAYLIST_SELECTOR_ID;
+    playlistSelectorElement.setAttribute('aria-label', 'Select playlist');
+    extraControlsRight.appendChild(playlistSelectorElement);
+
+    queueToggleButton = document.createElement('button');
+    queueToggleButton.id = QUEUE_TOGGLE_ICON_ID;
+    queueToggleButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'extra-control');
+    queueToggleButton.innerHTML = '<span>≡</span>';
+    queueToggleButton.title = "Show/Hide Queue";
+    queueToggleButton.setAttribute('aria-label', 'Show/Hide Queue');
+    queueToggleButton.setAttribute('aria-expanded', 'false');
+    extraControlsRight.appendChild(queueToggleButton);
+
+    minimizeButtonElement = document.createElement("button");
+    minimizeButtonElement.id = MINIMIZE_BUTTON_ID;
+    minimizeButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'extra-control');
+    const minimizeIcon = document.createElement("img");
+    minimizeIcon.src = ICON_MINIMIZE;
+    minimizeIcon.alt = "Minimize player";
+    minimizeButtonElement.appendChild(minimizeIcon);
+    extraControlsRight.appendChild(minimizeButtonElement);
+
     bottomControls.appendChild(extraControlsRight);
 
     controlsContainer.appendChild(bottomControls);
-    controlsWrapper.appendChild(controlsContainer);
+    controlsMain.appendChild(controlsContainer);
+    controlsWrapper.appendChild(controlsMain);
     playerContainer.appendChild(controlsWrapper);
-    const youtubePlayerDiv = document.createElement("div"); youtubePlayerDiv.id = YOUTUBE_PLAYER_DIV_ID; fragment.appendChild(youtubePlayerDiv);
+
+    const youtubePlayerDiv = document.createElement("div");
+    youtubePlayerDiv.id = YOUTUBE_PLAYER_DIV_ID;
+    fragment.appendChild(youtubePlayerDiv);
     return fragment;
   }
 
@@ -38699,18 +38959,18 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
   function loadFavorites() {
     const state = loadState();
-    if (state.favorites) {
+    if (Array.isArray(state.favorites)) {
       userFavorites = state.favorites.map(s => new Song(s.title, s.artist, s.coverLink, s.videoIds));
     }
   }
 
   function saveFavorites() {
-    saveState({ favorites: userFavorites });
+    saveState({ favorites: userFavorites.map(s => s.toJSON()) });
     updateFavoritesPlaylistEntry();
   }
 
   function updateFavoritesPlaylistEntry() {
-    let favIndex = PLAYLISTS_DATA.findIndex(p => p.isFavorites);
+    const favIndex = PLAYLISTS_DATA.findIndex(p => p.isFavorites);
     if (favIndex === -1) {
       PLAYLISTS_DATA.push({ name: "My favorites", songs: userFavorites, isFavorites: true });
     } else {
@@ -38722,15 +38982,19 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     const currentSong = playlist.getCurrentSong();
     if (!currentSong) return;
 
-    const index = userFavorites.findIndex(s => s.getTitle() === currentSong.getTitle());
+    const index = userFavorites.findIndex(s => s.matches(currentSong));
     if (index === -1) userFavorites.push(currentSong);
     else userFavorites.splice(index, 1);
 
     saveFavorites();
     updateFavoriteButtonUI();
 
-    if (PLAYLISTS_DATA[activePlaylistIndex].isFavorites) {
+    if (PLAYLISTS_DATA[activePlaylistIndex]?.isFavorites) {
+      const updatedSongs = userFavorites.map(s => new Song(s.title, s.artist, s.coverLink, s.videoIds));
+      originalSongOrderForCurrentPlaylist = [...updatedSongs];
+      playlist.setSongs(isShuffleActive ? shuffleArray(updatedSongs) : updatedSongs);
       lastQueuePlaylistId = null;
+      resetCoverFlow();
       updateQueueDisplay();
     }
   }
@@ -38739,13 +39003,16 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     const btn = document.getElementById(FAVORITE_BUTTON_ID);
     if (!btn) return;
     const currentSong = playlist.getCurrentSong();
-    const isLiked = currentSong && userFavorites.some(s => s.getTitle() === currentSong.getTitle());
+    const isLiked = Boolean(currentSong && userFavorites.some(s => s.matches(currentSong)));
 
-    btn.querySelector('img').src = isLiked ? ICON_HEART_FULL : ICON_HEART_EMPTY;
-    btn.title = isLiked ? "Remove from favorites" : "Add to favorites";
+    const img = btn.querySelector('img');
+    if (img) img.src = isLiked ? ICON_HEART_FULL : ICON_HEART_EMPTY;
+    const label = isLiked ? "Remove from favorites" : "Add to favorites";
+    btn.title = label;
+    btn.setAttribute('aria-label', label);
+    btn.setAttribute('aria-pressed', String(isLiked));
   }
 
-  // debounce function
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -38756,23 +39023,23 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   const debouncedSaveState = debounce((patch) => saveState(patch), 500);
 
   function loadYouTubeAPI() {
-	  return new Promise((resolve) => {
-		if (window.YT && window.YT.Player) return resolve();
+    return new Promise((resolve) => {
+      if (window.YT && window.YT.Player) return resolve();
 
-		const previous = window.onYouTubeIframeAPIReady;
-		window.onYouTubeIframeAPIReady = () => {
-		  if (previous) previous();
-		  resolve();
-		};
+      const previous = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (previous) previous();
+        resolve();
+      };
 
-		if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
-		  const tag = document.createElement('script');
-		  tag.src = "https://www.youtube.com/iframe_api";
-		  tag.async = true;
-		  document.head.appendChild(tag);
-		}
-	  });
-	}
+      if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        tag.async = true;
+        document.head.appendChild(tag);
+      }
+    });
+  }
 
   let isDragging = false;
   let dragMoved = false;
@@ -38781,7 +39048,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   const DRAG_THRESHOLD_PX = 6;
 
   function bindUIEventListeners() {
-    if (!playPauseButton || !nextButtonElement || !prevButtonElement || !repeatButtonElement || !shuffleButtonElement || !progressBar || !volumeIconElement || !volumeSlider || !playlistSelectorElement || !queueToggleButton) return;
+    if (!playPauseButton || !nextButtonElement || !prevButtonElement || !repeatButtonElement || !shuffleButtonElement || !progressBar || !volumeIconElement || !volumeSlider || !playlistSelectorElement || !queueToggleButton || !minimizeButtonElement) return;
 
     playPauseButton.addEventListener("click", togglePlayPause);
     nextButtonElement.addEventListener("click", () => {
@@ -38811,194 +39078,186 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     repeatButtonElement.addEventListener("click", toggleRepeatMode);
     shuffleButtonElement.addEventListener("click", toggleShuffleMode);
     volumeIconElement.addEventListener("click", toggleMute);
-
-    queueToggleButton.addEventListener('click', () => {
-      queueContainerElement.classList.toggle('hidden');
-      const visible = !queueContainerElement.classList.contains('hidden');
-      saveState({ queueVisible: visible });
-      if (visible) updateQueueDisplay();
-    });
+    queueToggleButton.addEventListener('click', toggleQueue);
+    minimizeButtonElement.addEventListener('click', toggleMinimize);
+    if (miniCoverElement) miniCoverElement.addEventListener('click', () => { if (isMinimized) toggleMinimize(); });
 
     queueListElement.addEventListener('click', (e) => {
-        const li = e.target.closest(`.${PLAYER_QUEUE_ITEM_CLASS}`);
-          if (!li || !queueListElement.contains(li)) return;
-          const index = Number(li.dataset.index);
-          if (!Number.isInteger(index)) return;
-          playlist.setCurrentSongIndex(index);
-          loadCurrentSong(true);
-        });
+      const li = e.target.closest(`.${PLAYER_QUEUE_ITEM_CLASS}`);
+      if (!li || !queueListElement.contains(li)) return;
+      const index = Number(li.dataset.index);
+      if (!Number.isInteger(index)) return;
+      playlist.setCurrentSongIndex(index);
+      loadCurrentSong(true);
+    });
 
-        queueListElement.addEventListener('dragstart', (e) => {
-          const li = e.target.closest(`.${PLAYER_QUEUE_ITEM_CLASS}`);
-          if (!li || !li.draggable) return;
-          dragSrcEl = li;
-          e.dataTransfer.effectAllowed = 'move';
-          // Firefox requires dataTransfer.setData to allow dragging
-          e.dataTransfer.setData('text/plain', li.dataset.index);
-          li.classList.add('dragging');
-        });
+    queueListElement.addEventListener('dragstart', (e) => {
+      const li = e.target.closest(`.${PLAYER_QUEUE_ITEM_CLASS}`);
+      if (!li || !li.draggable) return;
+      dragSrcEl = li;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', li.dataset.index);
+      li.classList.add('dragging');
+    });
 
-        queueListElement.addEventListener('dragover', (e) => {
-          if (!dragSrcEl) return;
-          e.preventDefault();
-          e.dataTransfer.dropEffect = 'move';
-        });
+    queueListElement.addEventListener('dragover', (e) => {
+      if (!dragSrcEl) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+    });
 
-        queueListElement.addEventListener('drop', (e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          const targetLi = e.target.closest(`.${PLAYER_QUEUE_ITEM_CLASS}`);
-          if (!targetLi || !dragSrcEl || dragSrcEl === targetLi) return;
+    queueListElement.addEventListener('drop', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const targetLi = e.target.closest(`.${PLAYER_QUEUE_ITEM_CLASS}`);
+      if (!targetLi || !dragSrcEl || dragSrcEl === targetLi) return;
 
-          const fromIndex = parseInt(dragSrcEl.dataset.index, 10);
-          const toIndex = parseInt(targetLi.dataset.index, 10);
-          if (isNaN(fromIndex) || isNaN(toIndex) || fromIndex === toIndex) return;
+      const fromIndex = parseInt(dragSrcEl.dataset.index, 10);
+      const toIndex = parseInt(targetLi.dataset.index, 10);
+      if (isNaN(fromIndex) || isNaN(toIndex) || fromIndex === toIndex) return;
 
-          // Reorder favorites array
-          const movedItem = userFavorites.splice(fromIndex, 1)[0];
-          userFavorites.splice(toIndex, 0, movedItem);
-          saveFavorites();
+      const movedItem = userFavorites.splice(fromIndex, 1)[0];
+      userFavorites.splice(toIndex, 0, movedItem);
+      saveFavorites();
 
-          if (PLAYLISTS_DATA[activePlaylistIndex]?.isFavorites) {
-            const currentSong = playlist.getCurrentSong();
-            originalSongOrderForCurrentPlaylist = [...userFavorites];
-            playlist.setSongs(isShuffleActive ? playlist.getSongs() : [...userFavorites]);
+      if (PLAYLISTS_DATA[activePlaylistIndex]?.isFavorites) {
+        const currentSong = playlist.getCurrentSong();
+        const updatedSongs = userFavorites.map(s => new Song(s.title, s.artist, s.coverLink, s.videoIds));
+        originalSongOrderForCurrentPlaylist = [...updatedSongs];
+        playlist.setSongs(isShuffleActive ? playlist.getSongs() : updatedSongs);
 
-            // Keep current playing song selected at its new index
-            if (currentSong) {
-              const newIdx = playlist.getSongs().findIndex(s => s.getTitle() === currentSong.getTitle());
-              if (newIdx !== -1) playlist.setCurrentSongIndex(newIdx);
-            }
-          }
+        if (currentSong) {
+          const newIdx = playlist.getSongs().findIndex(s => s.matches(currentSong));
+          if (newIdx !== -1) playlist.setCurrentSongIndex(newIdx);
+        }
+      }
 
-          lastQueuePlaylistId = null;
-          updateQueueDisplay();
-        });
+      lastQueuePlaylistId = null;
+      updateQueueDisplay();
+    });
 
-        queueListElement.addEventListener('dragend', () => {
-          if (dragSrcEl) {
-            dragSrcEl.classList.remove('dragging');
-            dragSrcEl = null;
-          }
-        });
+    queueListElement.addEventListener('dragend', () => {
+      if (dragSrcEl) {
+        dragSrcEl.classList.remove('dragging');
+        dragSrcEl = null;
+      }
+    });
 
     const coverFlowStage = document.getElementById('cover-flow-stage');
-    coverFlowStage.addEventListener('mousedown', (e) => {
-      if (!playlist || playlist.isEmpty()) return;
+    const startDrag = (clientX) => {
+      if (isMinimized || !playlist || playlist.isEmpty()) return;
       isDragging = true;
       dragMoved = false;
-      startX = e.pageX;
+      startX = clientX;
       dragStartIndex = playlist.currentSongIndex;
+      coverFlowStage.classList.add('dragging');
       coverFlowStage.style.cursor = 'grabbing';
-    });
-    const stopDragging = () => {
+    };
+
+    const moveDrag = (clientX) => {
+      const deltaX = clientX - startX;
+      if (!dragMoved && Math.abs(deltaX) < DRAG_THRESHOLD_PX) return false;
+      dragMoved = true;
+      scheduleDragRender(dragStartIndex + (deltaX * -0.005));
+      return true;
+    };
+
+    const stopDragging = (triggerPlayPauseOnClick = true) => {
       if (!isDragging) return;
       const didMove = dragMoved;
       const indexChanged = dragStartIndex !== playlist.currentSongIndex;
       isDragging = false;
       dragMoved = false;
+      pendingDragVisualIndex = null;
+      if (dragRaf) { cancelAnimationFrame(dragRaf); dragRaf = 0; }
+      coverFlowStage.classList.remove('dragging');
       coverFlowStage.style.cursor = 'grab';
 
       if (!didMove) {
-        if (!indexChanged) togglePlayPause();
+        if (triggerPlayPauseOnClick && !indexChanged) togglePlayPause();
         return;
       }
       if (indexChanged) {
         loadCurrentSong(isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING);
+      } else {
+        updateCoverFlow(0);
       }
     };
-    coverFlowStage.addEventListener('mouseleave', stopDragging);
-    coverFlowStage.addEventListener('mouseup', stopDragging);
+
+    coverFlowStage.addEventListener('mousedown', (e) => startDrag(e.pageX));
+    coverFlowStage.addEventListener('mouseleave', () => stopDragging(false));
+    coverFlowStage.addEventListener('mouseup', () => stopDragging(true));
     coverFlowStage.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
       e.preventDefault();
-      const deltaX = e.pageX - startX;
-      if (!dragMoved && Math.abs(deltaX) < DRAG_THRESHOLD_PX) return;
-      dragMoved = true;
-      const fractionalOffset = deltaX * -0.005;
-      updateCoverFlow(fractionalOffset);
+      moveDrag(e.pageX);
     });
 
-    let wheelLocked = false;
+    let lastWheelTime = 0;
     coverFlowStage.addEventListener('wheel', (e) => {
-      e.preventDefault(); e.stopPropagation();
-      if (!playlist || playlist.isEmpty() || wheelLocked) return;
-      const canGoNext = e.deltaY > 0 && playlist.currentSongIndex < playlist.getSongs().length - 1;
-      const canGoPrev = e.deltaY < 0 && playlist.currentSongIndex > 0;
+      e.preventDefault();
+      e.stopPropagation();
+      if (isMinimized || !playlist || playlist.isEmpty()) return;
+      const now = performance.now();
+      if (now - lastWheelTime < 280) return;
+
+      const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      const canGoNext = delta > 0 && playlist.currentSongIndex < playlist.getSongs().length - 1;
+      const canGoPrev = delta < 0 && playlist.currentSongIndex > 0;
 
       if (canGoNext || canGoPrev) {
-        wheelLocked = true;
-        setTimeout(() => { wheelLocked = false; }, 300);
+        lastWheelTime = now;
         const wasPlaying = isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
         if (canGoNext) playlist.playNext();
-        else if (canGoPrev) playlist.playPrevious();
+        else playlist.playPrevious();
         loadCurrentSong(wasPlaying);
       }
     }, { passive: false });
 
-    coverFlowStage.addEventListener('dblclick', () => togglePlayPause());
     document.getElementById(FAVORITE_BUTTON_ID).addEventListener("click", toggleFavorite);
 
     coverFlowStage.addEventListener('touchstart', (e) => {
-      if (!playlist || playlist.isEmpty()) return;
       const t = e.touches[0];
-      isDragging = true;
-      dragMoved = false;
-      startX = t.pageX;
-      dragStartIndex = playlist.currentSongIndex;
-      coverFlowStage.style.cursor = 'grabbing';
+      if (t) startDrag(t.pageX);
     }, { passive: true });
     coverFlowStage.addEventListener('touchmove', (e) => {
       if (!isDragging) return;
-      e.preventDefault();
       const t = e.touches[0];
-      if (!dragMoved && Math.abs(t.pageX - startX) < DRAG_THRESHOLD_PX) return;
-      dragMoved = true;
-      const walk = (t.pageX - startX) * -0.005;
-      const newIndex = Math.round(dragStartIndex + walk);
-      const clampedIndex = Math.max(0, Math.min(playlist.getSongs().length - 1, newIndex));
-      scheduleDragRender(clampedIndex);
+      if (!t) return;
+      if (moveDrag(t.pageX)) e.preventDefault();
     }, { passive: false });
-    coverFlowStage.addEventListener('touchend', () => {
-      if (!isDragging) return;
-      const indexChanged = dragStartIndex !== playlist.currentSongIndex;
-      isDragging = false;
-      const didMove = dragMoved;
-      dragMoved = false;
-      coverFlowStage.style.cursor = 'grab';
-      if (didMove && indexChanged) {
-        loadCurrentSong(isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING);
-      }
-    });
+    coverFlowStage.addEventListener('touchend', () => stopDragging(false));
+    coverFlowStage.addEventListener('touchcancel', () => stopDragging(false));
 
     const progressWrapper = document.getElementById('progress-visual-wrapper');
     if (progressWrapper) {
       progressBarObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
+        for (const entry of entries) {
           cachedProgressBarWidth = entry.contentRect.width;
-          updateProgressVisuals(parseFloat(progressBar.value) || 0);
+          updateProgressVisuals(parseFloat(progressBar.value) || 0, lastRenderedBuffer || 0);
         }
       });
       progressBarObserver.observe(progressWrapper);
     }
 
     const onSeekStart = () => {
-          if (!hasUserInitiatedPlayback) return;
-          isSeeking = true;
-          stopRafUpdater();
-          progressBar.value = lastProgress;
-        };
+      if (!hasUserInitiatedPlayback) return;
+      isSeeking = true;
+      stopRafUpdater();
+      progressBar.value = lastProgress;
+    };
 
-        progressBar.addEventListener('mousedown', onSeekStart);
-        progressBar.addEventListener('touchstart', onSeekStart, { passive: true });
-        progressBar.addEventListener('focus', () => {
-        progressBar.value = lastProgress;
+    progressBar.addEventListener('mousedown', onSeekStart);
+    progressBar.addEventListener('touchstart', onSeekStart, { passive: true });
+    progressBar.addEventListener('focus', () => {
+      progressBar.value = lastProgress;
     });
 
     progressBar.addEventListener("input", () => {
-      if (!isSeeking || !hasUserInitiatedPlayback) return;
+      if (!hasUserInitiatedPlayback) return;
+      if (!isSeeking) { isSeeking = true; stopRafUpdater(); }
       const percentage = parseFloat(progressBar.value) || 0;
-      updateProgressVisuals(percentage);
+      updateProgressVisuals(percentage, lastRenderedBuffer || 0);
       if (isPlayerActive() && currentTimeElement) {
         const duration = cachedDuration || ytPlayer.getDuration();
         if (duration > 0) currentTimeElement.textContent = formatTime((percentage / 100) * duration);
@@ -39011,10 +39270,14 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       if (!isPlayerActive() || typeof ytPlayer.seekTo !== 'function') { isSeeking = false; return; }
       const duration = cachedDuration || ytPlayer.getDuration();
       if (duration > 0) {
-        const seekTime = (progressBar.value / 100) * duration;
-        pendingSeekTime = seekTime; seekSettlingTime = 0;
+        const pct = parseFloat(progressBar.value) || 0;
+        const seekTime = (pct / 100) * duration;
+        pendingSeekTime = seekTime;
+        seekSettlingTime = 0;
+        lastProgress = pct;
         ytPlayer.seekTo(seekTime, true);
         if (currentTimeElement) currentTimeElement.textContent = formatTime(seekTime);
+        progressBar.setAttribute('aria-valuenow', pct.toFixed(2));
       }
       isSeeking = false;
       if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) startRafUpdater();
@@ -39024,11 +39287,12 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     progressBar.addEventListener('click', (e) => {
       if (!hasUserInitiatedPlayback) return;
       const rect = progressBar.getBoundingClientRect();
+      if (!rect.width) return;
       const x = (e.clientX ?? 0);
       const ratio = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
       const percentage = ratio * 100;
       progressBar.value = percentage;
-      updateProgressVisuals(percentage);
+      updateProgressVisuals(percentage, lastRenderedBuffer || 0);
       applySeekFromProgressBar();
     });
 
@@ -39048,13 +39312,9 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     playlistSelectorElement.addEventListener("change", (event) => loadNewPlaylistByIndex(parseInt(event.target.value, 10)));
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
+    playerContainer.addEventListener('keydown', (e) => {
       const tag = (document.activeElement && document.activeElement.tagName || '').toLowerCase();
       if (tag === 'input' || tag === 'textarea' || tag === 'select' || document.activeElement?.isContentEditable) return;
-
-      const isPlayerFocused = document.activeElement === playerContainer || playerContainer.contains(document.activeElement);
-      if (!isPlayerFocused) return;
 
       switch (e.key) {
         case ' ': e.preventDefault(); togglePlayPause(); break;
@@ -39079,6 +39339,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
           if (!volumeSlider) return;
           volumeSlider.value = String(Math.min(1, parseFloat(volumeSlider.value) + 0.05));
           setVolumeFromSlider(true);
+          debouncedSaveState({ volume: parseFloat(volumeSlider.value), muted: isPlayerActive() && ytPlayer.isMuted() });
           break;
         }
         case 'ArrowDown': {
@@ -39086,15 +39347,14 @@ window.tctCityVisits = { ensureVisitOverlayCities };
           if (!volumeSlider) return;
           volumeSlider.value = String(Math.max(0, parseFloat(volumeSlider.value) - 0.05));
           setVolumeFromSlider(true);
+          debouncedSaveState({ volume: parseFloat(volumeSlider.value), muted: isPlayerActive() && ytPlayer.isMuted() });
           break;
         }
         case 'm': case 'M': toggleMute(); break;
         case 's': case 'S': toggleShuffleMode(); break;
         case 'r': case 'R': toggleRepeatMode(); break;
-        case 'q': case 'Q':
-          queueContainerElement.classList.toggle('hidden');
-          saveState({ queueVisible: !queueContainerElement.classList.contains('hidden') });
-          break;
+        case 'q': case 'Q': toggleQueue(); break;
+        case 'c': case 'C': toggleMinimize(); break;
         case '1': case '2': case '3':
           loadNewPlaylistByIndex(parseInt(e.key, 10) - 1);
           break;
@@ -39145,7 +39405,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     });
 
     window.addEventListener('resize', () => {
-      if (resizeRaf) return;
+      if (isMinimized || resizeRaf) return;
       resizeRaf = requestAnimationFrame(() => {
         resizeRaf = 0;
         updateCoverFlow();
@@ -39167,154 +39427,228 @@ window.tctCityVisits = { ensureVisitOverlayCities };
                 --transition-speed: 0.5s; --transition-func: cubic-bezier(0.25, 0.46, 0.45, 0.94);
                 --volume-fill-bg: rgba(240, 240, 240, 0.45);
             }
-            #${PLAYER_ELEMENT_ID} { display: flex; flex-direction: column; background-color: var(--player-bg); width: 100%; height: 450px; overflow: hidden; position: relative; font-family: var(--font-family); border-radius: 0 0 .4em .4em; contain: content; }
-			#cover-flow-stage {
-				flex-grow: 1;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				position: relative;
-				cursor: grab;
-				-webkit-user-select: none;
-				user-select: none;
-				padding-bottom: 40px;
-				overflow: hidden;
-				touch-action: pan-y;
+            #${PLAYER_ELEMENT_ID} {
+                display: flex; flex-direction: column; background-color: var(--player-bg);
+                width: 100%; height: 450px; overflow: hidden; position: relative;
+                font-family: var(--font-family); border-radius: 0 0 .4em .4em; contain: content;
+                transition: height 0.28s var(--transition-func);
+            }
+            #${PLAYER_ELEMENT_ID}.minimized {
+                height: 125px;
+            }
+            #${PLAYER_ELEMENT_ID}.minimized.has-open-queue {
+                height: auto;
+                min-height: 125px;
+            }
+            #${PLAYER_ELEMENT_ID}.minimized #cover-flow-stage {
+                display: none;
+            }
+            #${PLAYER_ELEMENT_ID}.minimized #player-controls-wrapper {
+                position: relative; bottom: auto; left: auto; right: auto;
+                flex-direction: row; justify-content: center; gap: 16px;
+                padding: 10px 20px; border-top: none; order: 1; flex-shrink: 0;
+            }
+            #${PLAYER_ELEMENT_ID}.minimized #${MINI_COVER_ID} {
+                display: block;
+            }
+            #${PLAYER_ELEMENT_ID}.minimized #player-controls-main {
+                flex: 1; min-width: 0; max-width: 800px;
+            }
+            #${PLAYER_ELEMENT_ID}.minimized #${VOLUME_SLIDER_ID} {
+                width: clamp(60px, 11vw, 120px);
+            }
+            #${PLAYER_ELEMENT_ID}.minimized #${QUEUE_CONTAINER_ID} {
+                position: relative; bottom: auto; left: auto; transform: none;
+                width: calc(100% - 40px); margin: 8px auto 12px;
+                box-sizing: border-box; order: 2;
+            }
+            #${PLAYER_ELEMENT_ID}.minimized #${QUEUE_CONTAINER_ID}.hidden {
+                display: none;
+            }
+			#${PLAYER_ELEMENT_ID}.minimized #cover-flow-song-info {
+				align-self: stretch;
+				text-align: left;
 			}
-
-			#cover-flow-container {
-				position: relative;
-				width: 100%;
-				height: var(--cover-size);
-				transform-style: preserve-3d;
-				perspective: 1200px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				top: -42px;
+			#${PLAYER_ELEMENT_ID}.minimized #player-controls-wrapper {
+				justify-content: flex-start;
 			}
-
-			.cover-flow-item {
-				position: absolute;
-				width: var(--cover-size);
-				height: var(--cover-size);
-				aspect-ratio: 1 / 1;
-				border-radius: 6px;
-				border: 1px solid rgba(255,255,255,0.1);
-				box-shadow:
-					0 10px 30px rgba(0,0,0,0.5),
-					0 20px 60px rgba(0,0,0,0.3);
-				background-color: #1a1a1a;
-				pointer-events: none;
-				transition:
-					transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-					opacity 0.5s ease,
-					filter 0.5s ease;
-				will-change: transform, opacity;
-				backface-visibility: hidden;
-				transform-origin: center center;
-				background-size: cover;
-				background-position: center;
-			    background-repeat: no-repeat;
+			#${PLAYER_ELEMENT_ID}.minimized #player-controls-main,
+			#${PLAYER_ELEMENT_ID}.minimized #${CONTROLS_CONTAINER_ID} {
+				max-width: none;
 			}
+			
+            #cover-flow-stage {
+                flex-grow: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                cursor: grab;
+                -webkit-user-select: none;
+                user-select: none;
+                padding-bottom: 40px;
+                overflow: hidden;
+                touch-action: pan-y;
+            }
+            #cover-flow-container {
+                position: relative;
+                width: 100%;
+                height: var(--cover-size);
+                transform-style: preserve-3d;
+                perspective: 1200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: -42px;
+            }
+            .cover-flow-item {
+                position: absolute;
+                width: var(--cover-size);
+                height: var(--cover-size);
+                aspect-ratio: 1 / 1;
+                border-radius: 6px;
+                border: 1px solid rgba(255,255,255,0.1);
+                box-shadow:
+                    0 10px 30px rgba(0,0,0,0.5),
+                    0 20px 60px rgba(0,0,0,0.3);
+                background-color: #1a1a1a;
+                pointer-events: auto;
+                cursor: pointer;
+                transition:
+                    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    opacity 0.5s ease,
+                    filter 0.5s ease;
+                will-change: transform, opacity;
+                backface-visibility: hidden;
+                transform-origin: center center;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
             .cover-flow-item.has-reflection::after {
-				content: '';
-				position: absolute;
-				top: calc(100% + 5px);
-				left: 0;
-				width: 100%;
-				height: 60%;
-
-				background: inherit;
-				background-size: cover;
-				background-position: center;
-
-				transform: scaleY(-1);
-
-				-webkit-mask-image: linear-gradient(
-					to bottom,
-					rgba(0,0,0,0.4) 0%,
-					rgba(0,0,0,0.1) 65%,
-					transparent 100%
-				);
-				mask-image: linear-gradient(
-					to bottom,
-					rgba(0,0,0,0.4) 0%,
-					rgba(0,0,0,0.1) 65%,
-					transparent 100%
-				);
-			}
-			.cover-flow-item.has-reflection::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: linear-gradient(
-					135deg,
-					rgba(255,255,255,0.1) 0%,
-					transparent 50%
-				);
-				border-radius: 6px;
-				pointer-events: none;
-				z-index: 1;
-			}
-			#cover-flow-stage.dragging .cover-flow-item {
-				transition-duration: 0.1s;
-			}
-			.cover-flow-item.loading {
-				background: linear-gradient(
-					135deg,
-					#2a2a2a 0%,
-					#3a3a3a 50%,
-					#2a2a2a 100%
-				);
-				background-size: 200% 200%;
-				animation: shimmer 2s ease-in-out infinite;
-			}
-
-			@keyframes shimmer {
-				0% { background-position: 0% 0%; }
-				50% { background-position: 100% 100%; }
-				100% { background-position: 0% 0%; }
-			}
-            #player-controls-wrapper { position: absolute; bottom: 0; left: 0; right: 0; height: 125px; background: rgba(28, 28, 28, 0.96); /*-webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);*/ border-top: 1px solid rgba(255, 255, 255, 0.15); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 5px 20px; box-sizing: border-box; }
-            #cover-flow-song-info { color: var(--text-primary); text-align: center; margin-bottom: 5px; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+                content: '';
+                position: absolute;
+                top: calc(100% + 5px);
+                left: 0;
+                width: 100%;
+                height: 60%;
+                background: inherit;
+                background-size: cover;
+                background-position: center;
+                transform: scaleY(-1);
+                pointer-events: none;
+                -webkit-mask-image: linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.4) 0%,
+                    rgba(0,0,0,0.1) 65%,
+                    transparent 100%
+                );
+                mask-image: linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.4) 0%,
+                    rgba(0,0,0,0.1) 65%,
+                    transparent 100%
+                );
+            }
+            .cover-flow-item.has-reflection::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+                border-radius: 6px;
+                pointer-events: none;
+                z-index: 1;
+            }
+            #cover-flow-stage.dragging .cover-flow-item {
+                transition-duration: 0.1s;
+            }
+            .cover-flow-item.loading {
+                background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 50%, #2a2a2a 100%);
+                background-size: 200% 200%;
+                animation: shimmer 2s ease-in-out infinite;
+            }
+            @keyframes shimmer {
+                0% { background-position: 0% 0%; }
+                50% { background-position: 100% 100%; }
+                100% { background-position: 0% 0%; }
+            }
+            #player-controls-wrapper {
+                position: absolute; bottom: 0; left: 0; right: 0; height: 125px;
+                background: rgba(28, 28, 28, 0.96);
+                border-top: 1px solid rgba(255, 255, 255, 0.15);
+                display: flex; flex-direction: column; align-items: center; justify-content: center;
+                padding: 5px 20px; box-sizing: border-box;
+            }
+            #player-controls-main {
+                width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            }
+            #${MINI_COVER_ID} {
+                display: none;
+                position: relative;
+                width: 96px;
+                height: 96px;
+                aspect-ratio: 1 / 1;
+                flex-shrink: 0;
+                border-radius: 6px;
+                border: 1px solid rgba(255,255,255,0.12);
+                box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+                background-color: #1a1a1a;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                cursor: pointer;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            #${MINI_COVER_ID}:hover {
+                transform: scale(1.03);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+            }
+            #${MINI_COVER_ID}::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%);
+                border-radius: 6px;
+                pointer-events: none;
+            }
+            #cover-flow-song-info {
+                color: var(--text-primary); text-align: center; margin-bottom: 5px;
+                text-shadow: 0 1px 3px rgba(0,0,0,0.6); max-width: 100%;
+            }
+            #${TITLE_ID}, #${ARTIST_ID} {
+                white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            }
             #${TITLE_ID} { font-size: 16px; font-weight: 500; margin: 0; }
             #${ARTIST_ID} { font-size: 14px; color: var(--text-secondary); margin: 0; }
             #${CONTROLS_CONTAINER_ID} { width: 100%; max-width: 800px; display: flex; flex-direction: column; align-items: center; }
             #${PROGRESS_BAR_CONTAINER_ID} {
-				width: 100%;
-				display: flex;
-				align-items: center;
-				gap: 10px;
-				order: 1;
-				margin-bottom: 10px;
-				height: 20px;
-				/* transform: translate3d(0, 0, 0); */
-			}
-
-			#${CURRENT_TIME_ID}, #${DURATION_ID} {
-				font-size: 11px;
-				color: var(--text-secondary);
-				min-width: 35px;
-				text-align: center;
-				flex-shrink: 0;
-				font-variant-numeric: tabular-nums;
-				letter-spacing: 0.3px;
-			}
-
-			#nice-music-player input[type="range"] {
-				-webkit-appearance: none;
-				appearance: none;
-				background: transparent;
-				cursor: pointer;
-				width: 100%;
-				outline: none;
-				flex-grow: 1;
-				flex-shrink: 1;
-			}
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                order: 1;
+                margin-bottom: 10px;
+                height: 20px;
+            }
+            #${CURRENT_TIME_ID}, #${DURATION_ID} {
+                font-size: 11px;
+                color: var(--text-secondary);
+                min-width: 35px;
+                text-align: center;
+                flex-shrink: 0;
+                font-variant-numeric: tabular-nums;
+                letter-spacing: 0.3px;
+            }
+            #nice-music-player input[type="range"] {
+                -webkit-appearance: none;
+                appearance: none;
+                background: transparent;
+                cursor: pointer;
+                width: 100%;
+                outline: none;
+                flex-grow: 1;
+                flex-shrink: 1;
+            }
             #nice-music-player input[type="range"]::-webkit-slider-runnable-track { height: 5px; background: var(--slider-track-bg); border-radius: 5px; }
             #nice-music-player input[type="range"]::-moz-range-track { height: 5px; background: var(--slider-track-bg); border-radius: 5px; }
             #nice-music-player input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -5px; height: 15px; width: 15px; background-color: var(--slider-thumb-bg); border-radius: 50%; border: none; }
@@ -39322,162 +39656,142 @@ window.tctCityVisits = { ensureVisitOverlayCities };
             #player-bottom-controls { display: flex; align-items: center; justify-content: space-between; width: 100%; order: 2; }
             #player-main-controls-center { flex: 1; display: flex; align-items: center; justify-content: center; gap: 20px; }
             #${VOLUME_CONTAINER_ID} { flex: 1; display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
-			#${VOLUME_ICON_ID}, #${QUEUE_TOGGLE_ICON_ID} {
-				transition: opacity 0.2s ease, transform 0.2s ease;
-				opacity: 0.8;
-			}
-			#${VOLUME_ICON_ID}:hover, #${QUEUE_TOGGLE_ICON_ID}:hover {
-				opacity: 1;
-				transform: scale(1.1);
-			}
+            #${VOLUME_ICON_ID}, #${QUEUE_TOGGLE_ICON_ID} {
+                transition: opacity 0.2s ease, transform 0.2s ease;
+                opacity: 0.8;
+            }
+            #${VOLUME_ICON_ID}:hover, #${QUEUE_TOGGLE_ICON_ID}:hover {
+                opacity: 1;
+                transform: scale(1.1);
+            }
             #${VOLUME_ICON_ID} { width: 18px; height: 18px; cursor: pointer; }
             #${VOLUME_SLIDER_ID} { width: 140px; }
-            #${VOLUME_PERCENTAGE_ID} { font-size: 11px; color: var(--text-secondary); min-width: 35px; }
+            #${VOLUME_PERCENTAGE_ID} { font-size: 11px; color: var(--text-secondary); min-width: 35px; font-variant-numeric: tabular-nums; }
             #${VOLUME_SLIDER_ID}::-webkit-slider-thumb { height: 12px; width: 12px; margin-top: -3.5px; }
             #${VOLUME_SLIDER_ID}::-moz-range-thumb { height: 12px; width: 12px; }
-			#${VOLUME_SLIDER_ID}::-webkit-slider-runnable-track {
-				background: linear-gradient(
-					to right,
-					var(--volume-fill-bg) 0%,
-					var(--volume-fill-bg) var(--volume-percent, 50%),
-					var(--slider-track-bg) var(--volume-percent, 50%),
-					var(--slider-track-bg) 100%
-				) !important;
-			}
-			#${VOLUME_SLIDER_ID}::-moz-range-track {
-				background: linear-gradient(
-					to right,
-					var(--volume-fill-bg) 0%,
-					var(--volume-fill-bg) var(--volume-percent, 50%),
-					var(--slider-track-bg) var(--volume-percent, 50%),
-					var(--slider-track-bg) 100%
-				) !important;
-			}
+            #${VOLUME_SLIDER_ID}::-webkit-slider-runnable-track {
+                background: linear-gradient(
+                    to right,
+                    var(--volume-fill-bg) 0%,
+                    var(--volume-fill-bg) var(--volume-percent, 50%),
+                    var(--slider-track-bg) var(--volume-percent, 50%),
+                    var(--slider-track-bg) 100%
+                ) !important;
+            }
+            #${VOLUME_SLIDER_ID}::-moz-range-track {
+                background: linear-gradient(
+                    to right,
+                    var(--volume-fill-bg) 0%,
+                    var(--volume-fill-bg) var(--volume-percent, 50%),
+                    var(--slider-track-bg) var(--volume-percent, 50%),
+                    var(--slider-track-bg) 100%
+                ) !important;
+            }
             #player-extra-controls-right { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 15px; }
-            .${PLAYER_CONTROL_BUTTON_CLASS} { background: none; border: none; cursor: pointer; padding: 0; opacity: 0.8; transition: opacity 0.2s ease, transform 0.2s ease; }
-            .${PLAYER_CONTROL_BUTTON_CLASS}:hover { background: #1b263b; opacity: 1; transform: scale(1.05); }
-            .${PLAYER_CONTROL_BUTTON_CLASS}:active { transform: scale(0.95); }
+            .${PLAYER_CONTROL_BUTTON_CLASS} {
+                background: none; border: none; border-radius: 4px; cursor: pointer; padding: 0; opacity: 0.8;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .${PLAYER_CONTROL_BUTTON_CLASS}:hover {
+                background: #1b263b; opacity: 1; transform: scale(1.05);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            }
+            .${PLAYER_CONTROL_BUTTON_CLASS}:active {
+                transform: scale(0.95);
+                box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            }
             .${PLAYER_CONTROL_BUTTON_CLASS} img { display: block; }
             .${PLAYER_CONTROL_BUTTON_CLASS}.extra-control img { width: 18px; height: 18px; }
-			.${PLAYER_CONTROL_BUTTON_CLASS} {
-				box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-				transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-			}
-			.${PLAYER_CONTROL_BUTTON_CLASS}:hover {
-				box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-			}
-			.${PLAYER_CONTROL_BUTTON_CLASS}:active {
-				box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-			}
             #${PREV_BUTTON_ID} img, #${NEXT_BUTTON_ID} img { width: 24px; height: 24px; }
             #${PLAY_PAUSE_BUTTON_ID} img { width: 32px; height: 32px; }
             .${PLAYER_CONTROL_BUTTON_CLASS}.active img { filter: invert(70%) sepia(98%) saturate(1485%) hue-rotate(180deg) brightness(101%) contrast(101%); }
             #${PLAYLIST_SELECTOR_ID} { background: rgba(17, 17, 17, 0.75); color: var(--text-primary); border: 1px solid #555; border-radius: 4px; padding: 4px 8px; font-size: 12px; }
             #${QUEUE_TOGGLE_ICON_ID} { font-size: 24px; line-height: 0; color: #f0f0f0; padding: 11px 4px 11px 5px; }
-            #${QUEUE_CONTAINER_ID} { position: absolute; bottom: 155px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; max-height: 180px; background-color: rgba(30, 30, 30, 0.95); border: 1px solid #555; border-radius: 6px; z-index: 1000; padding: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5); transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; }
+            #${QUEUE_CONTAINER_ID} {
+                position: absolute; bottom: 155px; left: 50%; transform: translateX(-50%);
+                width: 90%; max-width: 600px; max-height: 180px; background-color: rgba(30, 30, 30, 0.95);
+                border: 1px solid #555; border-radius: 6px; z-index: 1000; padding: 10px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.5);
+                transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            }
             #${QUEUE_CONTAINER_ID}.hidden { opacity: 0; visibility: hidden; transform: translateX(-50%) scale(0.95); }
             #${QUEUE_TITLE_ID} { font-size: 14px; color: var(--text-primary); margin: 0 0 10px 0; padding-bottom: 5px; border-bottom: 1px solid #444; }
-            #${QUEUE_LIST_ID} { list-style: none; padding: 0; margin: 0; max-height: 140px; overflow-y: auto; overscroll-behavior: contain; color: var(--text-secondary); }
-			#${QUEUE_LIST_ID} {
-				scroll-behavior: smooth;
-				scrollbar-width: thin;
-				scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.3);
-			}
-
-			#${QUEUE_LIST_ID}::-webkit-scrollbar {
-				width: 8px;
-			}
-
-			#${QUEUE_LIST_ID}::-webkit-scrollbar-track {
-				background: rgba(0, 0, 0, 0.3);
-				border-radius: 4px;
-			}
-
-			#${QUEUE_LIST_ID}::-webkit-scrollbar-thumb {
-				background: rgba(255, 255, 255, 0.2);
-				border-radius: 4px;
-				border: 2px solid transparent;
-				background-clip: padding-box;
-			}
-
-			#${QUEUE_LIST_ID}::-webkit-scrollbar-thumb:hover {
-				background: rgba(255, 255, 255, 0.35);
-				background-clip: padding-box;
-			}
-
-			#${QUEUE_LIST_ID}::-webkit-scrollbar-thumb:active {
-				background: rgba(255, 255, 255, 0.5);
-				background-clip: padding-box;
-			}
-            .${PLAYER_QUEUE_ITEM_CLASS} { padding: 5px; font-size: 13px; border-radius: 3px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background-color 0.2s; }
+            #${QUEUE_LIST_ID} {
+                list-style: none; padding: 0; margin: 0; max-height: 140px;
+                overflow-y: auto; overscroll-behavior: contain; color: var(--text-secondary);
+                scroll-behavior: smooth;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.3);
+            }
+            #${QUEUE_LIST_ID}::-webkit-scrollbar { width: 8px; }
+            #${QUEUE_LIST_ID}::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); border-radius: 4px; }
+            #${QUEUE_LIST_ID}::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.2); border-radius: 4px;
+                border: 2px solid transparent; background-clip: padding-box;
+            }
+            #${QUEUE_LIST_ID}::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.35); background-clip: padding-box; }
+            #${QUEUE_LIST_ID}::-webkit-scrollbar-thumb:active { background: rgba(255, 255, 255, 0.5); background-clip: padding-box; }
+            .${PLAYER_QUEUE_ITEM_CLASS} {
+                padding: 5px; font-size: 13px; border-radius: 3px; cursor: pointer;
+                white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background-color 0.2s;
+            }
             .${PLAYER_QUEUE_ITEM_CLASS}:hover { background-color: rgba(255,255,255,0.1); }
             .${PLAYER_QUEUE_ITEM_CLASS}.current { background-color: rgba(102, 179, 255, 0.3); font-weight: bold; }
             .player-queue-item-title { color: #eee; } .player-queue-item-artist { color: #999; }
             #${YOUTUBE_PLAYER_DIV_ID} {
-				position: fixed !important;
-				top: 0 !important;
-				left: -9999px !important;
-				width: 200px !important;
-				height: 200px !important;
-				opacity: 0 !important;
-				pointer-events: none !important;
-				z-index: -1 !important;
-				overflow: hidden !important;
-			}
-
-			#${FAVORITE_BUTTON_ID} img { width: 22px; height: 22px; }
-			.player-queue-item.dragging { opacity: 0.5; background: #333; }
-			.player-queue-item[draggable="true"] { cursor: grab; }
-			.player-queue-item[draggable="true"]:active { cursor: grabbing; }
-
-			@keyframes pulse {
-				0%, 100% { opacity: 1; }
-				50% { opacity: 0.5; }
-			}
-			.player-buffering #${TITLE_ID} {
-				animation: pulse 1.5s ease-in-out infinite;
-			}
-
-			#progress-visual-wrapper {
-				position: relative; flex-grow: 1; height: 20px;
-				display: flex; align-items: center; cursor: pointer;
-			}
-
-			.progress-visual-track {
-				position: absolute; left: 0; right: 0; height: 5px;
-				background-color: var(--slider-track-bg); border-radius: 5px;
-				overflow: hidden; pointer-events: none;
-			}
-
-			.progress-buffer-bar, .progress-fill-bar {
-				position: absolute; top: 0; left: 0; bottom: 0; width: 100%;
-				transform-origin: left center; transform: scaleX(0);
-				will-change: transform; pointer-events: none;
-			}
-			.progress-buffer-bar { background-color: rgba(240,240,240,0.35); }
-			.progress-fill-bar { background-color: var(--progress-fill-bg); }
-
-			.progress-thumb {
-				position: absolute; left: 0; width: 15px; height: 15px;
-				background-color: var(--slider-thumb-bg); border-radius: 50%;
-				pointer-events: none; margin-left: -7.5px;
-				will-change: transform;
-			}
-
-			.transparent-seeker {
-				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-				opacity: 0; cursor: pointer; z-index: 10; margin: 0;
-			}
-
+                position: fixed !important; top: 0 !important; left: -9999px !important;
+                width: 200px !important; height: 200px !important;
+                opacity: 0 !important; pointer-events: none !important;
+                z-index: -1 !important; overflow: hidden !important;
+            }
+            #${FAVORITE_BUTTON_ID} img { width: 22px; height: 22px; }
+            .player-queue-item.dragging { opacity: 0.5; background: #333; }
+            .player-queue-item[draggable="true"] { cursor: grab; }
+            .player-queue-item[draggable="true"]:active { cursor: grabbing; }
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+            .player-buffering #${TITLE_ID} { animation: pulse 1.5s ease-in-out infinite; }
+            #progress-visual-wrapper {
+                position: relative; flex-grow: 1; height: 20px;
+                display: flex; align-items: center; cursor: pointer;
+            }
+            .progress-visual-track {
+                position: absolute; left: 0; right: 0; height: 5px;
+                background-color: var(--slider-track-bg); border-radius: 5px;
+                overflow: hidden; pointer-events: none;
+            }
+            .progress-buffer-bar, .progress-fill-bar {
+                position: absolute; top: 0; left: 0; bottom: 0; width: 100%;
+                transform-origin: left center; transform: scaleX(0);
+                will-change: transform; pointer-events: none;
+            }
+            .progress-buffer-bar { background-color: rgba(240,240,240,0.35); }
+            .progress-fill-bar { background-color: var(--progress-fill-bg); }
+            .progress-thumb {
+                position: absolute; left: 0; width: 15px; height: 15px;
+                background-color: var(--slider-thumb-bg); border-radius: 50%;
+                pointer-events: none; margin-left: -7.5px;
+                will-change: transform;
+            }
+            .transparent-seeker {
+                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                opacity: 0; cursor: pointer; z-index: 10; margin: 0;
+            }
             .${PLAYER_CONTROL_BUTTON_CLASS}:focus, #${PLAYLIST_SELECTOR_ID}:focus { outline: 2px solid #66b3ff; outline-offset: 2px; }
-			#${PLAYER_ELEMENT_ID}:focus { outline: none; }
+            #${PLAYER_ELEMENT_ID}:focus { outline: none; }
         `);
 
     document.adoptedStyleSheets = [...document.adoptedStyleSheets, playerSheet];
   }
 
   function cleanup() {
+    flushState();
     stopRafUpdater();
+    if (errorSkipTimer) { clearTimeout(errorSkipTimer); errorSkipTimer = null; }
+    if (loadUiRaf) { cancelAnimationFrame(loadUiRaf); loadUiRaf = 0; }
     if (resizeRaf) { cancelAnimationFrame(resizeRaf); resizeRaf = 0; }
     if (dragRaf) { cancelAnimationFrame(dragRaf); dragRaf = 0; }
     if (progressBarObserver) {
@@ -39496,6 +39810,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   async function initializeMusicPlayer() {
     try {
       persistedState = loadState();
+      if (persistedState?.minimized) isMinimized = true;
       loadFavorites();
 
       PLAYLISTS_DATA = (typeof campaignTrail_temp !== 'undefined' && campaignTrail_temp.compact_playlist)
@@ -39530,8 +39845,10 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       const anchorElement = document.getElementById("game_window");
       (anchorElement?.parentNode || document.body).insertBefore(playerFragment, anchorElement?.nextSibling || null);
 
-	  createCoverFlowPool();
-	  resetCoverFlow();
+      if (queueTitleElement) queueTitleElement.textContent = `Up Next — ${selectedPlaylistData.name}`;
+
+      createCoverFlowPool();
+      resetCoverFlow();
       preloadCovers(playlist.getSongs());
 
       if (playlistSelectorElement) {
@@ -39550,18 +39867,20 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       if (persistedState?.queueVisible) queueContainerElement.classList.remove('hidden');
       if (typeof persistedState?.volume === 'number') {
         volumeSlider.value = String(persistedState.volume);
-		volumeSlider.style.setProperty('--volume-percent', `${Math.round(persistedState.volume * 100)}%`);
-        if (volumePercentageElement) volumePercentageElement.textContent = `${Math.round(persistedState.volume * 100)}%`;
+        const pct = Math.round(persistedState.volume * 100);
+        volumeSlider.style.setProperty('--volume-percent', `${pct}%`);
+        volumeSlider.setAttribute('aria-valuenow', String(pct));
+        if (volumePercentageElement) volumePercentageElement.textContent = `${pct}%`;
       }
       if (persistedState?.muted) applyMuteOnReady = true;
 
       injectPlayerStyles();
       bindUIEventListeners();
       updateUI();
-      updateCoverFlow();
+      applyMinimizedState();
       updateFavoriteButtonUI();
 
-	  await loadYouTubeAPI();
+      await loadYouTubeAPI();
 
       ytPlayer = new window.YT.Player(YOUTUBE_PLAYER_DIV_ID, {
         height: '200', width: '200',
