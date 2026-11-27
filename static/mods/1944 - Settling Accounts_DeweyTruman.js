@@ -17,7 +17,7 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 1001,
         "fields": {
-            "description": "This war began as a Confederate surprise attack over the Ohio River and has only grown. Across the pond, your German and Austrian allies lash out against the French, British, and Russians. Closer to home, the Canadians and Mormons rose up in a bloody rebellion against the United States. You led America through the storm; the Mormons have unconditionally surrendered, the Canadians are in flight, and the Confederates are on their last legs. Now you stand before a gathered crowd of reporters and prepare yourself to answer the one question that really matters: what was it all for?"
+            "description": "Representative Flora Blackford, called the Conscience of Congress by the press, and President Charles La Follette, have addressed the nation, speaking of ‘population reductions’ - Confederate slang for genocide. Jake Featherston is wiping out the Black population of the South in his death camps. This shocking announcement is the headline of every newspaper. How will you respond to it?"
         }
     },
     {
